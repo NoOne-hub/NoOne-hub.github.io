@@ -473,7 +473,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-5/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -487,7 +487,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-heap-learn-5/" class="post-title-link" itemprop="url">pwn堆入门系列教程5</a>
+            <a href="/2019/11/01/pwn-heap-learn-3/" class="post-title-link" itemprop="url">pwn堆入门系列教程3</a>
         </h1>
 
         <div class="post-meta">
@@ -504,7 +504,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:28:59" itemprop="dateModified" datetime="2019-10-30T17:28:59+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 17:28:46" itemprop="dateModified" datetime="2019-10-30T17:28:46+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -531,7 +531,7 @@
             </span>
 
           
-            <span id="/2019/11/01/pwn-heap-learn-5/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程5" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-3/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程3" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -546,8 +546,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-5/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-5/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -557,7 +557,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>17k</span>
+              <span>18k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -576,10 +576,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pwn堆入门系列教程5"><a href="#pwn堆入门系列教程5" class="headerlink" title="pwn堆入门系列教程5"></a>pwn堆入门系列教程5</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a></p><p>进入uaf学习了，这部分题目就一道题</p><h2 id="hitcon-training-hacknote"><a href="#hitcon-training-hacknote" class="headerlink" title="hitcon-training-hacknote"></a>hitcon-training-hacknote</h2><p>这道题其实很简单，不过要冷静下才能做，我当时有点急躁，浪费一个钟才搞出来？冷静下来10分钟懂了</p><h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">del_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Index :"</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">  v1 = atoi(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt; <span class="number">0</span> || v1 &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Out of bound!"</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[v1] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(*(notelist[v1] + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">free</span>(notelist[v1]);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Success"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-5/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-3/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -733,7 +733,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-3/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -747,7 +747,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-heap-learn-3/" class="post-title-link" itemprop="url">pwn堆入门系列教程3</a>
+            <a href="/2019/11/01/pwn-heap-learn-2/" class="post-title-link" itemprop="url">pwn堆入门系列教程2</a>
         </h1>
 
         <div class="post-meta">
@@ -764,7 +764,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:28:46" itemprop="dateModified" datetime="2019-10-30T17:28:46+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 17:28:35" itemprop="dateModified" datetime="2019-10-30T17:28:35+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -791,7 +791,7 @@
             </span>
 
           
-            <span id="/2019/11/01/pwn-heap-learn-3/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程3" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-2/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程2" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -806,8 +806,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -817,14 +817,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>18k</span>
+              <span>17k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>16 mins.</span>
+              <span>15 mins.</span>
             </span>
 
         </div>
@@ -836,10 +836,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p>
+          <h1 id="pwn堆入门系列教程2"><a href="#pwn堆入门系列教程2" class="headerlink" title="pwn堆入门系列教程2"></a>pwn堆入门系列教程2</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">堆入门系列教程1</a><br>序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-3/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-2/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1551,7 +1551,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1597,20 +1597,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

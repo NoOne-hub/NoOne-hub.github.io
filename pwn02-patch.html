@@ -18,16 +18,6 @@
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-      app_id: "6959cb4a"
-    });
-  daovoice('update');
-  </script>
-
-
-
 <script id="hexo-configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
@@ -61,6 +51,17 @@
     sidebarPadding: 40
   };
 </script>
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "6959cb4a"
+    });
+  daovoice('update');
+  </script>
+
 
   <meta name="description" content="题目修复部分题目的点很容易看出，数组越界，不过如何利用这个比较难，我经过一段时间测试，发觉scanf的特性，输入-可以绕过，所以可以泄露cannary，泄露cannary过后可以任意写，然后精确覆盖到cannary过后进行ROP就行了，还有一个点就是输入长度为27的时候，他不会进行排序，这样才能ROP，不过最终我没利用成功，还有一个栈的偏移点我还没搞懂，所以最终也没打出来">
 <meta name="keywords" content="pwn， 栈">

@@ -1796,6 +1796,31 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
       </tags>
   </entry>
   <entry>
+    <title>2019软件测试web安全题目writeup收集</title>
+    <url>/%E6%AF%94%E8%B5%9B.html</url>
+    <content><![CDATA[<h1 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>比比手速 靶机地址：101.71.29.5:10065</p><p>burp抓包可知密码<br>然后文件上传，1.php.jpg<br>连接小马</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p><a href="https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/" target="_blank" rel="noopener">https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/</a></p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p><a href="https://blog.csdn.net/u011377996/article/details/83867976" target="_blank" rel="noopener">https://blog.csdn.net/u011377996/article/details/83867976</a></p><a id="more"></a>
+
+
+
+<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><a href="https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/" target="_blank" rel="noopener">https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/</a><br>666_0rdorby_you_can</p>
+<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p><a href="https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login" target="_blank" rel="noopener">https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login</a><br><a href="http://site3.sjk.space/dosgk1.php" target="_blank" rel="noopener">http://site3.sjk.space/dosgk1.php</a></p>
+<p>a327f27394c63ef5d6b1eed9591b90a4</p>
+<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>抓包可得</p>
+<p>c456aa77cf2bc89affb665194e9dee57</p>
+<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p><a href="https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2" target="_blank" rel="noopener">https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2</a><br>aa5237a5fc25af3fa07f1d724f7548d7</p>
+<h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><p><a href="http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/" target="_blank" rel="noopener">http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/</a></p>
+<h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p><a href="http://xcx1024.com/ArtInfo/524039.html" target="_blank" rel="noopener">http://xcx1024.com/ArtInfo/524039.html</a></p>
+<p>981369acba32abc4e28103fedd4891d2</p>
+]]></content>
+      <categories>
+        <category>web安全</category>
+        <category>练习</category>
+      </categories>
+      <tags>
+        <tag>web安全,练习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>web安全训练</title>
     <url>/%E5%AE%89%E6%81%92%E8%AE%AD%E7%BB%83%E8%B5%9B.html</url>
     <content><![CDATA[<h1 id="安恒训练赛"><a href="#安恒训练赛" class="headerlink" title="安恒训练赛"></a>安恒训练赛</h1><h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><p><a href="http://114.55.36.69:8009/index.php?url=upload" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=upload</a></p><p>upload很明显的文件上传，查了下是php伪协议<br>看到zip于是猜测是phar://伪协议读取。</p><p>于是写个小马打包成zip文件传上去。</p><p>例如我写的是south.php。</p><p>然后压缩成south.zip，那么需要访问以下链接。</p><a id="more"></a>
@@ -1862,31 +1887,6 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
 
 <p>部署在服务器上，默认以80端口，这样就不用index.php了</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$url = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">"f"</span>=&gt;<span class="string">"system"</span>,</span><br><span class="line">    <span class="string">"d"</span>=&gt;<span class="string">"cat ../flag.php"</span></span><br><span class="line">);</span><br><span class="line">$url = json_encode($url);</span><br><span class="line"><span class="keyword">echo</span> $url;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web安全</category>
-        <category>练习</category>
-      </categories>
-      <tags>
-        <tag>web安全,练习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019软件测试web安全题目writeup收集</title>
-    <url>/%E6%AF%94%E8%B5%9B.html</url>
-    <content><![CDATA[<h1 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>比比手速 靶机地址：101.71.29.5:10065</p><p>burp抓包可知密码<br>然后文件上传，1.php.jpg<br>连接小马</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p><a href="https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/" target="_blank" rel="noopener">https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/</a></p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p><a href="https://blog.csdn.net/u011377996/article/details/83867976" target="_blank" rel="noopener">https://blog.csdn.net/u011377996/article/details/83867976</a></p><a id="more"></a>
-
-
-
-<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><a href="https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/" target="_blank" rel="noopener">https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/</a><br>666_0rdorby_you_can</p>
-<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p><a href="https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login" target="_blank" rel="noopener">https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login</a><br><a href="http://site3.sjk.space/dosgk1.php" target="_blank" rel="noopener">http://site3.sjk.space/dosgk1.php</a></p>
-<p>a327f27394c63ef5d6b1eed9591b90a4</p>
-<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>抓包可得</p>
-<p>c456aa77cf2bc89affb665194e9dee57</p>
-<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p><a href="https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2" target="_blank" rel="noopener">https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2</a><br>aa5237a5fc25af3fa07f1d724f7548d7</p>
-<h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><p><a href="http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/" target="_blank" rel="noopener">http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/</a></p>
-<h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p><a href="http://xcx1024.com/ArtInfo/524039.html" target="_blank" rel="noopener">http://xcx1024.com/ArtInfo/524039.html</a></p>
-<p>981369acba32abc4e28103fedd4891d2</p>
 ]]></content>
       <categories>
         <category>web安全</category>
@@ -2554,14 +2554,14 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>书籍文章目录</title>
-    <url>/bin_security.html</url>
-    <content><![CDATA[<p>第一节：二进制安全概述<br>第二节：基础知识<br>    2.1 什么是软件<br>    2.2 什么是恶意软件<br>        2.2.1 潜藏广告<br>        2.2.2 木马<br>        2.2.3 病毒<br>        2.2.4 后门软件<br>    2.3 什么是漏洞<br>        2.3.1 poc是什么<br>        2.3.2 exp是什么<br>    2.4 虚拟环境<br>        2.4.1 沙盒<br>        2.4.2 虚拟机<br>    2.5 分析手法<br>        2.5.1 静态分析<br>        2.5.2 动态分析<br>第三节：二进制安全应用<br>    3.1 二进制层面的攻击<br>        3.1.1 软件的破解<br>        3.1.2 制作二进制层面的恶意软件<br>        3.1.3 利用软件漏洞攻击<br>    3.2 二进制层面的防御<br>        3.2.1 软件的安全防护<br>        3.2.1 恶意软件的防护<br>        3.2.1 软件漏洞的预防<br>第四节： 常见安全场景<br>    4.1 windows安全<br>    4.2 移动安全<br>        4.2.1 安卓安全<br>        4.2.2 ios安全<br>第五节： 二进制层面的安全防护<br>    5.1 基础级别防护<br>        5.1.1 安装杀毒软件<br>        5.1.2 下载方式的选择<br>        5.1.3 未知软件的处理<br>    5.2 进阶防护<br>        5.2.1 利用工具分析未知软件<br>        5.2.2 根据行为判别软件类别<br>        5.2.3 虚拟环境洞察软件行为<br>        5.2.4 应对处理措施</p>]]></content>
+    <title>基础待补充</title>
+    <url>/base.html</url>
+    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>书籍文章目录</category>
+        <category>基础知识</category>
       </categories>
       <tags>
-        <tag>书籍目录</tag>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -2596,14 +2596,14 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>基础待补充</title>
-    <url>/base.html</url>
-    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
+    <title>书籍文章目录</title>
+    <url>/bin_security.html</url>
+    <content><![CDATA[<p>第一节：二进制安全概述<br>第二节：基础知识<br>    2.1 什么是软件<br>    2.2 什么是恶意软件<br>        2.2.1 潜藏广告<br>        2.2.2 木马<br>        2.2.3 病毒<br>        2.2.4 后门软件<br>    2.3 什么是漏洞<br>        2.3.1 poc是什么<br>        2.3.2 exp是什么<br>    2.4 虚拟环境<br>        2.4.1 沙盒<br>        2.4.2 虚拟机<br>    2.5 分析手法<br>        2.5.1 静态分析<br>        2.5.2 动态分析<br>第三节：二进制安全应用<br>    3.1 二进制层面的攻击<br>        3.1.1 软件的破解<br>        3.1.2 制作二进制层面的恶意软件<br>        3.1.3 利用软件漏洞攻击<br>    3.2 二进制层面的防御<br>        3.2.1 软件的安全防护<br>        3.2.1 恶意软件的防护<br>        3.2.1 软件漏洞的预防<br>第四节： 常见安全场景<br>    4.1 windows安全<br>    4.2 移动安全<br>        4.2.1 安卓安全<br>        4.2.2 ios安全<br>第五节： 二进制层面的安全防护<br>    5.1 基础级别防护<br>        5.1.1 安装杀毒软件<br>        5.1.2 下载方式的选择<br>        5.1.3 未知软件的处理<br>    5.2 进阶防护<br>        5.2.1 利用工具分析未知软件<br>        5.2.2 根据行为判别软件类别<br>        5.2.3 虚拟环境洞察软件行为<br>        5.2.4 应对处理措施</p>]]></content>
       <categories>
-        <category>基础知识</category>
+        <category>书籍文章目录</category>
       </categories>
       <tags>
-        <tag>基础知识</tag>
+        <tag>书籍目录</tag>
       </tags>
   </entry>
   <entry>

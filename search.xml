@@ -1,6 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>linux/hexoDeploy</title>
+    <url>/2019/10/30/linux/hexoDeploy/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>linux/botsave</title>
+    <url>/2019/10/30/linux/botsave/</url>
+    <content><![CDATA[<p>‘’’<br>def init(group_id):<br>    reply_result=[]<br>    #此处的some_name是一个随便起的名称，第一次运行会让你输入手机号和验证码，之后会生成一个some_name.session的文件，再次运行的时候就不需要反复输入手机号验证码了<br>    client.send_message(<br>        group_id,<br>        ‘/start@free2ss_bot’<br>    )<br>    time.sleep(3)<br>    result = client.get_messages(GROUP_ID)<br>    for i in result[0].reply_markup.rows:<br>        for j in i.buttons:<br>            reply_result.append(j.text)<br>    dict={}<br>    import re<br>    re_words = re.compile(u”[\u4e00-\u9fa5]+”)<br>    for place in reply_result:<br>        dict[re_words.findall(place)[0]]=place<br>    return dict</p>
+<p>def ssr2html(body):<br>    message = “””<!DOCTYPE html></p>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+%s 
+</body>
+</html>
+"""%(body)
+    with open ('/var/www/html/ssr.html', 'w', encoding='utf-8') as f:
+        f.write(message)
+
+<p>place = init(GROUP_ID)<br>print(place)<br>get_place=’’</p>
+<p>@client.on(events.NewMessage(pattern=’ssr [\u4e00-\u9fa5]+’))<br>async def my_event_handler(event):<br>    global get_place<br>    get_place = event.raw_text.split(‘ ‘)[1]<br>    await client.send_message(<br>        GROUP_ID,<br>        ‘/start@free2ss_bot’<br>    )</p>
+<p>@client.on(events.NewMessage(pattern=’选择节点所属区域’))<br>async def my_event_handler(event):<br>    global get_place<br>    try:<br>        result = place[get_place]<br>    except Exception as e:#出现异常默认为香港<br>        result = place[‘香港’]<br>        await client.send_message(<br>            GROUP_ID,<br>            ‘不在地区范围内,默认选择香港地区，地区列表如下\n’<br>        )<br>        await client.send_message(<br>            GROUP_ID,<br>            str(place.keys())[11:-2]<br>        )<br>    get_place=result<br>    await event.reply(result)</p>
+<p>@client.on(events.NewMessage(pattern=’最新可用节点’))<br>async def my_event_handler(event):<br>    print(event.raw_text)<br>    ssr2html(event.raw_text)</p>
+<p>‘’’</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux/docker</title>
+    <url>/2019/10/30/linux/docker/</url>
+    <content><![CDATA[<h1 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h1><p>docker run -d –name v2ray -v /home/greenhand/Documents/v2ray/:/etc/v2ray -p 10808:10808 -p 10809:10809 -p 8000:8000 v2ray/official<br>docker run –name v2ray1 -v /home/greenhand/Project/v2ray/config/v2ray/:/etc/v2ray -p 10808:10808 -p 10809:10809 -p 8000:8000<br>echo <a href="http://mirrors.ustc.edu.cn/alpine/v3.7/main" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/alpine/v3.7/main</a> &gt; /etc/apk/repositories<br>echo <a href="http://mirrors.ustc.edu.cn/alpine/v3.7/community" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/alpine/v3.7/community</a> &gt;&gt; /etc/apk/repositories<br>apk update &amp;&amp; apk upgrade<br>apk add python3<br>mkdir ~/.pip<br>cat &gt;&gt; ~/.pip/pip.conf &lt;&lt; EOF<br>[global]<br>index-url =  <a href="http://mirrors.aliyun.com/pypi/simple/" target="_blank" rel="noopener">http://mirrors.aliyun.com/pypi/simple/</a><br>trusted-host = mirrors.aliyun.com<br>EOF</p>
+<p>cat &gt;&gt; ~/etc/supervisord/supervisord.conf &lt;&lt; EOF<br>[program:v2rayClient]<br>command=gunicorn -b 0.0.0.0:8000 -w 4 v2rayClient:app<br>directory=/v2ray<br>user=root<br>autostart=true<br>autorestart=true<br>stopasgroup=true<br>killasgroup=true<br>EOF</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux/v2ray-change</title>
+    <url>/2019/10/30/linux/v2ray-change/</url>
+    <content><![CDATA[<h1 id="功能构思"><a href="#功能构思" class="headerlink" title="功能构思"></a>功能构思</h1><ol>
+<li>修改监听端口</li>
+<li>导入vmess</li>
+<li>指定配置文件替换</li>
+<li>界面输入配置进行更换</li>
+<li>多账号切换</li>
+<li>订阅更新</li>
+<li>修改配置</li>
+</ol>
+<p>初步想法，做好后利用docker挂载/etc/v2ray目录，通过docker修改配置文件</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux/parrot-linux</title>
+    <url>/2019/10/30/linux/parrot-linux/</url>
+    <content><![CDATA[<h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p>
+<p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</p>
+<ul>
+<li>By Micah Lee, licensed under MIT</li>
+<li>version 0.3.1</li>
+<li><a href="https://github.com/micahflee/torbrowser-launcher" target="_blank" rel="noopener">https://github.com/micahflee/torbrowser-launcher</a></li>
+<li>Launching Tor Browser.</li>
+<li>Running /home/greenhand/.local/share/torbrowser/tbb/x86_64/tor-browser_en-US/start-tor-browser.desktop</li>
+<li>Launching ‘./Browser/start-tor-browser –detach’…</li>
+<li>QFileSystemWatcher::removePaths: list is empty</li>
+<li>QFileSystemWatcher::removePaths: list is empty </big></li>
+</ul>
+<p>解决方案可以直接往下划到底下，我先讲下处理这个问题思路<br>然后torbrowser-launcher没有启动,就这样就没了，我通过手动去官网下载了一波，解压后是可以运行的，然后将解压后的文件夹移动到tor默认位置那里，也就是上述出错的地方，tor浏览器居然运行不起来了，发现症结所在后，我创建了一个文件夹，然后将本身tor的文件夹移动到我新建的文件夹里，tor可以运行起来了，好吧，知道该怎么解决后就开始处理了</p>
+<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>直接移动后会报错，然后根据报错位置找到了<br><strong>/usr/lib/python3/dist-packages/torbrowser_launcher/</strong><br>这里有一堆py文件，然后经过手动探寻可以查到common.py里存放了位置信息，所以我将common.py里的 <strong>tbb_local = ‘{0}/.local/share/torbrowser/‘.format(homedir)</strong> 改成 <strong>tbb_local = ‘{0}/.local/share/torbrowser/test/‘.format(homedir)</strong><br>加多一层目录，然后命令行就可以完美启动了！</p>
+<h2 id="出现软件无法启动问题"><a href="#出现软件无法启动问题" class="headerlink" title="出现软件无法启动问题"></a>出现软件无法启动问题</h2><p>删除沙盒里的配置文件就行，或者注释掉部分<br>/etc/firejail 存着对应软件的沙盒配置文件</p>
+<h2 id="v2ray问题"><a href="#v2ray问题" class="headerlink" title="v2ray问题"></a>v2ray问题</h2><p>v2ray连不上有两个原因，<br>1.时间<br>2.配置文件，因为配置文件差了个流量控制的邮箱</p>
+<p>时间问题可以安装ntpdate<br>sudo apt-get install ntpdate<br>sudo ntpdate 0.asia.pool.ntp.org</p>
+<p>vi /etc/crontab<br>在末尾增加* */1 * * * ntpdate 0.asia.pool.ntp.org</p>
+<p>同步到硬件<br>hwclock –systohc</p>
+<h2 id="vmware问题"><a href="#vmware问题" class="headerlink" title="vmware问题"></a>vmware问题</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">VMWARE_VERSION=workstation-12.5.9</span><br><span class="line">TMP_FOLDER=/tmp/patch-vmware</span><br><span class="line">rm -fdr <span class="variable">$TMP_FOLDER</span></span><br><span class="line">mkdir -p <span class="variable">$TMP_FOLDER</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$TMP_FOLDER</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/mkubecek/vmware-host-modules.git</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$TMP_FOLDER</span>/vmware-host-modules</span><br><span class="line">git checkout <span class="variable">$VMWARE_VERSION</span></span><br><span class="line">git fetch</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">sudo rm /usr/lib/vmware/lib/libz.so.1/libz.so.1</span><br><span class="line">sudo ln -s /lib/x86_64-linux-gnu/libz.so.1 /usr/lib/vmware/lib/libz.so.1/libz.so.1</span><br><span class="line">sudo /etc/init.d/vmware restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="vimplus"><a href="#vimplus" class="headerlink" title="vimplus"></a>vimplus</h2><p>apt install vim-python-jedi<br>开机自启脚本</p>
+<h2 id="双系统引导找回问题"><a href="#双系统引导找回问题" class="headerlink" title="双系统引导找回问题"></a>双系统引导找回问题</h2><p>进行live模式<br>先查看哪个是linux启动盘</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+<p>然后挂载</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br><span class="line">chroot /mnt</span><br><span class="line">apt-get install grub-pc <span class="comment">#可有可无</span></span><br><span class="line">grub-mkconfig <span class="comment">#可有可无</span></span><br><span class="line">update-grub</span><br><span class="line">grub-install /dev/sda <span class="comment">#可有可无</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="aria2"><a href="#aria2" class="headerlink" title="aria2"></a>aria2</h2><p>sudo apt-get install aria2</p>
+<p>/etc/aria2/aria2.conf</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#用户名</span></span><br><span class="line"><span class="comment">#rpc-user=user</span></span><br><span class="line"><span class="comment">#密码</span></span><br><span class="line"><span class="comment">#rpc-passwd=passwd</span></span><br><span class="line"><span class="comment">#上面的认证方式不建议使用,建议使用下面的token方式</span></span><br><span class="line"><span class="comment">#设置加密的密钥</span></span><br><span class="line"><span class="comment">#rpc-secret=token</span></span><br><span class="line"><span class="comment">#允许rpc</span></span><br><span class="line"><span class="built_in">enable</span>-rpc=<span class="literal">true</span></span><br><span class="line"><span class="comment">#允许所有来源, web界面跨域权限需要</span></span><br><span class="line">rpc-allow-origin-all=<span class="literal">true</span></span><br><span class="line"><span class="comment">#允许外部访问，false的话只监听本地端口</span></span><br><span class="line">rpc-listen-all=<span class="literal">true</span></span><br><span class="line"><span class="comment">#RPC端口, 仅当默认端口被占用时修改</span></span><br><span class="line"><span class="comment">#rpc-listen-port=6800</span></span><br><span class="line"><span class="comment">#最大同时下载数(任务数), 路由建议值: 3</span></span><br><span class="line">max-concurrent-downloads=5</span><br><span class="line"><span class="comment">#断点续传</span></span><br><span class="line"><span class="built_in">continue</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#同服务器连接数</span></span><br><span class="line">max-connection-per-server=5</span><br><span class="line"><span class="comment">#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要</span></span><br><span class="line">min-split-size=10M</span><br><span class="line"><span class="comment">#单文件最大线程数, 路由建议值: 5</span></span><br><span class="line">split=10</span><br><span class="line"><span class="comment">#下载速度限制</span></span><br><span class="line">max-overall-download-limit=0</span><br><span class="line"><span class="comment">#单文件速度限制</span></span><br><span class="line">max-download-limit=0</span><br><span class="line"><span class="comment">#上传速度限制</span></span><br><span class="line">max-overall-upload-limit=0</span><br><span class="line"><span class="comment">#单文件速度限制</span></span><br><span class="line">max-upload-limit=0</span><br><span class="line"><span class="comment">#断开速度过慢的连接</span></span><br><span class="line"><span class="comment">#lowest-speed-limit=0</span></span><br><span class="line"><span class="comment">#验证用，需要1.16.1之后的release版本</span></span><br><span class="line"><span class="comment">#referer=*</span></span><br><span class="line"><span class="comment">#文件保存路径, 默认为当前启动位置</span></span><br><span class="line">dir=/Users/&lt;user_name&gt;/Downloads</span><br><span class="line"><span class="comment">#文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用, 需要1.16及以上版本</span></span><br><span class="line"><span class="comment">#disk-cache=0</span></span><br><span class="line"><span class="comment">#另一种Linux文件缓存方式, 使用前确保您使用的内核支持此选项, 需要1.15及以上版本(?)</span></span><br><span class="line"><span class="comment">#enable-mmap=true</span></span><br><span class="line"><span class="comment">#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长</span></span><br><span class="line"><span class="comment">#所需时间 none &lt; falloc ? trunc « prealloc, falloc和trunc需要文件系统和内核支持</span></span><br><span class="line">file-allocation=prealloc</span><br></pre></td></tr></table></figure>
+
+<p>/etc/init.d/aria2c</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">### BEGIN INIT INFO</span></span><br><span class="line"><span class="comment"># Provides: aria2</span></span><br><span class="line"><span class="comment"># Required-Start: $remote_fs $network</span></span><br><span class="line"><span class="comment"># Required-Stop: $remote_fs $network</span></span><br><span class="line"><span class="comment"># Default-Start: 2 3 4 5</span></span><br><span class="line"><span class="comment"># Default-Stop: 0 1 6</span></span><br><span class="line"><span class="comment"># Short-Description: Aria2 Downloader</span></span><br><span class="line"><span class="comment">### END INIT INFO</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">echo</span> -n <span class="string">"已开启Aria2c"</span></span><br><span class="line"> sudo aria2c --conf-path=/etc/aria2/aria2.conf -D</span><br><span class="line">;;</span><br><span class="line">stop)</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">echo</span> -n <span class="string">"已关闭Aria2c"</span></span><br><span class="line"> killall aria2c</span><br><span class="line">;;</span><br><span class="line">restart)</span><br><span class="line"> </span><br><span class="line"> killall aria2c</span><br><span class="line"> sudo aria2c --conf-path=/etc/aria2/aria2.conf -D</span><br><span class="line">;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p>谷歌插件</p>
+<h2 id="sudo-设置不用密码"><a href="#sudo-设置不用密码" class="headerlink" title="sudo 设置不用密码"></a>sudo 设置不用密码</h2><p>%greenhand ALL=(ALL) NOPASSWD: NOPASSWD:ALL</p>
+<h2 id="阿里云docker加速镜像"><a href="#阿里云docker加速镜像" class="headerlink" title="阿里云docker加速镜像"></a>阿里云docker加速镜像</h2><p>vi /etc/docker/daemon.json</p>
+<p>{</p>
+<p>“registry-mirrors”: [“<a href="http://hub-mirror.c.163.com&quot;]" target="_blank" rel="noopener">http://hub-mirror.c.163.com&quot;]</a></p>
+<p>}</p>
+<p><a href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
+<h2 id="pip-换源"><a href="#pip-换源" class="headerlink" title="pip 换源"></a>pip 换源</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">cat &gt;&gt; ~/.pip/pip.conf &lt;&lt; EOF</span><br><span class="line">[global]</span><br><span class="line">index-url =  http://mirrors.aliyun.com/pypi/simple/ </span><br><span class="line">trusted-host = mirrors.aliyun.com</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h2 id="禁用虚拟网卡"><a href="#禁用虚拟网卡" class="headerlink" title="禁用虚拟网卡"></a>禁用虚拟网卡</h2><p>内网段冲突</p>
+<p>ifconfig b47cab9fe564 down</p>
+<h2 id="docker-存在依赖无法删除"><a href="#docker-存在依赖无法删除" class="headerlink" title="docker 存在依赖无法删除"></a>docker 存在依赖无法删除</h2><p>docker commit 容器id 名称<br>docker save -o 压缩包.tar 新镜像名称:latest</p>
+<p>删除所有关于这个的镜像以及容易<br>docker load -i ./压缩包.tar</p>
+<h2 id="wine依赖问题"><a href="#wine依赖问题" class="headerlink" title="wine依赖问题"></a>wine依赖问题</h2><p>删除winehq-stable的官方源，用parrot的源安装就可以了</p>
+<h2 id="parrot-关闭更新提示"><a href="#parrot-关闭更新提示" class="headerlink" title="parrot 关闭更新提示"></a>parrot 关闭更新提示</h2><p>修改配置文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/xdg/autostart/parrot-updater.desktop</span><br></pre></td></tr></table></figure>
+
+<p>文件内容如下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=System Updater</span><br><span class="line">Comment=Update reminder <span class="keyword">for</span> Parrot OS</span><br><span class="line">Icon=synaptic</span><br><span class="line">Exec=/usr/bin/update-reminder scheduled</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">Type=Application</span><br><span class="line">Categories=</span><br><span class="line">X-MATE-Autostart-enabled=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置文件导入导出"><a href="#配置文件导入导出" class="headerlink" title="配置文件导入导出"></a>配置文件导入导出</h2><p>dconf dump / &gt; dconf-settings.ini<br>dconf load / &lt; dconf-settings.ini</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2019/10/30/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
@@ -17,5 +131,17 @@
 
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
+  </entry>
+  <entry>
+    <title>shell-1</title>
+    <url>/2019/01/29/linux/shell-1/</url>
+    <content><![CDATA[<h1 id="shell脚本学习"><a href="#shell脚本学习" class="headerlink" title="shell脚本学习"></a>shell脚本学习</h1><h2 id="九九乘法表"><a href="#九九乘法表" class="headerlink" title="九九乘法表"></a>九九乘法表</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> `seq 9`</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="keyword">for</span> m <span class="keyword">in</span> `seq <span class="variable">$n</span>`</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">echo</span> -n <span class="string">"<span class="variable">$m</span>*<span class="variable">$n</span>="</span>`expr <span class="variable">$m</span> \* <span class="variable">$n</span>`<span class="string">"   "</span>  </span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line">    <span class="built_in">echo</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>shell基础</category>
+      </categories>
+      <tags>
+        <tag>shell脚本</tag>
+      </tags>
   </entry>
 </search>

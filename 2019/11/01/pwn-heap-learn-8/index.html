@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7 这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见 HITCON2018 baby">
+  <meta name="description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程8">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;pwn-heap-learn-8&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7 这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见 HITCON2018 baby">
+<meta property="og:description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:29:21.216Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -246,7 +271,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/11/01/pwn-heap-learn-8/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程8" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-8/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-8/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -271,8 +317,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a></p>
-<p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p>
+        <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a></p><p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p><a id="more"></a>
+
 <h2 id="HITCON2018-baby-tcache"><a href="#HITCON2018-baby-tcache" class="headerlink" title="HITCON2018 baby_tcache"></a>HITCON2018 baby_tcache</h2><p>这道题我故意将其与tcache中的第一道题分开，因为这道题难度不在于tcache的攻击，而在于IO_FILE的利用，利用上一篇文章中的方法也很容易构造overlap，但libc却无法泄露，我自己纠结好久过后，还是看了wp</p>
 <h3 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h3><ol>
 <li>新建一个堆块，存在off-by-one</li>
@@ -373,16 +419,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/01/pwn-heap-learn-10/" rel="next" title="pwn堆入门系列教程10">
-                  <i class="fa fa-chevron-left"></i> pwn堆入门系列教程10
+                <a href="/2019/05/10/pwn-format64/" rel="next" title="64位格式化字符串自动篇">
+                  <i class="fa fa-chevron-left"></i> 64位格式化字符串自动篇
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/01/pwn-heap-learn-1/" rel="prev" title="pwn堆入门系列教程1">
-                  pwn堆入门系列教程1 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/01/%E6%AF%94%E8%B5%9B/" rel="prev" title="2019软件测试web安全题目writeup收集">
+                  2019软件测试web安全题目writeup收集 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -398,6 +444,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -451,7 +498,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -505,6 +552,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -531,6 +675,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -546,6 +692,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

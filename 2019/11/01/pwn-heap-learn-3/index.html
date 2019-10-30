@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2 序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做 1.1. HITCON Trainging la">
+  <meta name="description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程3">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;pwn-heap-learn-3&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2 序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做 1.1. HITCON Trainging la">
+<meta property="og:description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:28:46.472Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -246,7 +271,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/11/01/pwn-heap-learn-3/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程3" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -271,8 +317,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p>
-<p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p>
+        <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p><a id="more"></a>
+
 <h2 id="1-1-HITCON-Trainging-lab13"><a href="#1-1-HITCON-Trainging-lab13" class="headerlink" title="1.1. HITCON Trainging lab13"></a>1.1. HITCON Trainging lab13</h2><p>这道题还是相对简单的，对于前面几道来说，上一道已经用过这种方法了，而且比这复杂许多，所以差不多了，不过还有些小细节注意下就好</p>
 <h3 id="1-1-1-功能分析"><a href="#1-1-1-功能分析" class="headerlink" title="1.1.1. 功能分析"></a>1.1.1. 功能分析</h3><p>引用于ctf-wiki</p>
 <ol>
@@ -375,16 +421,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/05/10/pwn-format64/" rel="next" title="64位格式化字符串自动篇">
-                  <i class="fa fa-chevron-left"></i> 64位格式化字符串自动篇
+                <a href="/2019/11/01/pwn-heap-learn-1/" rel="next" title="pwn堆入门系列教程1">
+                  <i class="fa fa-chevron-left"></i> pwn堆入门系列教程1
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/01/%E6%AF%94%E8%B5%9B/" rel="prev" title="2019软件测试web安全题目writeup收集">
-                  2019软件测试web安全题目writeup收集 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/02/pwn-learn-0/" rel="prev" title="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存">
+                  论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -400,6 +446,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -453,7 +500,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -507,6 +554,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -533,6 +677,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -548,6 +694,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

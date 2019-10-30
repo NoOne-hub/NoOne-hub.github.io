@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="parot linux系统问题总结出现命令行无法启动torbrowser-launcher这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。 在我的parrot sercurity上出现的错误是这样的： + Tor Browser Launcher">
+  <meta name="description" content="parot linux系统问题总结出现命令行无法启动torbrowser-launcher这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。在我的parrot sercurity上出现的错误是这样的： + Tor Browser Launcher">
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="parrot linux问题解决">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;parrot-linux&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="parot linux系统问题总结出现命令行无法启动torbrowser-launcher这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。 在我的parrot sercurity上出现的错误是这样的： + Tor Browser Launcher">
+<meta property="og:description" content="parot linux系统问题总结出现命令行无法启动torbrowser-launcher这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。在我的parrot sercurity上出现的错误是这样的： + Tor Browser Launcher">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:26:08.016Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -234,7 +259,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/parrot-linux/" class="post-meta-item leancloud_visitors" data-flag-title="parrot linux问题解决" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/parrot-linux/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/parrot-linux/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -259,8 +305,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p>
-<p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</p>
+        <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p><p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</big></p><a id="more"></a>
+
 <ul>
 <li>By Micah Lee, licensed under MIT</li>
 <li>version 0.3.1</li>
@@ -269,7 +315,7 @@
 <li>Running /home/greenhand/.local/share/torbrowser/tbb/x86_64/tor-browser_en-US/start-tor-browser.desktop</li>
 <li>Launching ‘./Browser/start-tor-browser –detach’…</li>
 <li>QFileSystemWatcher::removePaths: list is empty</li>
-<li>QFileSystemWatcher::removePaths: list is empty </big></li>
+<li>QFileSystemWatcher::removePaths: list is empty </li>
 </ul>
 <p>解决方案可以直接往下划到底下，我先讲下处理这个问题思路<br>然后torbrowser-launcher没有启动,就这样就没了，我通过手动去官网下载了一波，解压后是可以运行的，然后将解压后的文件夹移动到tor默认位置那里，也就是上述出错的地方，tor浏览器居然运行不起来了，发现症结所在后，我创建了一个文件夹，然后将本身tor的文件夹移动到我新建的文件夹里，tor可以运行起来了，好吧，知道该怎么解决后就开始处理了</p>
 <h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>直接移动后会报错，然后根据报错位置找到了<br><strong>/usr/lib/python3/dist-packages/torbrowser_launcher/</strong><br>这里有一堆py文件，然后经过手动探寻可以查到common.py里存放了位置信息，所以我将common.py里的 <strong>tbb_local = ‘{0}/.local/share/torbrowser/‘.format(homedir)</strong> 改成 <strong>tbb_local = ‘{0}/.local/share/torbrowser/test/‘.format(homedir)</strong><br>加多一层目录，然后命令行就可以完美启动了！</p>
@@ -357,6 +403,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -410,7 +457,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -464,6 +511,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -490,6 +634,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -505,6 +651,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

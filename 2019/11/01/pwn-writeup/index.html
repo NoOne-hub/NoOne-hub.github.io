@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="pwn-01题目不难，很明显能看出ROP 123456789101112131415161718192021222324252627282930313233343536int encrypt()&amp;#123;  size_t v0; &#x2F;&#x2F; rbx  char s[48]; &#x2F;&#x2F; [rsp+0h] [rbp-50h]  __int16 v3; &#x2F;&#x2F; [rsp+30h] [rbp-20h]  memse">
+  <meta name="description" content="pwn-01题目不难，很明显能看出ROP123456789101112131415161718192021222324252627282930313233343536int encrypt()&amp;#123;  size_t v0; &#x2F;&#x2F; rbx  char s[48]; &#x2F;&#x2F; [rsp+0h] [rbp-50h]  __int16 v3; &#x2F;&#x2F; [rsp+30h] [rbp-20h]  memset">
 <meta name="keywords" content="pwn， 栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="国赛pwn01">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;pwn-writeup&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn-01题目不难，很明显能看出ROP 123456789101112131415161718192021222324252627282930313233343536int encrypt()&amp;#123;  size_t v0; &#x2F;&#x2F; rbx  char s[48]; &#x2F;&#x2F; [rsp+0h] [rbp-50h]  __int16 v3; &#x2F;&#x2F; [rsp+30h] [rbp-20h]  memse">
+<meta property="og:description" content="pwn-01题目不难，很明显能看出ROP123456789101112131415161718192021222324252627282930313233343536int encrypt()&amp;#123;  size_t v0; &#x2F;&#x2F; rbx  char s[48]; &#x2F;&#x2F; [rsp+0h] [rbp-50h]  __int16 v3; &#x2F;&#x2F; [rsp+30h] [rbp-20h]  memset">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:33:21.956Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -246,7 +271,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/11/01/pwn-writeup/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn01" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-writeup/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-writeup/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -271,8 +317,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn-01"><a href="#pwn-01" class="headerlink" title="pwn-01"></a>pwn-01</h1><p>题目不难，很明显能看出ROP</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v0; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">48</span>]; <span class="comment">// [rsp+0h] [rbp-50h]</span></span><br><span class="line">  __int16 v3; <span class="comment">// [rsp+30h] [rbp-20h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">  gets(s);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v0 = (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x;</span><br><span class="line">    <span class="keyword">if</span> ( v0 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span> )</span><br><span class="line">          s[x] ^= <span class="number">0xF</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        s[x] ^= <span class="number">0xE</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      s[x] ^= <span class="number">0xD</span>u;</span><br><span class="line">    &#125;</span><br><span class="line">    ++x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="pwn-01"><a href="#pwn-01" class="headerlink" title="pwn-01"></a>pwn-01</h1><p>题目不难，很明显能看出ROP</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v0; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">48</span>]; <span class="comment">// [rsp+0h] [rbp-50h]</span></span><br><span class="line">  __int16 v3; <span class="comment">// [rsp+30h] [rbp-20h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">  gets(s);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v0 = (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x;</span><br><span class="line">    <span class="keyword">if</span> ( v0 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span> )</span><br><span class="line">          s[x] ^= <span class="number">0xF</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        s[x] ^= <span class="number">0xE</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      s[x] ^= <span class="number">0xD</span>u;</span><br><span class="line">    &#125;</span><br><span class="line">    ++x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
 
 <p>gets没有限制长度，然后有个麻烦的地方就是对payload进行了一轮加密操作，然后过了这部分后，还要记住他是64位程序，用寄存器传前5个还是前6个参数来着，忘了，不重要，不过确定的是第一位是用的rdi，所以需要<br>ROPgadget –binary Emachine –only ‘pop|ret’<br>然后找到那个地址</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">└──╼ <span class="variable">$ROPgadget</span> --binary Emachine --only <span class="string">'pop|ret'</span></span><br><span class="line">Gadgets information</span><br><span class="line">============================================================</span><br><span class="line">0x0000000000400c7c : pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400c7e : pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400c80 : pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400c82 : pop r15 ; ret</span><br><span class="line">0x0000000000400c7b : pop rbp ; pop r12 ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x0000000000400c7f : pop rbp ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004007f0 : pop rbp ; ret</span><br><span class="line">0x0000000000400aec : pop rbx ; pop rbp ; ret</span><br><span class="line">0x0000000000400c83 : pop rdi ; ret</span><br><span class="line">0x0000000000400c81 : pop rsi ; pop r15 ; ret</span><br><span class="line">0x0000000000400c7d : pop rsp ; pop r13 ; pop r14 ; pop r15 ; ret</span><br><span class="line">0x00000000004006b9 : ret</span><br><span class="line">0x00000000004008ca : ret 0x2017</span><br><span class="line">0x0000000000400962 : ret 0x458b</span><br><span class="line">0x00000000004009c5 : ret 0xbf02</span><br><span class="line"></span><br><span class="line">Unique gadgets found: 15</span><br></pre></td></tr></table></figure>
@@ -329,6 +375,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -382,7 +429,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -436,6 +483,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -462,6 +606,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -477,6 +623,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

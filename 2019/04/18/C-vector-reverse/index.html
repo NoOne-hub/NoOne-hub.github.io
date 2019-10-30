@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -169,9 +169,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -251,7 +276,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/18/C-vector-reverse/" class="post-meta-item leancloud_visitors" data-flag-title="C++_vector_reverse" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/18/C-vector-reverse/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/18/C-vector-reverse/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -276,7 +322,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="C-逆向之容器vector篇入门（本文首发于安全客）"><a href="#C-逆向之容器vector篇入门（本文首发于安全客）" class="headerlink" title="C++逆向之容器vector篇入门（本文首发于安全客）"></a>C++逆向之容器vector篇入门（本文首发于安全客）</h1><p>前言：说实话，我自己也不会c++的逆向。然后，现在太多的题目是c++的逆向了，一上来就是一堆容器，搞得我不得不去补补c++逆向部分的知识了，我这篇文章以西湖论剑的easyCpp为例，希望能给那些跟我一样是c++逆向的新手的朋友们一点启发。下面我就开始我的抛砖引玉篇幅吧，在这篇文章里，我会以题目中出现的逆向出来的代码以及C++的代码进行对比，让你们更好的知道，c++容器入门篇其实不难，开始正文：</p>
+        <h1 id="C-逆向之容器vector篇入门（本文首发于安全客）"><a href="#C-逆向之容器vector篇入门（本文首发于安全客）" class="headerlink" title="C++逆向之容器vector篇入门（本文首发于安全客）"></a>C++逆向之容器vector篇入门（本文首发于安全客）</h1><p>前言：说实话，我自己也不会c++的逆向。然后，现在太多的题目是c++的逆向了，一上来就是一堆容器，搞得我不得不去补补c++逆向部分的知识了，我这篇文章以西湖论剑的easyCpp为例，希望能给那些跟我一样是c++逆向的新手的朋友们一点启发。下面我就开始我的抛砖引玉篇幅吧，在这篇文章里，我会以题目中出现的逆向出来的代码以及C++的代码进行对比，让你们更好的知道，c++容器入门篇其实不难，开始正文：</p><a id="more"></a>
 <p>我将先给你们介绍每个容器操作的代码以及ida反汇编出来的代码进行对比</p>
 <h2 id="vector的构造以及析构"><a href="#vector的构造以及析构" class="headerlink" title="vector的构造以及析构"></a>vector的构造以及析构</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//声明一个int型向量</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test1;</span><br><span class="line">    getchar();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//声明一个初始大小为5的int向量</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test2(<span class="number">5</span>);</span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明一个初始大小为10且值都是1的向量</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test3(<span class="number">10</span>,<span class="number">1</span>);</span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明并用num向量初始化test4向量</span></span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test4(num);</span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//用向量vec的第0个到第9个值初始化test3</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test5(test3.begin(), test3.end());</span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将arr[1]~arr[4]范围内的元素作为vec的初始值</span></span><br><span class="line">    <span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; test6(&amp;<span class="built_in">array</span>[<span class="number">1</span>], &amp;<span class="built_in">array</span>[<span class="number">4</span>]);</span><br><span class="line">    getchar();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这是C++代码，接下来是ida F5出现的代码</p>
@@ -289,7 +335,7 @@
 <li>可以看出构造函数和析构函数是同时存在的</li>
 <li>要学会简化所识别出来的C++代码，括号里的模板类可以不仔细看，只需要看他具体是什么函数就行</li>
 </ul>
-<p><strong>重点</strong>：<br>  v3 = std::vector&lt;int,std::allocator<int>&gt;::end(&amp;v14);<br>  v4 = std::vector&lt;int,std::allocator<int>&gt;::begin(&amp;v14);<br>  这两句要会识别，这是常用的，他是取容器的begin和end，相当于C++的v14.begin();v14.end();</p>
+<p><strong>重点</strong>：<br>  v3 = std::vector&lt;int,std::allocator<int>&gt;::end(&amp;v14);<br>  v4 = std::vector&lt;int,std::allocator<int>&gt;::begin(&amp;v14);<br>  这两句要会识别，这是常用的，他是取容器的begin和end，相当于C++的v14.begin();v14.end();</int></int></p>
 <h2 id="vector的常用操作识别"><a href="#vector的常用操作识别" class="headerlink" title="vector的常用操作识别"></a>vector的常用操作识别</h2><p>先进行vector操作知识的复习</p>
 <p>vector对象最重要的几种操作</p>
 <ol>
@@ -302,7 +348,7 @@
 <li>v.erase(pointer1,pointer2) 删除pointer1到pointer2中间（包括pointer1所指）的元素。<br> vector中删除一个元素后，此位置以后的元素都需要往前移动一个位置，虽然当前迭代器位置没有自动加1，<br> 但是由于后续元素的顺次前移，也就相当于迭代器的自动指向下一个位置一样。</li>
 <li>v1==v2          判断v1与v2是否相等。</li>
 <li>！=、&lt;、&lt;=、&gt;、&gt;=      保持这些操作符惯有含义。</li>
-<li>vector<typeName>::iterator p=v1.begin( ); p初始值指向v1的第一个元素。*p取所指向元素的值。<br>  对于const vector<typeName>只能用vector<typeName>::const_iterator类型的指针访问。</li>
+<li>vector<typename>::iterator p=v1.begin( ); p初始值指向v1的第一个元素。*p取所指向元素的值。<br>  对于const vector<typename>只能用vector<typename>::const_iterator类型的指针访问。</typename></typename></typename></li>
 <li>p=v1.end( ); p指向v1的最后一个元素的下一位置。</li>
 <li>v.clear()      删除容器中的所有元素。</li>
 <li>v.resize(2<em>v.size)或v.resize(2</em>v.size, 99)　　 将v的容量翻倍(并把新元素的值初始化为99)</li>
@@ -361,7 +407,7 @@
 <p>把这段复制到linux上运行即可得到flag，或者直接逆向也得到了</p>
 <p>我的这篇文章文字不多，大部分文字都在代码里写注释了，因为这篇文章针对的就是如何分析C++的vector的反汇编代码，具体多余的文字赘述我也就没写了</p>
 <h3 id="总结下："><a href="#总结下：" class="headerlink" title="总结下："></a><strong>总结下：</strong></h3><ol>
-<li>在ida的f5插件识别出来的不会是你理想的c++代码，比如v24.begin(); 他会变成std::vector&lt;int,std::allocator<int>&gt;::end(&amp;v24)；</li>
+<li>在ida的f5插件识别出来的不会是你理想的c++代码，比如v24.begin(); 他会变成std::vector&lt;int,std::allocator<int>&gt;::end(&amp;v24)；</int></li>
 <li>在ida的f5插件识别出来的代码下，不清楚的部分可以跟进去，看看具体是什么操作</li>
 <li>需要了解常见的vector容器的基本操作，在自己遇到的时候可以快速识别，不需要步进了解具体过程</li>
 <li>在不了解具体过程的情况下，可以进行动态调试，方便自己理解</li>
@@ -408,6 +454,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -461,7 +508,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -515,6 +562,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -541,6 +685,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -556,6 +702,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="pwn堆入门系列教程1因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑 环境搭建具体搭建方法点我 off by one原理（引用ctf-wiki)off-by-one 是指单字节缓冲区溢出，这">
+  <meta name="description" content="pwn堆入门系列教程1因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑环境搭建具体搭建方法点我">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程1">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;pwn-heap-learn-1&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程1因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑 环境搭建具体搭建方法点我 off by one原理（引用ctf-wiki)off-by-one 是指单字节缓冲区溢出，这">
+<meta property="og:description" content="pwn堆入门系列教程1因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑环境搭建具体搭建方法点我">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:32:06.120Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -246,7 +271,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/11/01/pwn-heap-learn-1/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程1" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -271,8 +317,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程1"><a href="#pwn堆入门系列教程1" class="headerlink" title="pwn堆入门系列教程1"></a>pwn堆入门系列教程1</h1><p>因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑</p>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><a href="https://xz.aliyun.com/t/5749" target="_blank" rel="noopener">具体搭建方法点我</a></p>
+        <h1 id="pwn堆入门系列教程1"><a href="#pwn堆入门系列教程1" class="headerlink" title="pwn堆入门系列教程1"></a>pwn堆入门系列教程1</h1><p>因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑</p><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><a href="https://xz.aliyun.com/t/5749" target="_blank" rel="noopener">具体搭建方法点我</a></p><a id="more"></a>
+
 <h2 id="off-by-one原理（引用ctf-wiki"><a href="#off-by-one原理（引用ctf-wiki" class="headerlink" title="off by one原理（引用ctf-wiki)"></a>off by one原理（引用ctf-wiki)</h2><p>off-by-one 是指单字节缓冲区溢出，这种漏洞的产生往往与边界验证不严和字符串操作有关，当然也不排除写入的 size 正好就只多了一个字节的情况。其中边界验证不严通常包括</p>
 <p>使用循环语句向堆块中写入数据时，循环的次数设置错误（这在 C 语言初学者中很常见）导致多写入了一个字节。<br>字符串操作不合适<br>一般来说，单字节溢出被认为是难以利用的，但是因为 Linux 的堆管理机制 ptmalloc 验证的松散性，基于 Linux 堆的 off-by-one 漏洞利用起来并不复杂，并且威力强大。 此外，需要说明的一点是 off-by-one 是可以基于各种缓冲区的，比如栈、bss 段等等，但是堆上（heap based） 的 off-by-one 是 CTF 中比较常见的。我们这里仅讨论堆上的 off-by-one 情况。</p>
 <h2 id="off-by-one-利用思路（引用ctf-wiki"><a href="#off-by-one-利用思路（引用ctf-wiki" class="headerlink" title="off-by-one 利用思路（引用ctf-wiki)"></a>off-by-one 利用思路（引用ctf-wiki)</h2><p>溢出字节为可控制任意字节：通过修改大小造成块结构之间出现重叠，从而泄露其他块数据，或是覆盖其他块数据。也可使用 NULL 字节溢出的方法<br>溢出字节为 NULL 字节：在 size 为 0x100 的时候，溢出 NULL 字节可以使得 prev_in_use 位被清，这样前块会被认为是 free 块。（1） 这时可以选择使用 unlink 方法（见 unlink 部分）进行处理。（2） 另外，这时 prev_size 域就会启用，就可以伪造 prev_size ，从而造成块之间发生重叠。此方法的关键在于 unlink 的时候没有检查按照 prev_size 找到的块的后一块（理论上是当前正在 unlink 的块）与当前正在 unlink 的块大小是否相等。</p>
@@ -441,16 +487,16 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/11/01/pwn-heap-learn-8/" rel="next" title="pwn堆入门系列教程8">
-                  <i class="fa fa-chevron-left"></i> pwn堆入门系列教程8
+                <a href="/2019/11/01/pwn-heap-learn-10/" rel="next" title="pwn堆入门系列教程10">
+                  <i class="fa fa-chevron-left"></i> pwn堆入门系列教程10
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/11/02/pwn-learn-0/" rel="prev" title="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存">
-                  论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/01/pwn-heap-learn-3/" rel="prev" title="pwn堆入门系列教程3">
+                  pwn堆入门系列教程3 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -466,6 +512,7 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -519,7 +566,7 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -573,6 +620,103 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -599,6 +743,8 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -614,6 +760,33 @@ BK-&gt;fd = FD;</code></pre><p>}<br><a href="https://ctf-wiki.github.io/ctf-wiki
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

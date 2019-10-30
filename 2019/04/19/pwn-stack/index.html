@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文: 题目简介123456789101112131415161718192021222324int __cdecl">
+  <meta name="description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:题目简介123456789101112131415161718192021222324int __cdecl">
 <meta name="keywords" content="pwn， 二进制,栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滴滴CTF之唯一的pwn题详解">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;pwn-stack&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文: 题目简介123456789101112131415161718192021222324int __cdecl">
+<meta property="og:description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:题目简介123456789101112131415161718192021222324int __cdecl">
 <meta property="og:locale" content="English">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g27zjxto4tj30m90g5adg.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g285j7w0nhj30iz0evdh0.jpg">
@@ -178,9 +178,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -260,7 +285,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/pwn-stack/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴CTF之唯一的pwn题详解" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/pwn-stack/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/pwn-stack/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -285,8 +331,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="滴滴CTF之唯一的pwn题详解"><a href="#滴滴CTF之唯一的pwn题详解" class="headerlink" title="滴滴CTF之唯一的pwn题详解"></a>滴滴CTF之唯一的pwn题详解</h1><p>前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:</p>
-<h2 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> nbytes; <span class="comment">// [esp+40h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// [esp+44h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = &amp;a1;</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  sub_80485DB(<span class="built_in">stdin</span>, <span class="built_in">stdout</span>);</span><br><span class="line">  sleep(<span class="number">1u</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please set the length of password: "</span>);</span><br><span class="line">  nbytes = sub_804862D();</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">63</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Too long!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter password(lenth %u): "</span>, nbytes);</span><br><span class="line">  v1 = fileno(<span class="built_in">stdin</span>);</span><br><span class="line">  read(v1, &amp;buf, nbytes);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"All done, bye!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="滴滴CTF之唯一的pwn题详解"><a href="#滴滴CTF之唯一的pwn题详解" class="headerlink" title="滴滴CTF之唯一的pwn题详解"></a>滴滴CTF之唯一的pwn题详解</h1><p>前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:</p><h2 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> nbytes; <span class="comment">// [esp+40h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// [esp+44h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = &amp;a1;</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  sub_80485DB(<span class="built_in">stdin</span>, <span class="built_in">stdout</span>);</span><br><span class="line">  sleep(<span class="number">1u</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please set the length of password: "</span>);</span><br><span class="line">  nbytes = sub_804862D();</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">63</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Too long!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter password(lenth %u): "</span>, nbytes);</span><br><span class="line">  v1 = fileno(<span class="built_in">stdin</span>);</span><br><span class="line">  read(v1, &amp;buf, nbytes);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"All done, bye!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
 <p><strong>sub_80485DB(stdin, stdout)内部代码</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80485DB</span><span class="params">(FILE *stream, FILE *a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-48h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter username: "</span>);</span><br><span class="line">  v2 = fileno(stream);</span><br><span class="line">  read(v2, &amp;buf, <span class="number">0x40</span>u);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">fprintf</span>(a2, <span class="string">"Hello %s"</span>, &amp;buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>sub_804862D()内部代码</strong></p>
@@ -347,8 +393,8 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/04/19/ida/" rel="next" title="ida7.2的安装">
-                  <i class="fa fa-chevron-left"></i> ida7.2的安装
+                <a href="/2019/04/19/pwn_%E7%BB%86%E8%8A%82/" rel="next" title="比赛细节注意点">
+                  <i class="fa fa-chevron-left"></i> 比赛细节注意点
                 </a>
             </div>
 
@@ -372,6 +418,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -425,7 +472,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -479,6 +526,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -505,6 +649,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -520,6 +666,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

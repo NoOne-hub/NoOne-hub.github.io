@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -51,14 +51,14 @@
 </script>
 
   <meta name="description" content="NoOne自我介绍一个无名小卒，个人比较喜欢pwn，因为ctf的re相对没意思，整天都在玩算法，对于现实中的软件完全没有任何用处感觉。以前自己喜欢逆向一些小软件，破解授权自己用，曾帮人破解过一个辅助吧，也没公开，朋友私用。pwn方向的话，现在学到堆的攻击，只差house of系列还没学完了，栈的题目见的比较多，以前只经常打栈题目，然后现在比赛经常都是堆类型题目，所以着重学堆了。学完堆准备学漏洞分析">
-<meta name="keywords" content="about_me">
+<meta name="keywords" content="about">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于我">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;about_me&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
 <meta property="og:description" content="NoOne自我介绍一个无名小卒，个人比较喜欢pwn，因为ctf的re相对没意思，整天都在玩算法，对于现实中的软件完全没有任何用处感觉。以前自己喜欢逆向一些小软件，破解授权自己用，曾帮人破解过一个辅助吧，也没公开，朋友私用。pwn方向的话，现在学到堆的攻击，只差house of系列还没学完了，栈的题目见的比较多，以前只经常打栈题目，然后现在比赛经常都是堆类型题目，所以着重学堆了。学完堆准备学漏洞分析">
 <meta property="og:locale" content="English">
-<meta property="og:updated_time" content="2019-10-30T09:14:54.736Z">
+<meta property="og:updated_time" content="2019-10-30T10:56:35.820Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/2019/04/19/about_me/">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -220,7 +245,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:14:54" itemprop="dateModified" datetime="2019-10-30T17:14:54+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 18:56:35" itemprop="dateModified" datetime="2019-10-30T18:56:35+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -228,13 +253,34 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/about-me/" itemprop="url" rel="index">
-                    <span itemprop="name">about_me</span>
+                  <a href="/categories/about/" itemprop="url" rel="index">
+                    <span itemprop="name">about</span>
                   </a>
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/about_me/" class="post-meta-item leancloud_visitors" data-flag-title="关于我" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/about_me/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/about_me/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -259,7 +305,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="NoOne"><a href="#NoOne" class="headerlink" title="NoOne"></a>NoOne</h1><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>一个无名小卒，个人比较喜欢pwn，因为ctf的re相对没意思，整天都在玩算法，对于现实中的软件完全没有任何用处感觉。<br>以前自己喜欢逆向一些小软件，破解授权自己用，曾帮人破解过一个辅助吧，也没公开，朋友私用。<br>pwn方向的话，现在学到堆的攻击，只差house of系列还没学完了，栈的题目见的比较多，以前只经常打栈题目，然后现在比赛经常都是堆类型题目，所以着重学堆了。学完堆准备学漏洞分析了，自己分析些cve什么的。<br>二进制病毒分析类我也挺喜欢的，我的初心就是想在这方面发展的，后面因为各种原因搁置了，偶尔分析下简单锁机软件吧，现在的话破解软件难度也大了，易语言部分整天都是麻婆壳</p>
+        <h1 id="NoOne"><a href="#NoOne" class="headerlink" title="NoOne"></a>NoOne</h1><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>一个无名小卒，个人比较喜欢pwn，因为ctf的re相对没意思，整天都在玩算法，对于现实中的软件完全没有任何用处感觉。<br>以前自己喜欢逆向一些小软件，破解授权自己用，曾帮人破解过一个辅助吧，也没公开，朋友私用。<br>pwn方向的话，现在学到堆的攻击，只差house of系列还没学完了，栈的题目见的比较多，以前只经常打栈题目，然后现在比赛经常都是堆类型题目，所以着重学堆了。学完堆准备学漏洞分析了，自己分析些cve什么的。<br>二进制病毒分析类我也挺喜欢的，我的初心就是想在这方面发展的，后面因为各种原因搁置了，偶尔分析下简单锁机软件吧，现在的话破解软件难度也大了，易语言部分整天都是麻婆壳</p><a id="more"></a>
 <p>成就：全国大学生信息安全竞赛总决赛三等奖，华中区特等奖</p>
 <p>在先知安全客也发过几篇文章吧，没啥成就，感觉就是自己还是很菜</p>
 <p>目标：以后能在二进制安全方向找份工作，漏洞挖掘类的，或者病毒分析类的</p>
@@ -275,23 +321,23 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/about-me/" rel="tag"># about_me</a>
+              <a href="/tags/about/" rel="tag"># about</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/04/19/hadoop1/" rel="next" title="大数据作业">
-                  <i class="fa fa-chevron-left"></i> 大数据作业
+                <a href="/2019/04/19/htmlLearn/" rel="next" title="前端学习1">
+                  <i class="fa fa-chevron-left"></i> 前端学习1
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/05/10/pwn-format64/" rel="prev" title="64位格式化字符串自动篇">
-                  64位格式化字符串自动篇 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/04/19/hadoop1/" rel="prev" title="大数据作业">
+                  大数据作业 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -307,6 +353,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -360,7 +407,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -414,6 +461,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -440,6 +584,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -455,6 +601,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

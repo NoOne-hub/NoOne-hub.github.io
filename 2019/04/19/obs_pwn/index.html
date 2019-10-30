@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -246,7 +271,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/obs_pwn/" class="post-meta-item leancloud_visitors" data-flag-title="日常生活记录的漏洞点" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/obs_pwn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/obs_pwn/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -272,7 +318,6 @@
 
       
         <h1 id="obs-pwn"><a href="#obs-pwn" class="headerlink" title="obs_pwn"></a>obs_pwn</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">└──╼ <span class="variable">$obs</span> </span><br><span class="line">Attempted path: share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">info: CPU Name: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz</span><br><span class="line">info: CPU Speed: 3480.843MHz</span><br><span class="line">info: Physical Cores: 2, Logical Cores: 4</span><br><span class="line">info: Physical Memory: 11782MB Total, 3611MB Free</span><br><span class="line">info: Kernel Version: Linux 5.2.0-2parrot1-amd64</span><br><span class="line">info: Distribution: <span class="string">"Parrot GNU/Linux"</span> <span class="string">"4.7"</span></span><br><span class="line">info: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.20.4</span><br><span class="line">info: Portable mode: <span class="literal">false</span></span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_clicked()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_destroyed()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_program_customContextMenuRequested(QPoint)</span><br><span class="line">info: OBS 0.0.1 (linux)</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: audio settings reset:</span><br><span class="line">	samples per sec: 44100</span><br><span class="line">	speakers:        2</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: Initializing OpenGL...</span><br><span class="line">info: Loading up OpenGL on adapter Intel Open Source Technology Center Mesa DRI Intel(R) HD Graphics 620 (Kaby Lake GT2) </span><br><span class="line">info: OpenGL loaded successfully, version 4.5 (Core Profile) Mesa 19.1.6, shading language 4.50</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: video settings reset:</span><br><span class="line">	base resolution:   1920x1080</span><br><span class="line">	output resolution: 1280x720</span><br><span class="line">	downscale filter:  Bicubic</span><br><span class="line">	fps:               30/1</span><br><span class="line">	format:            NV12</span><br><span class="line">	YUV mode:          601/Partial</span><br><span class="line">info: NV12 texture support not available</span><br><span class="line">info: Audio monitoring device:</span><br><span class="line">	name: Default</span><br><span class="line">	id: default</span><br><span class="line">info: ---------------------------------</span><br><span class="line">warning: Failed to load <span class="string">'en-US'</span> text <span class="keyword">for</span> module: <span class="string">'decklink-ouput-ui.so'</span></span><br><span class="line">libDeckLinkAPI.so: cannot open shared object file: No such file or directory</span><br><span class="line">info: No blackmagic support</span><br><span class="line">info: FFMPEG VAAPI supported</span><br><span class="line">info: VLC found, VLC video <span class="built_in">source</span> enabled</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info:   Loaded Modules:</span><br><span class="line">info:     vlc-video.so</span><br><span class="line">info:     text-freetype2.so</span><br><span class="line">info:     rtmp-services.so</span><br><span class="line">info:     obs-x264.so</span><br><span class="line">info:     obs-transitions.so</span><br><span class="line">info:     obs-outputs.so</span><br><span class="line">info:     obs-filters.so</span><br><span class="line">info:     obs-ffmpeg.so</span><br><span class="line">info:     linux-v4l2.so</span><br><span class="line">info:     linux-pulseaudio.so</span><br><span class="line">info:     linux-jack.so</span><br><span class="line">info:     linux-decklink.so</span><br><span class="line">info:     linux-capture.so</span><br><span class="line">info:     linux-alsa.so</span><br><span class="line">info:     image-source.so</span><br><span class="line">info:     frontend-tools.so</span><br><span class="line">info:     decklink-ouput-ui.so</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ==== Startup complete ===============================================</span><br><span class="line">error: Service <span class="string">''</span> not found</span><br><span class="line">info: No scene file found, creating default scene</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: Switched to scene <span class="string">'Scene'</span></span><br><span class="line">warning: Failed to glob scene collections</span><br><span class="line">Attempted path: share/obs/obs-studio/images/overflow.png</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/images/overflow.png</span><br><span class="line">info: adding 23 milliseconds of audio buffering, total audio buffering is now 23 milliseconds (<span class="built_in">source</span>: Mic/Aux)</span><br><span class="line"></span><br><span class="line">^Cinfo: ==== Shutting down ==================================================</span><br><span class="line">info: Switched to scene <span class="string">'(null)'</span></span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Got 125 packets with 32338 frames</span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: pulse-input: Got 271 packets with 118520 frames</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">double free or corruption (out)</span><br><span class="line">Aborted</span><br></pre></td></tr></table></figure>
-
     </div>
 
     
@@ -313,6 +358,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -366,7 +412,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -420,6 +466,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -446,6 +589,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -461,6 +606,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

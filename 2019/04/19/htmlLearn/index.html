@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="字体样式    W3Cschool教程(w3cschool.cn)         这个文本加粗的       这个文本是加粗的       这个文本字体放大       这个文本是斜体的       这个文本是斜体的       这个文本是缩小的       这个文本包含下标       这个文本包含上标     pre标签     此例演示如何使用 pre 标签     对空行和   空格">
+  <meta name="description" content="字体样式   W3Cschool教程(w3cschool.cn)         这个文本加粗的       这个文本是加粗的       这个文本字体放大       这个文本是斜体的       这个文本是斜体的       这个文本是缩小的       这个文本包含下标       这个文本包含上标">
 <meta name="keywords" content="web,前端,html">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端学习1">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;htmlLearn&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="字体样式    W3Cschool教程(w3cschool.cn)         这个文本加粗的       这个文本是加粗的       这个文本字体放大       这个文本是斜体的       这个文本是斜体的       这个文本是缩小的       这个文本包含下标       这个文本包含上标     pre标签     此例演示如何使用 pre 标签     对空行和   空格">
+<meta property="og:description" content="字体样式   W3Cschool教程(w3cschool.cn)         这个文本加粗的       这个文本是加粗的       这个文本字体放大       这个文本是斜体的       这个文本是斜体的       这个文本是缩小的       这个文本包含下标       这个文本包含上标">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:22:40.988Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -240,7 +265,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/04/19/htmlLearn/" class="post-meta-item leancloud_visitors" data-flag-title="前端学习1" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/19/htmlLearn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/htmlLearn/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -265,8 +311,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h1><!DOCTYPE html>
-<html>
+        <h1 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h1><html>
 <head>
 <meta charset="utf-8">
 <title>W3Cschool教程(w3cschool.cn)</title>
@@ -298,7 +343,8 @@
     这个文本包含<sup>上标</sup>
 </p>
 </body>
-</html>
+</html><a id="more"></a><!DOCTYPE html>
+
 
 <h1 id="pre标签"><a href="#pre标签" class="headerlink" title="pre标签"></a>pre标签</h1><pre>
     此例演示如何使用 pre 标签
@@ -306,7 +352,7 @@
     进行控制
 </pre>
 
-<h1 id="html全称"><a href="#html全称" class="headerlink" title="html全称"></a>html全称</h1><p><a>:anchor 定义锚<br><abbr>:abbreviation 定义缩写<br><acronym>: 定义只取消首字母的缩写 </p>
+<h1 id="html全称"><a href="#html全称" class="headerlink" title="html全称"></a>html全称</h1><p><a>:anchor 定义锚<br><abbr>:abbreviation 定义缩写<br><acronym>: 定义只取消首字母的缩写 </acronym></abbr></a></p>
 <address>:定义地址元素 
 <area>:定义图像映射内部的区域 
 <b>:bold 定义粗体字 
@@ -406,7 +452,7 @@ textarea 多行文本域
 style 样式表
 
 <h1 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h1><p><code>计算机输出</code><br><kbd>键盘输入</kbd><br><tt>打字机文本</tt><br><samp>计算机代码样本</samp><br><var>计算机变量</var></p>
-
+</script></samp></q></pre></p></option></optgroup></ol></object></noscript></noframe></map></li></legend></label></kbd></ins></iframe></i></html></head></h6></h1></frameset></form></fieldset></em></dt></dl></dfn></div></del></dd></colgroup></code></cite></caption></button></body></blockquote></big></bdo></b></address>
     </div>
 
     
@@ -430,8 +476,8 @@ style 样式表
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/04/19/hadoop1/" rel="prev" title="大数据作业">
-                  大数据作业 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/04/19/about_me/" rel="prev" title="关于我">
+                  关于我 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -447,6 +493,7 @@ style 样式表
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -646,7 +693,7 @@ style 样式表
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -700,6 +747,103 @@ style 样式表
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -726,6 +870,8 @@ style 样式表
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -741,6 +887,33 @@ style 样式表
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

@@ -38,7 +38,7 @@
       hits: {"per_page":10},
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
-    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
@@ -50,13 +50,13 @@
   };
 </script>
 
-  <meta name="description" content="爬虫第一天关于内容的思考书里有两处遗漏  正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里">
+  <meta name="description" content="爬虫第一天关于内容的思考书里有两处遗漏 正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里讲">
 <meta name="keywords" content="python,爬虫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程1">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;python-spider&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="爬虫第一天关于内容的思考书里有两处遗漏  正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里">
+<meta property="og:description" content="爬虫第一天关于内容的思考书里有两处遗漏 正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里讲">
 <meta property="og:locale" content="English">
 <meta property="og:updated_time" content="2019-10-30T09:34:46.688Z">
 <meta name="twitter:card" content="summary">
@@ -164,9 +164,34 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 
 </nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
 </div>
     </header>
 
@@ -240,7 +265,28 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span id="/2019/11/01/python-spider/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程1" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/python-spider/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/python-spider/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
@@ -265,15 +311,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="爬虫第一天"><a href="#爬虫第一天" class="headerlink" title="爬虫第一天"></a>爬虫第一天</h1><h2 id="关于内容的思考"><a href="#关于内容的思考" class="headerlink" title="关于内容的思考"></a>关于内容的思考</h2><p>书里有两处遗漏</p>
-<ol>
+        <h1 id="爬虫第一天"><a href="#爬虫第一天" class="headerlink" title="爬虫第一天"></a>爬虫第一天</h1><h2 id="关于内容的思考"><a href="#关于内容的思考" class="headerlink" title="关于内容的思考"></a>关于内容的思考</h2><p>书里有两处遗漏</p><ol>
 <li><p>正则匹配不当</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
 <p>这里应该是/place/default/这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上</p>
 </li>
 <li><p>在requests这里讲解的时候代码少了个return html</p>
 </li>
-</ol>
+</ol><a id="more"></a>
+
 <h2 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urljoin</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">def download(url, user_agent='wswp', robots=None, num_retries=5, proxies=None):</span></span><br><span class="line"><span class="string">    print("Downloading:", url)</span></span><br><span class="line"><span class="string">    headers = &#123;'User-Agent': user_agent&#125;</span></span><br><span class="line"><span class="string">    try:</span></span><br><span class="line"><span class="string">        resp = requests.get(url, headers=headers, proxies=proxies)</span></span><br><span class="line"><span class="string">        html = resp.text</span></span><br><span class="line"><span class="string">        # print(html)</span></span><br><span class="line"><span class="string">        if resp.status_code &gt;= 400:</span></span><br><span class="line"><span class="string">            print("Downloading error:", resp.text)</span></span><br><span class="line"><span class="string">            html = None</span></span><br><span class="line"><span class="string">            if num_retries and 500 &lt;= resp.status_code &lt; 600:</span></span><br><span class="line"><span class="string">                return download(url, num_retries - 1)</span></span><br><span class="line"><span class="string">    except requests.exceptions.RequestException as e:</span></span><br><span class="line"><span class="string">        print("Download error", e.reason)</span></span><br><span class="line"><span class="string">        html = None</span></span><br><span class="line"><span class="string">    return html</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(url, user_agent=<span class="string">'wswp'</span>, robots=None, num_retries=<span class="number">5</span>,proxies = None)</span>:</span></span><br><span class="line">    print(<span class="string">"Downloading:"</span>, url)</span><br><span class="line">    headers = &#123;<span class="string">'User-Agent'</span>:user_agent&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        resp = requests.get(url, headers=headers, proxies = proxies)</span><br><span class="line">        html = resp.text</span><br><span class="line">        <span class="keyword">if</span> resp.status_code &gt; <span class="number">400</span>:</span><br><span class="line">            print(<span class="string">"Download error"</span>, resp.text)</span><br><span class="line">            html = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">if</span> num_retries <span class="keyword">and</span> <span class="number">500</span> &lt;= resp.status_code &lt; <span class="number">600</span>:</span><br><span class="line">                <span class="keyword">return</span> download(url,num_retries<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Download error"</span>, e.reason)</span><br><span class="line">        html = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> html</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">craw_sitemap</span><span class="params">(url)</span>:</span></span><br><span class="line">    sitemap = download(url)</span><br><span class="line">    print(sitemap)</span><br><span class="line">    links = re.findall(<span class="string">r'&lt;loc&gt;(.*?)&lt;/loc&gt;'</span>, sitemap)</span><br><span class="line">    print(links)</span><br><span class="line">    <span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">        html = download(link)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num_errors = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">craw_site</span><span class="params">(url, max_error=<span class="number">5</span>)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> itertools.count(<span class="number">1</span>):</span><br><span class="line">        pg_url = <span class="string">"&#123;&#125;&#123;&#125;"</span>.format(url, page)</span><br><span class="line">        html = download(pg_url)</span><br><span class="line">        <span class="keyword">if</span> html <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            num_errors += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num_errors == max_error:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_links</span><span class="params">(html)</span>:</span></span><br><span class="line">    webpage_regex = re.compile(<span class="string">r'a href="(.*?)"&gt;'</span>)</span><br><span class="line">    <span class="keyword">return</span> webpage_regex.findall(html)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> robotparser</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_robots_parser</span><span class="params">(robots_url)</span>:</span></span><br><span class="line">    rp = robotparser.RobotFileParser()</span><br><span class="line">    rp.set_url(<span class="string">'http://example.python-scraping.com/robots.txt'</span>)</span><br><span class="line">    rp.read()</span><br><span class="line">    <span class="keyword">return</span> rp</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">link_craw</span><span class="params">(start_url, link_regex, robots_url = None, user_agent = <span class="string">'wswp'</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> robots_url:</span><br><span class="line">        robots_url = <span class="string">'&#123;&#125;/robots.txt'</span>.format(start_url)</span><br><span class="line">    rp = get_robots_parser(robots_url)</span><br><span class="line">    craw_queue = [start_url]</span><br><span class="line">    seen = set(craw_queue)</span><br><span class="line">    <span class="keyword">while</span> craw_queue:</span><br><span class="line">        url = craw_queue.pop()</span><br><span class="line">        <span class="keyword">if</span> rp.can_fetch(user_agent,url):</span><br><span class="line">            html = download(url,user_agent=user_agent)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Blocked by robots.txt"</span>, url)</span><br><span class="line">            html = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> html <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> get_links(html):</span><br><span class="line">            <span class="keyword">if</span> re.match(link_regex, link):</span><br><span class="line">                abs_link = urljoin(start_url, link)</span><br><span class="line">                <span class="keyword">if</span> abs_link <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                    seen.add(abs_link)</span><br><span class="line">                    craw_queue.append(abs_link)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># craw_sitemap("http://example.python-scraping.com/sitemap.xml")</span></span><br><span class="line">    <span class="comment">#craw_site("http://example.python-scraping.com/view/-")</span></span><br><span class="line">    link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
@@ -324,6 +370,7 @@
 
           </div>
           
+    <div class="comments" id="comments"></div>
 
         </div>
           
@@ -377,7 +424,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -431,6 +478,103 @@
 
 
 
+  <script>
+  function leancloudSelector(url) {
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = visitors.getAttribute('id').trim();
+      var title = visitors.getAttribute('data-flag-title').trim();
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.log('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.log('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return element.getAttribute('id').trim();
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            leancloudSelector(url).innerText = time;
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.log('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id': 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+            'X-LC-Key': 'C1z9X6NQu0ES8qiAOF8RaSq3',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        const localhost = /http:\/\/(localhost|127.0.0.1|0.0.0.0)/;
+        if (localhost.test(document.URL)) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
 
 
 
@@ -457,6 +601,8 @@
 
 
 
+  <script src="/js/local-search.js"></script>
+
 
 
 
@@ -472,6 +618,33 @@
   
 
   
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+    appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+    placeholder: "Just go go",
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname,
+    recordIP: false,
+    serverURLs: ''
+  });
+}, window.Valine);
+</script>
 
 </body>
 </html>

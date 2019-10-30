@@ -68,7 +68,7 @@
 <meta name="keywords" content="pwn， 二进制,栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="滴滴CTF之唯一的pwn题详解">
-<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;pwn-stack&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;10&#x2F;30&#x2F;pwn-stack&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
 <meta property="og:description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:题目简介123456789101112131415161718192021222324int __cdecl">
 <meta property="og:locale" content="zh-Hans">
@@ -85,11 +85,11 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287x3g3l0j30ss0mh0zp.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287x8ni0fj30rg0l6jwz.jpg">
 <meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287xdxivlj30mr06x75l.jpg">
-<meta property="og:updated_time" content="2019-10-30T09:59:59.832Z">
+<meta property="og:updated_time" content="2019-10-30T11:56:49.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g27zjxto4tj30m90g5adg.jpg">
 
-<link rel="canonical" href="https://noone-hub.github.io/2019/04/19/pwn-stack/">
+<link rel="canonical" href="https://noone-hub.github.io/2019/10/30/pwn-stack/">
 
 
 <script id="page-configurations">
@@ -243,7 +243,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/19/pwn-stack/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/10/30/pwn-stack/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -265,16 +265,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
+              <time title="Created: 2019-10-30 16:50:12 / Modified: 19:56:49" itemprop="dateCreated datePublished" datetime="2019-10-30T16:50:12+08:00">2019-10-30</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:59:59" itemprop="dateModified" datetime="2019-10-30T17:59:59+08:00">2019-10-30</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -300,7 +294,7 @@
             </span>
 
           
-            <span id="/2019/04/19/pwn-stack/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴CTF之唯一的pwn题详解" title="Views">
+            <span id="/2019/10/30/pwn-stack/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴CTF之唯一的pwn题详解" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -315,8 +309,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/04/19/pwn-stack/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/pwn-stack/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/10/30/pwn-stack/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/10/30/pwn-stack/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -407,16 +401,16 @@
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/04/19/pwn_%E7%BB%86%E8%8A%82/" rel="next" title="比赛细节注意点">
-                  <i class="fa fa-chevron-left"></i> 比赛细节注意点
+                <a href="/2019/05/10/pwn-format64/" rel="next" title="64位格式化字符串自动篇">
+                  <i class="fa fa-chevron-left"></i> 64位格式化字符串自动篇
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/04/19/jinja2/" rel="prev" title="jinja2问题记录">
-                  jinja2问题记录 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/01/pwn02-patch/" rel="prev" title="国赛pwn修复2">
+                  国赛pwn修复2 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

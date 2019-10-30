@@ -251,14 +251,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-02 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-02T03:14:36+08:00">2019-11-02</time>
+              <time title="Created: 2019-11-02 03:14:35" itemprop="dateCreated datePublished" datetime="2019-11-02T03:14:35+08:00">2019-11-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:58:55" itemprop="dateModified" datetime="2019-10-30T17:58:55+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:41" itemprop="dateModified" datetime="2019-10-30T19:56:41+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -351,7 +351,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-1/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/obs_pwn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -365,7 +365,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-heap-learn-1/" class="post-title-link" itemprop="url">pwn堆入门系列教程1</a>
+            <a href="/2019/11/01/obs_pwn/" class="post-title-link" itemprop="url">日常生活记录的漏洞点</a>
         </h1>
 
         <div class="post-meta">
@@ -375,14 +375,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:15:37" itemprop="dateCreated datePublished" datetime="2019-11-01T03:15:37+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:32:06" itemprop="dateModified" datetime="2019-10-30T17:32:06+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:57:23" itemprop="dateModified" datetime="2019-10-30T19:57:23+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -409,7 +409,7 @@
             </span>
 
           
-            <span id="/2019/11/01/pwn-heap-learn-1/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程1" title="Views">
+            <span id="/2019/11/01/obs_pwn/" class="post-meta-item leancloud_visitors" data-flag-title="日常生活记录的漏洞点" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -424,8 +424,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/obs_pwn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/obs_pwn/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -435,14 +435,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>24k</span>
+              <span>3.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>22 mins.</span>
+              <span>4 mins.</span>
             </span>
 
         </div>
@@ -454,145 +454,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pwn堆入门系列教程1"><a href="#pwn堆入门系列教程1" class="headerlink" title="pwn堆入门系列教程1"></a>pwn堆入门系列教程1</h1><p>因为自己学堆的时候，找不到一个系统的教程，我将会按照ctf-wiki的目录一步步学下去，尽量做到每天有更新，方便跟我一样刚入门堆的人学习，第一篇教程研究了4天吧，途中没人指导。。很尴尬，自己一个很容易的点研究了很久才懂，把踩过的坑也总结下，方便后人不再踩坑</p><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><a href="https://xz.aliyun.com/t/5749" target="_blank" rel="noopener">具体搭建方法点我</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LiHua">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/pwn-heap-learn-8/" class="post-title-link" itemprop="url">pwn堆入门系列教程8</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:29:21" itemprop="dateModified" datetime="2019-10-30T17:29:21+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">二进制</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
-                    <span itemprop="name">pwn</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
-                    <span itemprop="name">堆</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/pwn-heap-learn-8/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程8" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-8/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-8/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>9.1k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>8 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a></p><p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-8/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h1 id="obs-pwn"><a href="#obs-pwn" class="headerlink" title="obs_pwn"></a>obs_pwn</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">└──╼ <span class="variable">$obs</span> </span><br><span class="line">Attempted path: share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">info: CPU Name: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz</span><br><span class="line">info: CPU Speed: 3480.843MHz</span><br><span class="line">info: Physical Cores: 2, Logical Cores: 4</span><br><span class="line">info: Physical Memory: 11782MB Total, 3611MB Free</span><br><span class="line">info: Kernel Version: Linux 5.2.0-2parrot1-amd64</span><br><span class="line">info: Distribution: <span class="string">"Parrot GNU/Linux"</span> <span class="string">"4.7"</span></span><br><span class="line">info: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.20.4</span><br><span class="line">info: Portable mode: <span class="literal">false</span></span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_clicked()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_destroyed()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_program_customContextMenuRequested(QPoint)</span><br><span class="line">info: OBS 0.0.1 (linux)</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: audio settings reset:</span><br><span class="line">	samples per sec: 44100</span><br><span class="line">	speakers:        2</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: Initializing OpenGL...</span><br><span class="line">info: Loading up OpenGL on adapter Intel Open Source Technology Center Mesa DRI Intel(R) HD Graphics 620 (Kaby Lake GT2) </span><br><span class="line">info: OpenGL loaded successfully, version 4.5 (Core Profile) Mesa 19.1.6, shading language 4.50</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: video settings reset:</span><br><span class="line">	base resolution:   1920x1080</span><br><span class="line">	output resolution: 1280x720</span><br><span class="line">	downscale filter:  Bicubic</span><br><span class="line">	fps:               30/1</span><br><span class="line">	format:            NV12</span><br><span class="line">	YUV mode:          601/Partial</span><br><span class="line">info: NV12 texture support not available</span><br><span class="line">info: Audio monitoring device:</span><br><span class="line">	name: Default</span><br><span class="line">	id: default</span><br><span class="line">info: ---------------------------------</span><br><span class="line">warning: Failed to load <span class="string">'en-US'</span> text <span class="keyword">for</span> module: <span class="string">'decklink-ouput-ui.so'</span></span><br><span class="line">libDeckLinkAPI.so: cannot open shared object file: No such file or directory</span><br><span class="line">info: No blackmagic support</span><br><span class="line">info: FFMPEG VAAPI supported</span><br><span class="line">info: VLC found, VLC video <span class="built_in">source</span> enabled</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info:   Loaded Modules:</span><br><span class="line">info:     vlc-video.so</span><br><span class="line">info:     text-freetype2.so</span><br><span class="line">info:     rtmp-services.so</span><br><span class="line">info:     obs-x264.so</span><br><span class="line">info:     obs-transitions.so</span><br><span class="line">info:     obs-outputs.so</span><br><span class="line">info:     obs-filters.so</span><br><span class="line">info:     obs-ffmpeg.so</span><br><span class="line">info:     linux-v4l2.so</span><br><span class="line">info:     linux-pulseaudio.so</span><br><span class="line">info:     linux-jack.so</span><br><span class="line">info:     linux-decklink.so</span><br><span class="line">info:     linux-capture.so</span><br><span class="line">info:     linux-alsa.so</span><br><span class="line">info:     image-source.so</span><br><span class="line">info:     frontend-tools.so</span><br><span class="line">info:     decklink-ouput-ui.so</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ==== Startup complete ===============================================</span><br><span class="line">error: Service <span class="string">''</span> not found</span><br><span class="line">info: No scene file found, creating default scene</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: Switched to scene <span class="string">'Scene'</span></span><br><span class="line">warning: Failed to glob scene collections</span><br><span class="line">Attempted path: share/obs/obs-studio/images/overflow.png</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/images/overflow.png</span><br><span class="line">info: adding 23 milliseconds of audio buffering, total audio buffering is now 23 milliseconds (<span class="built_in">source</span>: Mic/Aux)</span><br><span class="line"></span><br><span class="line">^Cinfo: ==== Shutting down ==================================================</span><br><span class="line">info: Switched to scene <span class="string">'(null)'</span></span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Got 125 packets with 32338 frames</span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: pulse-input: Got 271 packets with 118520 frames</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">double free or corruption (out)</span><br><span class="line">Aborted</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -635,14 +497,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:45" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:45+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:29:38" itemprop="dateModified" datetime="2019-10-30T17:29:38+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:35" itemprop="dateModified" datetime="2019-10-30T19:56:35+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -741,7 +603,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-system_all/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -755,7 +617,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-system_all/" class="post-title-link" itemprop="url">pwn细节</a>
+            <a href="/2019/11/01/pwn-heap-learn-9/" class="post-title-link" itemprop="url">pwn堆入门系列教程9</a>
         </h1>
 
         <div class="post-meta">
@@ -765,14 +627,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:44" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:44+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:32:45" itemprop="dateModified" datetime="2019-10-30T17:32:45+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:30" itemprop="dateModified" datetime="2019-10-30T19:56:30+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -792,14 +654,14 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E7%BB%86%E8%8A%82/" itemprop="url" rel="index">
-                    <span itemprop="name">细节</span>
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/11/01/pwn-system_all/" class="post-meta-item leancloud_visitors" data-flag-title="pwn细节" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-9/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程9" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -814,8 +676,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-system_all/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-system_all/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-9/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-9/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -825,14 +687,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>133</span>
+              <span>17k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>15 mins.</span>
             </span>
 
         </div>
@@ -844,138 +706,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <ol>
-<li>system(“/bin/sh”)</li>
-<li>system(“sh”)</li>
-<li>system(“/bin/bash”)</li>
-<li>system(“bash”)</li>
-<li>system(“$0”)</li>
-</ol><p>若还不成，可试试在参数后面加;#<br>比如system(“/bin/sh;#”)<br>这是由于函数的特殊性，有些函数会截断特殊字符</p>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-writeup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LiHua">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/pwn-writeup/" class="post-title-link" itemprop="url">国赛pwn01</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:33:21" itemprop="dateModified" datetime="2019-10-30T17:33:21+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">二进制</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
-                    <span itemprop="name">pwn</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E6%A0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">栈</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/pwn-writeup/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn01" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/11/01/pwn-writeup/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-writeup/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="pwn-01"><a href="#pwn-01" class="headerlink" title="pwn-01"></a>pwn-01</h1><p>题目不难，很明显能看出ROP</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">size_t</span> v0; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">char</span> s[<span class="number">48</span>]; <span class="comment">// [rsp+0h] [rbp-50h]</span></span><br><span class="line">  __int16 v3; <span class="comment">// [rsp+30h] [rbp-20h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">  v3 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">  gets(s);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v0 = (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x;</span><br><span class="line">    <span class="keyword">if</span> ( v0 &gt;= <span class="built_in">strlen</span>(s) )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> ( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span> )</span><br><span class="line">          s[x] ^= <span class="number">0xF</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        s[x] ^= <span class="number">0xE</span>u;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      s[x] ^= <span class="number">0xD</span>u;</span><br><span class="line">    &#125;</span><br><span class="line">    ++x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="pwn堆入门系列教程9"><a href="#pwn堆入门系列教程9" class="headerlink" title="pwn堆入门系列教程9"></a>pwn堆入门系列教程9</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a><br><a href="https://xz.aliyun.com/t/6473" target="_blank" rel="noopener">pwn堆入门系列教程8</a></p><p>学习House Of Einherjar</p><h2 id="2016-Seccon-tinypad"><a href="#2016-Seccon-tinypad" class="headerlink" title="2016 Seccon tinypad"></a>2016 Seccon tinypad</h2><p>这道题说难不难。。我也做得久了，因为exp看不懂啊，这么复杂。。。后来简化了下，感觉轻松点了</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-writeup/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-9/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -999,7 +733,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-writeup1/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1013,7 +747,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-writeup1/" class="post-title-link" itemprop="url">国赛pwn修复1</a>
+            <a href="/2019/11/01/pwn-heap-learn-8/" class="post-title-link" itemprop="url">pwn堆入门系列教程8</a>
         </h1>
 
         <div class="post-meta">
@@ -1023,14 +757,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:43" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:43+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:34:13" itemprop="dateModified" datetime="2019-10-30T17:34:13+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:27" itemprop="dateModified" datetime="2019-10-30T19:56:27+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1050,14 +784,14 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E6%A0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">栈</span>
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/11/01/pwn-writeup1/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn修复1" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-8/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程8" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1072,8 +806,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-writeup1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-writeup1/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-8/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-8/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1083,14 +817,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
+              <span>9.1k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>8 mins.</span>
             </span>
 
         </div>
@@ -1102,10 +836,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#修复部分</p><p>题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1.Encrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2.Decrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3.Exit"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Input your choice!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">48</span>];</span><br><span class="line">    <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">strlen</span>(s) &gt; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span>)</span><br><span class="line">                    s[x] ^= <span class="number">0xf</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                s[x] ^= <span class="number">14</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s[x] ^= <span class="number">13</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ++x;</span><br><span class="line">    &#125;</span><br><span class="line">    s[<span class="number">47</span>] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> input;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE                            hh      iii                "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mm mm mmmm    aa aa   cccc hh          nn nnn    eee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEE   mmm  mm  mm  aa aaa cc     hhhhhh  iii nnn  nn ee   e "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mmm  mm  mm aa  aaa cc     hh   hh iii nn   nn eeeee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE mmm  mm  mm  aaa aa  ccccc hh   hh iii nn   nn  eeeee "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Welcome to this Encryption machine\n"</span>);</span><br><span class="line">    begin();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            fflush(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;input);</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">if</span>(input != <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"I think you can do it by yourself"</span>);</span><br><span class="line">            begin();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(input == <span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Bye!"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( input != <span class="number">1</span>  )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        encrypt();</span><br><span class="line">        begin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Something Wrong!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a></p><p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-writeup1/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-8/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1129,7 +863,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn02-patch/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1143,7 +877,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn02-patch/" class="post-title-link" itemprop="url">国赛pwn修复2</a>
+            <a href="/2019/11/01/pwn-heap-learn-7/" class="post-title-link" itemprop="url">pwn堆入门系列教程7</a>
         </h1>
 
         <div class="post-meta">
@@ -1153,14 +887,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:42" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:42+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:34:21" itemprop="dateModified" datetime="2019-10-30T17:34:21+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:24" itemprop="dateModified" datetime="2019-10-30T19:56:24+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1180,14 +914,14 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E6%A0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">栈</span>
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/11/01/pwn02-patch/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn修复2" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-7/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程7" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1202,8 +936,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn02-patch/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn02-patch/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-7/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-7/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1213,14 +947,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.9k</span>
+              <span>12k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
+              <span>11 mins.</span>
             </span>
 
         </div>
@@ -1232,10 +966,270 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="题目修复部分"><a href="#题目修复部分" class="headerlink" title="题目修复部分"></a>题目修复部分</h1><p>题目的点很容易看出，数组越界，不过如何利用这个比较难，我经过一段时间测试，发觉scanf的特性，输入-可以绕过，所以可以泄露cannary，泄露cannary过后可以任意写，然后精确覆盖到cannary过后进行ROP就行了，还有一个点就是输入长度为27的时候，他不会进行排序，这样才能ROP，不过最终我没利用成功，还有一个栈的偏移点我还没搞懂，所以最终也没打出来</p>
+          <h1 id="pwn堆入门系列教程7"><a href="#pwn堆入门系列教程7" class="headerlink" title="pwn堆入门系列教程7"></a>pwn堆入门系列教程7</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a></p><p>先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题<br>Large bin也没有题目，到时候遇到在进行学习</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn02-patch/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-7/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/pwn-heap-learn-6/" class="post-title-link" itemprop="url">pwn堆入门系列教程6</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 03:14:41" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:41+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 19:56:21" itemprop="dateModified" datetime="2019-10-30T19:56:21+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/01/pwn-heap-learn-6/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程6" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-6/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-6/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>13k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>11 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="pwn堆入门系列教程6"><a href="#pwn堆入门系列教程6" class="headerlink" title="pwn堆入门系列教程6"></a>pwn堆入门系列教程6</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a></p><p>要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了</p><h2 id="2019护网杯-mergeheap"><a href="#2019护网杯-mergeheap" class="headerlink" title="2019护网杯 mergeheap"></a>2019护网杯 mergeheap</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/pwn-heap-learn-5/" class="post-title-link" itemprop="url">pwn堆入门系列教程5</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 03:14:40" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:40+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 19:56:18" itemprop="dateModified" datetime="2019-10-30T19:56:18+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/01/pwn-heap-learn-5/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程5" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-5/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>16 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="pwn堆入门系列教程5"><a href="#pwn堆入门系列教程5" class="headerlink" title="pwn堆入门系列教程5"></a>pwn堆入门系列教程5</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a></p><p>进入uaf学习了，这部分题目就一道题</p><h2 id="hitcon-training-hacknote"><a href="#hitcon-training-hacknote" class="headerlink" title="hitcon-training-hacknote"></a>hitcon-training-hacknote</h2><p>这道题其实很简单，不过要冷静下才能做，我当时有点急躁，浪费一个钟才搞出来？冷静下来10分钟懂了</p><h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">del_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Index :"</span>);</span><br><span class="line">  read(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">  v1 = atoi(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt; <span class="number">0</span> || v1 &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Out of bound!"</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[v1] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(*(notelist[v1] + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">free</span>(notelist[v1]);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Success"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-5/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1283,14 +1277,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:39" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:39+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:28:53" itemprop="dateModified" datetime="2019-10-30T17:28:53+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:15" itemprop="dateModified" datetime="2019-10-30T19:56:15+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1389,7 +1383,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-9/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1403,7 +1397,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-heap-learn-9/" class="post-title-link" itemprop="url">pwn堆入门系列教程9</a>
+            <a href="/2019/11/01/pwn-heap-learn-3/" class="post-title-link" itemprop="url">pwn堆入门系列教程3</a>
         </h1>
 
         <div class="post-meta">
@@ -1413,14 +1407,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+              <time title="Created: 2019-11-01 03:14:38" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:38+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:29:27" itemprop="dateModified" datetime="2019-10-30T17:29:27+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:56:12" itemprop="dateModified" datetime="2019-10-30T19:56:12+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1447,7 +1441,7 @@
             </span>
 
           
-            <span id="/2019/11/01/pwn-heap-learn-9/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程9" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-3/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程3" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1462,8 +1456,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-9/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-9/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-3/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-3/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1473,14 +1467,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>17k</span>
+              <span>18k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>15 mins.</span>
+              <span>16 mins.</span>
             </span>
 
         </div>
@@ -1492,10 +1486,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pwn堆入门系列教程9"><a href="#pwn堆入门系列教程9" class="headerlink" title="pwn堆入门系列教程9"></a>pwn堆入门系列教程9</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn堆入门系列教程2</a><br><a href="https://xz.aliyun.com/t/6252" target="_blank" rel="noopener">pwn堆入门系列教程3</a><br><a href="https://xz.aliyun.com/t/6322" target="_blank" rel="noopener">pwn堆入门系列教程4</a><br><a href="https://xz.aliyun.com/t/6377" target="_blank" rel="noopener">pwn堆入门系列教程5</a><br><a href="https://xz.aliyun.com/t/6406" target="_blank" rel="noopener">pwn堆入门系列教程6</a><br><a href="https://xz.aliyun.com/t/6449" target="_blank" rel="noopener">pwn堆入门系列教程7</a><br><a href="https://xz.aliyun.com/t/6473" target="_blank" rel="noopener">pwn堆入门系列教程8</a></p><p>学习House Of Einherjar</p><h2 id="2016-Seccon-tinypad"><a href="#2016-Seccon-tinypad" class="headerlink" title="2016 Seccon tinypad"></a>2016 Seccon tinypad</h2><p>这道题说难不难。。我也做得久了，因为exp看不懂啊，这么复杂。。。后来简化了下，感觉轻松点了</p>
+          <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-9/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-3/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

@@ -64,27 +64,18 @@
   };
 </script>
 
-  <meta name="description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，">
-<meta name="keywords" content="about_me">
+  <meta name="description" content="obs_pwn1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495└──╼ $obs At">
+<meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="滴滴ctf_re1,2">
-<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;ddctf-re1-2&#x2F;index.html">
+<meta property="og:title" content="日常生活记录的漏洞点">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;obs_pwn&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="DDCTF之re1详解前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。re1用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，">
+<meta property="og:description" content="obs_pwn1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495└──╼ $obs At">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blu5vzhij319y0jgmxw.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blucw5inj31hc0sj77u.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blui7pb2j31hc0sj77t.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blunfdy7j31hc0sjtc5.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2bluu4xyaj31hc0sj77l.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2bluykzzgj30wi04pq3x.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blv2f2a7j31hc0sjwi3.jpg">
-<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blv7l7y4j31hc0sjwi2.jpg">
-<meta property="og:updated_time" content="2019-10-30T09:19:10.032Z">
+<meta property="og:updated_time" content="2019-10-30T11:57:23.372Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2blu5vzhij319y0jgmxw.jpg">
 
-<link rel="canonical" href="https://noone-hub.github.io/2019/04/19/ddctf-re1-2/">
+<link rel="canonical" href="https://noone-hub.github.io/2019/11/01/obs_pwn/">
 
 
 <script id="page-configurations">
@@ -98,7 +89,7 @@
   };
 </script>
 
-  <title>滴滴ctf_re1,2 | NoOne-hub</title>
+  <title>日常生活记录的漏洞点 | NoOne-hub</title>
   
 
 
@@ -238,7 +229,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/19/ddctf-re1-2/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/obs_pwn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -251,7 +242,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          滴滴ctf_re1,2
+          日常生活记录的漏洞点
         </h1>
 
         <div class="post-meta">
@@ -261,14 +252,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
+              <time title="Created: 2019-11-01 03:15:37" itemprop="dateCreated datePublished" datetime="2019-11-01T03:15:37+08:00">2019-11-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:19:10" itemprop="dateModified" datetime="2019-10-30T17:19:10+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 19:57:23" itemprop="dateModified" datetime="2019-10-30T19:57:23+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -282,14 +273,20 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/%E9%80%86%E5%90%91/" itemprop="url" rel="index">
-                    <span itemprop="name">逆向</span>
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E5%A0%86/" itemprop="url" rel="index">
+                    <span itemprop="name">堆</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/04/19/ddctf-re1-2/" class="post-meta-item leancloud_visitors" data-flag-title="滴滴ctf_re1,2" title="Views">
+            <span id="/2019/11/01/obs_pwn/" class="post-meta-item leancloud_visitors" data-flag-title="日常生活记录的漏洞点" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -304,8 +301,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/04/19/ddctf-re1-2/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/ddctf-re1-2/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/obs_pwn/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/obs_pwn/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -315,14 +312,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
+              <span>3.9k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>4 mins.</span>
             </span>
 
         </div>
@@ -334,26 +331,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p><a id="more"></a>
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// [esp+4h] [ebp-804h]</span></span><br><span class="line">  <span class="keyword">char</span> v5; <span class="comment">// [esp+5h] [ebp-803h]</span></span><br><span class="line">  <span class="keyword">char</span> v6; <span class="comment">// [esp+404h] [ebp-404h]</span></span><br><span class="line">  <span class="keyword">char</span> Dst; <span class="comment">// [esp+405h] [ebp-403h]</span></span><br><span class="line"></span><br><span class="line">  v6 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;Dst, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  v4 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v5, <span class="number">0</span>, <span class="number">0x3FF</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"please input code:"</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v6);</span><br><span class="line">  sub_401000(&amp;v6);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(&amp;v4, <span class="string">"DDCTF&#123;reverseME&#125;"</span>) )</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You've got it!!%s\n"</span>, &amp;v4);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Try again later.\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>整个过程很明朗，没有挖坑，关键函数就在sub_401000处，进去后</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_401000</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  _BYTE *v1; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// ebx</span></span><br><span class="line"></span><br><span class="line">  v2 = <span class="number">0</span>;</span><br><span class="line">  result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">  <span class="keyword">if</span> ( result )</span><br><span class="line">  &#123;</span><br><span class="line">    v4 = a1 - v1;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      *v1 = byte_402FF8[(<span class="keyword">char</span>)v1[v4]];</span><br><span class="line">      ++v2;</span><br><span class="line">      ++v1;</span><br><span class="line">      result = <span class="built_in">strlen</span>(a1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( v2 &lt; result );</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>…我发觉a1 - v1这是什么鬼，a1不是地址吗，v1又是什么鬼。。抱着一堆什么鬼都不知道的东西，我就直接上od了，因为这是windows逆向，所以我还是比较擅长动态调试的，大一一年几乎都是在啃汇编啃od,当时都不知道ida这玩意。</p>
-<p>调试环境：吾爱虚拟机</p>
-<p>工具：吾爱的OD</p>
-<p>感觉像是为吾爱打了一波广告，哈哈，没关系，反正我也是论坛成员，宣传下没什么毛病<br>打开od载入程序后，点播放按钮，也就是运行按钮，然后右键中文搜索，搜索字符串，来到这里</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blu5vzhij319y0jgmxw.jpg" alt="2"></p>
-<p>在定位到关键点please input code<br>这里很容易看出ida的逻辑，scanf后跟着的一个call便是关键，在此call处下断点，</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blucw5inj31hc0sj77u.jpg" alt="3"></p>
-<p>然后输入12345678,</p>
-<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blui7pb2j31hc0sj77t.jpg" alt="4"></p>
-<p>成功断下，然后F7单步进入,在单步跟了一轮过后，我发觉pop这里有好东西<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blunfdy7j31hc0sjtc5.jpg" alt="6"><br>看堆栈窗口，也就是右下角，出现了跟我输入字符串一样长度的英文字符串，起初我也没在意，然后输入多几次后发觉，每次输入是对应的，也就是说，他跟凯撒密码类似，他只是移了下位，然后，我自己手动把键盘里所有出现的字符输入了一遍，发觉还是漏了一些，找不齐，最终就利用他本身含有的一个字符串进行输入，得到每个的对应字符串，他的字符串可以从od里直接看到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluu4xyaj31hc0sj77l.jpg" alt="7"><br>或者从ida里都可以找到<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2bluykzzgj30wi04pq3x.jpg" alt="8"><br>然后进行手动输入进行匹配，我需要的DDCTF{reverse}<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv2f2a7j31hc0sjwi3.jpg" alt="9"><br>看栈窗口，最上面的对应匹配，我这样手动把每个字符对应起来，就得到flag了<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2blv7l7y4j31hc0sjwi2.jpg" alt="10"><br>最终得到对应字符<br>Z D<br>[ C<br>J T<br>, r<br>9 e<br>( v</p>
-<ul>
-<li>s<h1 id><a href="#" class="headerlink" title="{"></a>{</h1>! }<br>X F</li>
-</ul>
-<p>手动得到ZZ[JX#,9(9,+9!</p>
-
+        <h1 id="obs-pwn"><a href="#obs-pwn" class="headerlink" title="obs_pwn"></a>obs_pwn</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">└──╼ <span class="variable">$obs</span> </span><br><span class="line">Attempted path: share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale/en-US.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/locale.ini</span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark.qss</span><br><span class="line">info: CPU Name: Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz</span><br><span class="line">info: CPU Speed: 3480.843MHz</span><br><span class="line">info: Physical Cores: 2, Logical Cores: 4</span><br><span class="line">info: Physical Memory: 11782MB Total, 3611MB Free</span><br><span class="line">info: Kernel Version: Linux 5.2.0-2parrot1-amd64</span><br><span class="line">info: Distribution: <span class="string">"Parrot GNU/Linux"</span> <span class="string">"4.7"</span></span><br><span class="line">info: Window System: X11.0, Vendor: The X.Org Foundation, Version: 1.20.4</span><br><span class="line">info: Portable mode: <span class="literal">false</span></span><br><span class="line">Attempted path: share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/themes/Dark/no_sources.svg</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_clicked()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_advAudioProps_destroyed()</span><br><span class="line">QMetaObject::connectSlotsByName: No matching signal <span class="keyword">for</span> on_program_customContextMenuRequested(QPoint)</span><br><span class="line">info: OBS 0.0.1 (linux)</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: audio settings reset:</span><br><span class="line">	samples per sec: 44100</span><br><span class="line">	speakers:        2</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: Initializing OpenGL...</span><br><span class="line">info: Loading up OpenGL on adapter Intel Open Source Technology Center Mesa DRI Intel(R) HD Graphics 620 (Kaby Lake GT2) </span><br><span class="line">info: OpenGL loaded successfully, version 4.5 (Core Profile) Mesa 19.1.6, shading language 4.50</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: video settings reset:</span><br><span class="line">	base resolution:   1920x1080</span><br><span class="line">	output resolution: 1280x720</span><br><span class="line">	downscale filter:  Bicubic</span><br><span class="line">	fps:               30/1</span><br><span class="line">	format:            NV12</span><br><span class="line">	YUV mode:          601/Partial</span><br><span class="line">info: NV12 texture support not available</span><br><span class="line">info: Audio monitoring device:</span><br><span class="line">	name: Default</span><br><span class="line">	id: default</span><br><span class="line">info: ---------------------------------</span><br><span class="line">warning: Failed to load <span class="string">'en-US'</span> text <span class="keyword">for</span> module: <span class="string">'decklink-ouput-ui.so'</span></span><br><span class="line">libDeckLinkAPI.so: cannot open shared object file: No such file or directory</span><br><span class="line">info: No blackmagic support</span><br><span class="line">info: FFMPEG VAAPI supported</span><br><span class="line">info: VLC found, VLC video <span class="built_in">source</span> enabled</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info:   Loaded Modules:</span><br><span class="line">info:     vlc-video.so</span><br><span class="line">info:     text-freetype2.so</span><br><span class="line">info:     rtmp-services.so</span><br><span class="line">info:     obs-x264.so</span><br><span class="line">info:     obs-transitions.so</span><br><span class="line">info:     obs-outputs.so</span><br><span class="line">info:     obs-filters.so</span><br><span class="line">info:     obs-ffmpeg.so</span><br><span class="line">info:     linux-v4l2.so</span><br><span class="line">info:     linux-pulseaudio.so</span><br><span class="line">info:     linux-jack.so</span><br><span class="line">info:     linux-decklink.so</span><br><span class="line">info:     linux-capture.so</span><br><span class="line">info:     linux-alsa.so</span><br><span class="line">info:     image-source.so</span><br><span class="line">info:     frontend-tools.so</span><br><span class="line">info:     decklink-ouput-ui.so</span><br><span class="line">info: ---------------------------------</span><br><span class="line">info: ==== Startup complete ===============================================</span><br><span class="line">error: Service <span class="string">''</span> not found</span><br><span class="line">info: No scene file found, creating default scene</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Server name: <span class="string">'pulseaudio 13.0'</span></span><br><span class="line">info: pulse-input: Audio format: s16le, 44100 Hz, 2 channels</span><br><span class="line">info: pulse-input: Started recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: Switched to scene <span class="string">'Scene'</span></span><br><span class="line">warning: Failed to glob scene collections</span><br><span class="line">Attempted path: share/obs/obs-studio/images/overflow.png</span><br><span class="line">Attempted path: /usr/share/obs/obs-studio/images/overflow.png</span><br><span class="line">info: adding 23 milliseconds of audio buffering, total audio buffering is now 23 milliseconds (<span class="built_in">source</span>: Mic/Aux)</span><br><span class="line"></span><br><span class="line">^Cinfo: ==== Shutting down ==================================================</span><br><span class="line">info: Switched to scene <span class="string">'(null)'</span></span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_output.pci-0000_00_1f.3.analog-stereo.monitor'</span></span><br><span class="line">info: pulse-input: Got 125 packets with 32338 frames</span><br><span class="line">info: pulse-input: Stopped recording from <span class="string">'alsa_input.pci-0000_00_1f.3.analog-stereo'</span></span><br><span class="line">info: pulse-input: Got 271 packets with 118520 frames</span><br><span class="line">info: All scene data cleared</span><br><span class="line">info: ------------------------------------------------</span><br><span class="line">double free or corruption (out)</span><br><span class="line">Aborted</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -362,23 +340,23 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/about-me/" rel="tag"># about_me</a>
+              <a href="/tags/pwn%EF%BC%8C-%E5%A0%86/" rel="tag"># pwn， 堆</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/2019/04/19/base/" rel="next" title="基础待补充">
-                  <i class="fa fa-chevron-left"></i> 基础待补充
+                <a href="/2019/11/01/pwn-heap-learn-10/" rel="next" title="pwn堆入门系列教程10">
+                  <i class="fa fa-chevron-left"></i> pwn堆入门系列教程10
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/2019/04/19/parrot-linux/" rel="prev" title="parrot linux问题解决">
-                  parrot linux问题解决 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/02/pwn-learn-0/" rel="prev" title="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存">
+                  论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -419,7 +397,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DDCTF之re1详解"><span class="nav-number">1.</span> <span class="nav-text">DDCTF之re1详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#re1"><span class="nav-number">1.1.</span> <span class="nav-text">re1</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">{</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#obs-pwn"><span class="nav-number">1.</span> <span class="nav-text">obs_pwn</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

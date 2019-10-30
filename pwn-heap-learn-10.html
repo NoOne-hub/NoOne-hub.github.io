@@ -54,15 +54,6 @@
 
 
 
-  <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
-  daovoice('init', {
-      app_id: "6959cb4a"
-    });
-  daovoice('update');
-  </script>
-
-
   <meta name="description" content="pwn-heap-learn-102016 BCTF bcloud漏洞点我自己找洞：发现写的读取函数出现了off-by-one，然而他用malloc(size+0x4)解决了。。。似乎没了？？凉了，又不会做看了wp后发觉初始化名字部分出现了洞，通常这里不会设置洞的。。然后。。。我看了wp居然还是看不出他为啥子能泄露。。。自己调试呗">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">

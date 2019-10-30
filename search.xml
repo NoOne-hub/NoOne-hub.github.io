@@ -2554,17 +2554,6 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>基础待补充</title>
-    <url>/base.html</url>
-    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>基础知识</category>
-      </categories>
-      <tags>
-        <tag>基础知识</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>滴滴ctf_re1,2</title>
     <url>/ddctf-re1-2.html</url>
     <content><![CDATA[<h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p><a id="more"></a>
@@ -2593,6 +2582,17 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </categories>
       <tags>
         <tag>about_me</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基础待补充</title>
+    <url>/base.html</url>
+    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>基础知识</category>
+      </categories>
+      <tags>
+        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>

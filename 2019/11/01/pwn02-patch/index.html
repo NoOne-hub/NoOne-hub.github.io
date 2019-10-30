@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="English">
+<html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -71,7 +71,7 @@
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;11&#x2F;01&#x2F;pwn02-patch&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
 <meta property="og:description" content="题目修复部分题目的点很容易看出，数组越界，不过如何利用这个比较难，我经过一段时间测试，发觉scanf的特性，输入-可以绕过，所以可以泄露cannary，泄露cannary过后可以任意写，然后精确覆盖到cannary过后进行ROP就行了，还有一个点就是输入长度为27的时候，他不会进行排序，这样才能ROP，不过最终我没利用成功，还有一个栈的偏移点我还没搞懂，所以最终也没打出来">
-<meta property="og:locale" content="English">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-10-30T09:34:21.680Z">
 <meta name="twitter:card" content="summary">
 
@@ -228,7 +228,7 @@
       
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="English">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn02-patch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">

@@ -980,18 +980,6 @@
       </tags>
   </entry>
   <entry>
-    <title>linux qq测试</title>
-    <url>/tencentqq.html</url>
-    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
-      <categories>
-        <category>linux</category>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>linux,测试</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>web安全学习</title>
     <url>/sql%E6%B3%A8%E5%85%A5.html</url>
     <content><![CDATA[<h1 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h1><p>john –format=raw-MD5 1.txt<br>破解hash值</p><p>二次执行<br>删除 ~/.john</p><p>john –format=raw-MD5 1.txt –show 可以展示以前破解的密码</p>]]></content>
@@ -1001,6 +989,18 @@
       </categories>
       <tags>
         <tag>web安全,sql注入</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux qq测试</title>
+    <url>/tencentqq.html</url>
+    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
+      <categories>
+        <category>linux</category>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>linux,测试</tag>
       </tags>
   </entry>
   <entry>
@@ -2554,6 +2554,28 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
+    <title>书籍文章目录</title>
+    <url>/bin_security.html</url>
+    <content><![CDATA[<p>第一节：二进制安全概述<br>第二节：基础知识<br>    2.1 什么是软件<br>    2.2 什么是恶意软件<br>        2.2.1 潜藏广告<br>        2.2.2 木马<br>        2.2.3 病毒<br>        2.2.4 后门软件<br>    2.3 什么是漏洞<br>        2.3.1 poc是什么<br>        2.3.2 exp是什么<br>    2.4 虚拟环境<br>        2.4.1 沙盒<br>        2.4.2 虚拟机<br>    2.5 分析手法<br>        2.5.1 静态分析<br>        2.5.2 动态分析<br>第三节：二进制安全应用<br>    3.1 二进制层面的攻击<br>        3.1.1 软件的破解<br>        3.1.2 制作二进制层面的恶意软件<br>        3.1.3 利用软件漏洞攻击<br>    3.2 二进制层面的防御<br>        3.2.1 软件的安全防护<br>        3.2.1 恶意软件的防护<br>        3.2.1 软件漏洞的预防<br>第四节： 常见安全场景<br>    4.1 windows安全<br>    4.2 移动安全<br>        4.2.1 安卓安全<br>        4.2.2 ios安全<br>第五节： 二进制层面的安全防护<br>    5.1 基础级别防护<br>        5.1.1 安装杀毒软件<br>        5.1.2 下载方式的选择<br>        5.1.3 未知软件的处理<br>    5.2 进阶防护<br>        5.2.1 利用工具分析未知软件<br>        5.2.2 根据行为判别软件类别<br>        5.2.3 虚拟环境洞察软件行为<br>        5.2.4 应对处理措施</p>]]></content>
+      <categories>
+        <category>书籍文章目录</category>
+      </categories>
+      <tags>
+        <tag>书籍目录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基础待补充</title>
+    <url>/base.html</url>
+    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>基础知识</category>
+      </categories>
+      <tags>
+        <tag>基础知识</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>滴滴ctf_re1,2</title>
     <url>/ddctf-re1-2.html</url>
     <content><![CDATA[<h1 id="DDCTF之re1详解"><a href="#DDCTF之re1详解" class="headerlink" title="DDCTF之re1详解"></a>DDCTF之re1详解</h1><p>前言：re1,可能我的是非预期解法吧，re2的话，可能也是非预期吧，不过做出来过后感觉这两道都蛮简单的，不会做的时候就是个傻子。。。</p><h2 id="re1"><a href="#re1" class="headerlink" title="re1"></a>re1</h2><p>用ida打开这个程序，出现upx1,明显upx壳，linux下我用upx -d filename 脱了壳后。我先把ida出来的flag复制提交了下，没用。。。然后开始看算法，</p><a id="more"></a>
@@ -2582,28 +2604,6 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </categories>
       <tags>
         <tag>about_me</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>书籍文章目录</title>
-    <url>/bin_security.html</url>
-    <content><![CDATA[<p>第一节：二进制安全概述<br>第二节：基础知识<br>    2.1 什么是软件<br>    2.2 什么是恶意软件<br>        2.2.1 潜藏广告<br>        2.2.2 木马<br>        2.2.3 病毒<br>        2.2.4 后门软件<br>    2.3 什么是漏洞<br>        2.3.1 poc是什么<br>        2.3.2 exp是什么<br>    2.4 虚拟环境<br>        2.4.1 沙盒<br>        2.4.2 虚拟机<br>    2.5 分析手法<br>        2.5.1 静态分析<br>        2.5.2 动态分析<br>第三节：二进制安全应用<br>    3.1 二进制层面的攻击<br>        3.1.1 软件的破解<br>        3.1.2 制作二进制层面的恶意软件<br>        3.1.3 利用软件漏洞攻击<br>    3.2 二进制层面的防御<br>        3.2.1 软件的安全防护<br>        3.2.1 恶意软件的防护<br>        3.2.1 软件漏洞的预防<br>第四节： 常见安全场景<br>    4.1 windows安全<br>    4.2 移动安全<br>        4.2.1 安卓安全<br>        4.2.2 ios安全<br>第五节： 二进制层面的安全防护<br>    5.1 基础级别防护<br>        5.1.1 安装杀毒软件<br>        5.1.2 下载方式的选择<br>        5.1.3 未知软件的处理<br>    5.2 进阶防护<br>        5.2.1 利用工具分析未知软件<br>        5.2.2 根据行为判别软件类别<br>        5.2.3 虚拟环境洞察软件行为<br>        5.2.4 应对处理措施</p>]]></content>
-      <categories>
-        <category>书籍文章目录</category>
-      </categories>
-      <tags>
-        <tag>书籍目录</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>基础待补充</title>
-    <url>/base.html</url>
-    <content><![CDATA[<h1 id="base"><a href="#base" class="headerlink" title="base"></a>base</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">-1</span> &amp; <span class="number">0xffffffff</span>)</span><br><span class="line"><span class="string">'0xffffffff'</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>基础知识</category>
-      </categories>
-      <tags>
-        <tag>基础知识</tag>
       </tags>
   </entry>
   <entry>
@@ -2945,18 +2945,6 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>web前端学习之js</title>
-    <url>/js.html</url>
-    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><p>inerHtml跟inerText是不一样的，一个包含标签，一个不包含<br>字符串比较不要用===<br>inerText == 字符串可以<br>其余不行</p>]]></content>
-      <categories>
-        <category>web</category>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>web,前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jinja2问题记录</title>
     <url>/jinja2.html</url>
     <content><![CDATA[<h1 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for 循环是一层&#123;&#125;</span><br><span class="line">比如&#123;% for index in group %&#125;</span><br><span class="line">而不是&#123;&#123;% for index in group %&#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
@@ -2966,6 +2954,18 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </categories>
       <tags>
         <tag>web， 前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web前端学习之js</title>
+    <url>/js.html</url>
+    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><p>inerHtml跟inerText是不一样的，一个包含标签，一个不包含<br>字符串比较不要用===<br>inerText == 字符串可以<br>其余不行</p>]]></content>
+      <categories>
+        <category>web</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>web,前端</tag>
       </tags>
   </entry>
   <entry>

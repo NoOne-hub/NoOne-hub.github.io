@@ -20,6 +20,8 @@
   </script>
 
 
+<meta name="baidu-site-verification" content="CpUtq7PVXz" />
+
 <link rel="stylesheet" href="/css/main.css">
 
 
@@ -745,7 +747,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-3/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-heap-learn-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -759,7 +761,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/11/01/pwn-heap-learn-3/" class="post-title-link" itemprop="url">pwn堆入门系列教程3</a>
+            <a href="/2019/11/01/pwn-heap-learn-2/" class="post-title-link" itemprop="url">pwn堆入门系列教程2</a>
         </h1>
 
         <div class="post-meta">
@@ -776,7 +778,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:28:46" itemprop="dateModified" datetime="2019-10-30T17:28:46+08:00">2019-10-30</time>
+                <time title="Modified: 2019-10-30 17:28:35" itemprop="dateModified" datetime="2019-10-30T17:28:35+08:00">2019-10-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -803,7 +805,7 @@
             </span>
 
           
-            <span id="/2019/11/01/pwn-heap-learn-3/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程3" title="Views">
+            <span id="/2019/11/01/pwn-heap-learn-2/" class="post-meta-item leancloud_visitors" data-flag-title="pwn堆入门系列教程2" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -818,8 +820,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/2019/11/01/pwn-heap-learn-3/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-3/" itemprop="commentCount"></span>
+    <a title="valine" href="/2019/11/01/pwn-heap-learn-2/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-heap-learn-2/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -829,14 +831,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>18k</span>
+              <span>17k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>16 mins.</span>
+              <span>15 mins.</span>
             </span>
 
         </div>
@@ -848,10 +850,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">pwn堆入门系列教程1</a><br><a href="https://xz.aliyun.com/t/6169" target="_blank" rel="noopener">pwn入门系列教程2</a></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p>
+          <h1 id="pwn堆入门系列教程2"><a href="#pwn堆入门系列教程2" class="headerlink" title="pwn堆入门系列教程2"></a>pwn堆入门系列教程2</h1><p><a href="https://xz.aliyun.com/t/6087" target="_blank" rel="noopener">堆入门系列教程1</a><br>序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-heap-learn-3/#more" rel="contents">
+              <a class="btn" href="/2019/11/01/pwn-heap-learn-2/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1325,122 +1327,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/tencentqq/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LiHua">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/tencentqq/" class="post-title-link" itemprop="url">linux qq测试</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:36:41" itemprop="dateModified" datetime="2019-10-30T17:36:41+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">测试</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/tencentqq/" class="post-meta-item leancloud_visitors" data-flag-title="linux qq测试" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/11/01/tencentqq/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/tencentqq/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>249</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
     <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/tjctf2019/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1545,6 +1431,122 @@
 
       
           <h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/tencentqq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/tencentqq/" class="post-title-link" itemprop="url">linux qq测试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 17:36:41" itemprop="dateModified" datetime="2019-10-30T17:36:41+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/%E6%B5%8B%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">测试</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/01/tencentqq/" class="post-meta-item leancloud_visitors" data-flag-title="linux qq测试" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/tencentqq/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/tencentqq/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>249</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>
       
     </div>
 

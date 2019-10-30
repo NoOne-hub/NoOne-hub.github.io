@@ -1900,6 +1900,18 @@ dl_resolve 函数最后的解析根本上依赖于所给定的字符串。</code
       </tags>
   </entry>
   <entry>
+    <title>linux qq测试</title>
+    <url>/2019/11/01/tencentqq/</url>
+    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
+      <categories>
+        <category>linux</category>
+        <category>测试</category>
+      </categories>
+      <tags>
+        <tag>linux,测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>tjctf2019比赛</title>
     <url>/2019/11/01/tjctf2019/</url>
     <content><![CDATA[<h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>]]></content>
@@ -1910,18 +1922,6 @@ dl_resolve 函数最后的解析根本上依赖于所给定的字符串。</code
       </categories>
       <tags>
         <tag>pwn， 堆</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux qq测试</title>
-    <url>/2019/11/01/tencentqq/</url>
-    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
-      <categories>
-        <category>linux</category>
-        <category>测试</category>
-      </categories>
-      <tags>
-        <tag>linux,测试</tag>
       </tags>
   </entry>
   <entry>
@@ -2284,18 +2284,6 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>jinja2问题记录</title>
-    <url>/2019/04/19/jinja2/</url>
-    <content><![CDATA[<h1 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for 循环是一层&#123;&#125;</span><br><span class="line">比如&#123;% for index in group %&#125;</span><br><span class="line">而不是&#123;&#123;% for index in group %&#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>web</category>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>web， 前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>滴滴CTF之唯一的pwn题详解</title>
     <url>/2019/04/19/pwn-stack/</url>
     <content><![CDATA[<h1 id="滴滴CTF之唯一的pwn题详解"><a href="#滴滴CTF之唯一的pwn题详解" class="headerlink" title="滴滴CTF之唯一的pwn题详解"></a>滴滴CTF之唯一的pwn题详解</h1><p>前言：这道题比赛期间没怎么研究，第一次搞了一天没搞出，不知道什么错，然后放弃了，然后比完后，搜了一波exp后，自己具体调试了一波，懂了整个过程，有些师傅们的wp有些小瑕疵，还有就是师傅们从来不详细写简单题的writeup，导致新手很难懂exp。好了，开始正文:</p><h2 id="题目简介"><a href="#题目简介" class="headerlink" title="题目简介"></a>题目简介</h2><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+0h] [ebp-4Ch]</span></span><br><span class="line">  <span class="keyword">size_t</span> nbytes; <span class="comment">// [esp+40h] [ebp-Ch]</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// [esp+44h] [ebp-8h]</span></span><br><span class="line"></span><br><span class="line">  v5 = &amp;a1;</span><br><span class="line">  setbuf(<span class="built_in">stdout</span>, <span class="number">0</span>);</span><br><span class="line">  sub_80485DB(<span class="built_in">stdin</span>, <span class="built_in">stdout</span>);</span><br><span class="line">  sleep(<span class="number">1u</span>);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Please set the length of password: "</span>);</span><br><span class="line">  nbytes = sub_804862D();</span><br><span class="line">  <span class="keyword">if</span> ( (<span class="keyword">signed</span> <span class="keyword">int</span>)nbytes &gt; <span class="number">63</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Too long!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"Enter password(lenth %u): "</span>, nbytes);</span><br><span class="line">  v1 = fileno(<span class="built_in">stdin</span>);</span><br><span class="line">  read(v1, &amp;buf, nbytes);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">"All done, bye!"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
@@ -2352,6 +2340,18 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       <tags>
         <tag>pwn， 二进制</tag>
         <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>jinja2问题记录</title>
+    <url>/2019/04/19/jinja2/</url>
+    <content><![CDATA[<h1 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for 循环是一层&#123;&#125;</span><br><span class="line">比如&#123;% for index in group %&#125;</span><br><span class="line">而不是&#123;&#123;% for index in group %&#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>web</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>web， 前端</tag>
       </tags>
   </entry>
   <entry>

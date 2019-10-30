@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://noone-hub.github.io/about/index.html</loc>
+    
+    <lastmod>2019-10-30T12:14:33.804Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://noone-hub.github.io/2019/04/19/360/</loc>
     
     <lastmod>2019-10-30T11:58:31.760Z</lastmod>
@@ -191,13 +198,6 @@
   </url>
   
   <url>
-    <loc>https://noone-hub.github.io/about/index.html</loc>
-    
-    <lastmod>2019-10-30T11:26:42.744Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://noone-hub.github.io/tags/index.html</loc>
     
     <lastmod>2019-10-30T11:26:37.868Z</lastmod>
@@ -317,14 +317,14 @@
   </url>
   
   <url>
-    <loc>https://noone-hub.github.io/2019/02/02/python-6/</loc>
+    <loc>https://noone-hub.github.io/2019/02/03/python-8/</loc>
     
     <lastmod>2019-08-30T01:26:51.984Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://noone-hub.github.io/2019/02/03/python-8/</loc>
+    <loc>https://noone-hub.github.io/2019/02/02/python-6/</loc>
     
     <lastmod>2019-08-30T01:26:51.984Z</lastmod>
     

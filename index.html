@@ -855,136 +855,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-writeup1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LiHua">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/pwn-writeup1/" class="post-title-link" itemprop="url">国赛pwn修复1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-30 17:34:13" itemprop="dateModified" datetime="2019-10-30T17:34:13+08:00">2019-10-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">二进制</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
-                    <span itemprop="name">pwn</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E6%A0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">栈</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/pwn-writeup1/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn修复1" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/2019/11/01/pwn-writeup1/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-writeup1/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#修复部分</p><p>题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1.Encrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2.Decrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3.Exit"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Input your choice!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">48</span>];</span><br><span class="line">    <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">strlen</span>(s) &gt; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span>)</span><br><span class="line">                    s[x] ^= <span class="number">0xf</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                s[x] ^= <span class="number">14</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s[x] ^= <span class="number">13</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ++x;</span><br><span class="line">    &#125;</span><br><span class="line">    s[<span class="number">47</span>] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> input;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE                            hh      iii                "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mm mm mmmm    aa aa   cccc hh          nn nnn    eee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEE   mmm  mm  mm  aa aaa cc     hhhhhh  iii nnn  nn ee   e "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mmm  mm  mm aa  aaa cc     hh   hh iii nn   nn eeeee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE mmm  mm  mm  aaa aa  ccccc hh   hh iii nn   nn  eeeee "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Welcome to this Encryption machine\n"</span>);</span><br><span class="line">    begin();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            fflush(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;input);</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">if</span>(input != <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"I think you can do it by yourself"</span>);</span><br><span class="line">            begin();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(input == <span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Bye!"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( input != <span class="number">1</span>  )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        encrypt();</span><br><span class="line">        begin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Something Wrong!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/11/01/pwn-writeup1/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
     <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-writeup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1092,6 +962,136 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/11/01/pwn-writeup/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="English">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/2019/11/01/pwn-writeup1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LiHua">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/pwn-writeup1/" class="post-title-link" itemprop="url">国赛pwn修复1</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-30 17:34:13" itemprop="dateModified" datetime="2019-10-30T17:34:13+08:00">2019-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/" itemprop="url" rel="index">
+                    <span itemprop="name">pwn</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BA%8C%E8%BF%9B%E5%88%B6/pwn/%E6%A0%88/" itemprop="url" rel="index">
+                    <span itemprop="name">栈</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/01/pwn-writeup1/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn修复1" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/11/01/pwn-writeup1/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/11/01/pwn-writeup1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#修复部分</p><p>题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1.Encrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2.Decrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3.Exit"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Input your choice!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">48</span>];</span><br><span class="line">    <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">strlen</span>(s) &gt; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span>)</span><br><span class="line">                    s[x] ^= <span class="number">0xf</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                s[x] ^= <span class="number">14</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s[x] ^= <span class="number">13</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ++x;</span><br><span class="line">    &#125;</span><br><span class="line">    s[<span class="number">47</span>] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> input;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE                            hh      iii                "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mm mm mmmm    aa aa   cccc hh          nn nnn    eee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEE   mmm  mm  mm  aa aaa cc     hhhhhh  iii nnn  nn ee   e "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mmm  mm  mm aa  aaa cc     hh   hh iii nn   nn eeeee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE mmm  mm  mm  aaa aa  ccccc hh   hh iii nn   nn  eeeee "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Welcome to this Encryption machine\n"</span>);</span><br><span class="line">    begin();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            fflush(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;input);</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">if</span>(input != <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"I think you can do it by yourself"</span>);</span><br><span class="line">            begin();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(input == <span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Bye!"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( input != <span class="number">1</span>  )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        encrypt();</span><br><span class="line">        begin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Something Wrong!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/11/01/pwn-writeup1/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1505,7 +1505,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1551,20 +1551,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">51</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

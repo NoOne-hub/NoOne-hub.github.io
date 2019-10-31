@@ -14,16 +14,23 @@
       </tags>
   </entry>
   <entry>
-    <title>tjctf2019比赛</title>
-    <url>/tjctf2019.html</url>
-    <content><![CDATA[<h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>]]></content>
+    <title>v2ray_linux客户端构思</title>
+    <url>/v2ray-change.html</url>
+    <content><![CDATA[<h1 id="功能构思"><a href="#功能构思" class="headerlink" title="功能构思"></a>功能构思</h1><ol>
+<li>修改监听端口</li>
+<li>导入vmess</li>
+<li>指定配置文件替换</li>
+<li>界面输入配置进行更换</li>
+<li>多账号切换</li>
+<li>订阅更新</li>
+<li>修改配置</li>
+</ol><p>初步想法，做好后利用docker挂载/etc/v2ray目录，通过docker修改配置文件</p>]]></content>
       <categories>
-        <category>二进制</category>
-        <category>pwn</category>
-        <category>堆</category>
+        <category>linux</category>
+        <category>v2ray</category>
       </categories>
       <tags>
-        <tag>pwn， 堆</tag>
+        <tag>linux,v2ray,gui,客户端</tag>
       </tags>
   </entry>
   <entry>
@@ -78,23 +85,16 @@
       </tags>
   </entry>
   <entry>
-    <title>v2ray_linux客户端构思</title>
-    <url>/v2ray-change.html</url>
-    <content><![CDATA[<h1 id="功能构思"><a href="#功能构思" class="headerlink" title="功能构思"></a>功能构思</h1><ol>
-<li>修改监听端口</li>
-<li>导入vmess</li>
-<li>指定配置文件替换</li>
-<li>界面输入配置进行更换</li>
-<li>多账号切换</li>
-<li>订阅更新</li>
-<li>修改配置</li>
-</ol><p>初步想法，做好后利用docker挂载/etc/v2ray目录，通过docker修改配置文件</p>]]></content>
+    <title>tjctf2019比赛</title>
+    <url>/tjctf2019.html</url>
+    <content><![CDATA[<h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>]]></content>
       <categories>
-        <category>linux</category>
-        <category>v2ray</category>
+        <category>二进制</category>
+        <category>pwn</category>
+        <category>堆</category>
       </categories>
       <tags>
-        <tag>linux,v2ray,gui,客户端</tag>
+        <tag>pwn， 堆</tag>
       </tags>
   </entry>
   <entry>
@@ -2917,18 +2917,6 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </tags>
   </entry>
   <entry>
-    <title>web前端学习之js</title>
-    <url>/js.html</url>
-    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><p>inerHtml跟inerText是不一样的，一个包含标签，一个不包含<br>字符串比较不要用===<br>inerText == 字符串可以<br>其余不行</p>]]></content>
-      <categories>
-        <category>web</category>
-        <category>前端</category>
-      </categories>
-      <tags>
-        <tag>web,前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>jinja2问题记录</title>
     <url>/jinja2.html</url>
     <content><![CDATA[<h1 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h1><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for 循环是一层&#123;&#125;</span><br><span class="line">比如&#123;% for index in group %&#125;</span><br><span class="line">而不是&#123;&#123;% for index in group %&#125;&#125;</span><br></pre></td></tr></table></figure>]]></content>
@@ -2938,6 +2926,18 @@ example: <figure class="highlight python"><table><tr><td class="code"><pre><span
       </categories>
       <tags>
         <tag>web， 前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web前端学习之js</title>
+    <url>/js.html</url>
+    <content><![CDATA[<h1 id="js学习"><a href="#js学习" class="headerlink" title="js学习"></a>js学习</h1><p>inerHtml跟inerText是不一样的，一个包含标签，一个不包含<br>字符串比较不要用===<br>inerText == 字符串可以<br>其余不行</p>]]></content>
+      <categories>
+        <category>web</category>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>web,前端</tag>
       </tags>
   </entry>
   <entry>

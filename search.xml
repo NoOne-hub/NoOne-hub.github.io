@@ -762,15 +762,28 @@
       </tags>
   </entry>
   <entry>
-    <title>linux qq测试</title>
+    <title>2019软件测试web安全题目writeup收集</title>
     <url>/archives/undefined.html</url>
-    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
+    <content><![CDATA[<h1 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>比比手速 靶机地址：101.71.29.5:10065</p><p>burp抓包可知密码<br>然后文件上传，1.php.jpg<br>连接小马</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p><a href="https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/" target="_blank" rel="noopener">https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/</a></p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p><a href="https://blog.csdn.net/u011377996/article/details/83867976" target="_blank" rel="noopener">https://blog.csdn.net/u011377996/article/details/83867976</a></p><a id="more"></a>
+
+
+
+<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><a href="https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/" target="_blank" rel="noopener">https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/</a><br>666_0rdorby_you_can</p>
+<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p><a href="https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login" target="_blank" rel="noopener">https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login</a><br><a href="http://site3.sjk.space/dosgk1.php" target="_blank" rel="noopener">http://site3.sjk.space/dosgk1.php</a></p>
+<p>a327f27394c63ef5d6b1eed9591b90a4</p>
+<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>抓包可得</p>
+<p>c456aa77cf2bc89affb665194e9dee57</p>
+<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p><a href="https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2" target="_blank" rel="noopener">https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2</a><br>aa5237a5fc25af3fa07f1d724f7548d7</p>
+<h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><p><a href="http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/" target="_blank" rel="noopener">http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/</a></p>
+<h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p><a href="http://xcx1024.com/ArtInfo/524039.html" target="_blank" rel="noopener">http://xcx1024.com/ArtInfo/524039.html</a></p>
+<p>981369acba32abc4e28103fedd4891d2</p>
+]]></content>
       <categories>
-        <category>linux</category>
-        <category>测试</category>
+        <category>web安全</category>
+        <category>练习</category>
       </categories>
       <tags>
-        <tag>linux,测试</tag>
+        <tag>web安全,练习</tag>
       </tags>
   </entry>
   <entry>
@@ -794,28 +807,15 @@
       </tags>
   </entry>
   <entry>
-    <title>2019软件测试web安全题目writeup收集</title>
+    <title>linux qq测试</title>
     <url>/archives/undefined.html</url>
-    <content><![CDATA[<h1 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h1><h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>比比手速 靶机地址：101.71.29.5:10065</p><p>burp抓包可知密码<br>然后文件上传，1.php.jpg<br>连接小马</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p><a href="https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/" target="_blank" rel="noopener">https://blog.zeddyu.info/2019/02/24/%E5%AE%89%E6%81%921%E6%9C%88%E6%9C%88%E8%B5%9B/</a></p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p><a href="https://blog.csdn.net/u011377996/article/details/83867976" target="_blank" rel="noopener">https://blog.csdn.net/u011377996/article/details/83867976</a></p><a id="more"></a>
-
-
-
-<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><a href="https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/" target="_blank" rel="noopener">https://ssyeats.github.io/2018/09/01/%E5%AE%89%E6%81%927%E6%9C%88%E8%B5%9B%E9%83%A8%E5%88%86%E9%A2%98writeup/</a><br>666_0rdorby_you_can</p>
-<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p><a href="https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login" target="_blank" rel="noopener">https://roytse.github.io/2017/07/03/CTF_WriteUp/#easy-login</a><br><a href="http://site3.sjk.space/dosgk1.php" target="_blank" rel="noopener">http://site3.sjk.space/dosgk1.php</a></p>
-<p>a327f27394c63ef5d6b1eed9591b90a4</p>
-<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>抓包可得</p>
-<p>c456aa77cf2bc89affb665194e9dee57</p>
-<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p><a href="https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2" target="_blank" rel="noopener">https://skysec.top/2018/09/24/2018%E5%AE%89%E6%81%92%E6%9D%AF-9%E6%9C%88%E6%9C%88%E8%B5%9BWriteup/#Web2</a><br>aa5237a5fc25af3fa07f1d724f7548d7</p>
-<h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><p><a href="http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/" target="_blank" rel="noopener">http://flag0.com/2019/09/27/2019%E5%AE%89%E6%81%92%E6%9D%AFWeb%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E5%A4%A7%E8%B5%9B%E7%BB%83%E4%B9%A0%E8%B5%9BWriteup/</a></p>
-<h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p><a href="http://xcx1024.com/ArtInfo/524039.html" target="_blank" rel="noopener">http://xcx1024.com/ArtInfo/524039.html</a></p>
-<p>981369acba32abc4e28103fedd4891d2</p>
-]]></content>
+    <content><![CDATA[<h1 id="tencentqq"><a href="#tencentqq" class="headerlink" title="tencentqq"></a>tencentqq</h1><p>installing /usr/share/applications/qq.desktop<br>installing /usr/share/tencent-qq/qq<br>installing /usr/share/tencent-qq/qq.png<br>installing /usr/share/tencent-qq/qq.bmp<br>installing /usr/share/tencent-qq/res.db<br>installing /usr/share/tencent-qq/crashpad_handler</p>]]></content>
       <categories>
-        <category>web安全</category>
-        <category>练习</category>
+        <category>linux</category>
+        <category>测试</category>
       </categories>
       <tags>
-        <tag>web安全,练习</tag>
+        <tag>linux,测试</tag>
       </tags>
   </entry>
   <entry>

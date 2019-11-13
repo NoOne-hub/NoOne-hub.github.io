@@ -1018,127 +1018,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/ea44abbe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="NoOne">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/ea44abbe/" class="post-title-link" itemprop="url">parrot linux问题解决</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/ea44abbe/" class="post-meta-item leancloud_visitors" data-flag-title="parrot linux问题解决" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/posts/ea44abbe/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/ea44abbe/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.4k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>4 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p><p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</big></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/ea44abbe/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/c85295da/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,6 +1122,127 @@
 
       
           <h1 id="pwn-细节"><a href="#pwn-细节" class="headerlink" title="pwn_细节"></a>pwn_细节</h1><h2 id="partial-write"><a href="#partial-write" class="headerlink" title="partial write"></a>partial write</h2><p>保护全开情况下考虑部分覆盖，不要全部覆盖，开了pie后三位是固定的</p><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>巧妙利用unsortbin可以在<strong>malloc_hook或者</strong>free_hook前伪造一个地址，造成错位攻击</p><p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/c85295da/">https://noone-hub.github.io/posts/c85295da/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/ea44abbe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="NoOne">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/ea44abbe/" class="post-title-link" itemprop="url">parrot linux问题解决</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-19 03:14:36" itemprop="dateCreated datePublished" datetime="2019-04-19T03:14:36+08:00">2019-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/ea44abbe/" class="post-meta-item leancloud_visitors" data-flag-title="parrot linux问题解决" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/posts/ea44abbe/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/ea44abbe/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>4 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="parot-linux系统问题总结"><a href="#parot-linux系统问题总结" class="headerlink" title="parot linux系统问题总结"></a>parot linux系统问题总结</h1><h2 id="出现命令行无法启动torbrowser-launcher"><a href="#出现命令行无法启动torbrowser-launcher" class="headerlink" title="出现命令行无法启动torbrowser-launcher"></a>出现命令行无法启动torbrowser-launcher</h2><p>这个问题我谷歌了很久，也没有得到有效的答案，所以只能自己动手测试，这是一个程序员基本功，我重新安装了好几次torbrowser-launcher，也没有得到解决，所以不是安装的问题，是机器环境的问题。</p><p>在我的parrot sercurity上出现的错误是这样的：<br><big> + Tor Browser Launcher</big></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/ea44abbe/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

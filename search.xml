@@ -10,9 +10,13 @@
 
 <p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/undefined/">https://noone-hub.github.io/posts/undefined/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
+      <categories>
+        <category>writeup</category>
+      </categories>
       <tags>
         <tag>二进制</tag>
         <tag>pwn</tag>
+        <tag>writeup</tag>
       </tags>
   </entry>
   <entry>
@@ -3289,7 +3293,6 @@ dl_resolve 函数最后的解析根本上依赖于所给定的字符串。</code
 <p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/6e2e265a/">https://noone-hub.github.io/posts/6e2e265a/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
-        <category>writeup</category>
         <category>bin</category>
         <category>逆向</category>
       </categories>
@@ -3394,6 +3397,7 @@ dl_resolve 函数最后的解析根本上依赖于所给定的字符串。</code
 <p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/6e2e265a/">https://noone-hub.github.io/posts/6e2e265a/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 ]]></content>
       <categories>
+        <category>writeup</category>
         <category>bin</category>
         <category>逆向</category>
       </categories>

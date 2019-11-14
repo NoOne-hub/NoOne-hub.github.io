@@ -57,15 +57,15 @@
 
 
 
-  <meta name="description" content="pwn堆入门系列教程6pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了2019护网杯 mergeheap">
+  <meta name="description" content="pwn堆入门系列教程6本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程6">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;84788ee9&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程6pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了2019护网杯 mergeheap">
+<meta property="og:description" content="pwn堆入门系列教程6本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.103Z">
+<meta property="og:updated_time" content="2019-11-14T13:36:56.979Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/posts/84788ee9/">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:36:56" itemprop="dateModified" datetime="2019-11-14T21:36:56+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,9 +326,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程6"><a href="#pwn堆入门系列教程6" class="headerlink" title="pwn堆入门系列教程6"></a>pwn堆入门系列教程6</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span></p><p>要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了</p><h2 id="2019护网杯-mergeheap"><a href="#2019护网杯-mergeheap" class="headerlink" title="2019护网杯 mergeheap"></a>2019护网杯 mergeheap</h2><a id="more"></a>
+        <h1 id="pwn堆入门系列教程6"><a href="#pwn堆入门系列教程6" class="headerlink" title="pwn堆入门系列教程6"></a>pwn堆入门系列教程6</h1><p>本文首发于先知社区</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span></p><p>要将别人的东西转化成自己的东西，还是得实操，自己去操作番才可以得到些东西，学了这么久，这几天的比赛也算是用上了，有unlink，有double free，这些操作用上了</p><a id="more"></a>
 
-<p>我每次看到题目名字跟函数名字相同，我就知道点就在那个函数上，然而我当时已经看出这里有溢出了，然后调试的时候以为没覆盖到，原来只能覆盖到size，还是脑子不清晰，所以才会这样</p>
+
+<h2 id="2019护网杯-mergeheap"><a href="#2019护网杯-mergeheap" class="headerlink" title="2019护网杯 mergeheap"></a>2019护网杯 mergeheap</h2><p>我每次看到题目名字跟函数名字相同，我就知道点就在那个函数上，然而我当时已经看出这里有溢出了，然后调试的时候以为没覆盖到，原来只能覆盖到size，还是脑子不清晰，所以才会这样</p>
 <h3 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h3><ol>
 <li>新建一个堆块</li>
 <li>展示堆块内容</li>
@@ -528,7 +529,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -539,7 +540,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -581,12 +582,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

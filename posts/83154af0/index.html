@@ -57,16 +57,16 @@
 
 
 
-  <meta name="description" content="pwn堆入门系列教程2堆入门系列教程1序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴">
+  <meta name="description" content="本文首发于先知社区pwn堆入门系列教程2堆入门系列教程1序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程2">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;83154af0&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程2堆入门系列教程1序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴">
+<meta property="og:description" content="本文首发于先知社区pwn堆入门系列教程2堆入门系列教程1序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;xzfile.aliyuncs.com&#x2F;media&#x2F;upload&#x2F;picture&#x2F;20190829213254-81676342-ca61-1.png">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.103Z">
+<meta property="og:updated_time" content="2019-11-14T13:36:25.711Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;xzfile.aliyuncs.com&#x2F;media&#x2F;upload&#x2F;picture&#x2F;20190829213254-81676342-ca61-1.png">
 
@@ -256,7 +256,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:36:25" itemprop="dateModified" datetime="2019-11-14T21:36:25+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -328,7 +328,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程2"><a href="#pwn堆入门系列教程2" class="headerlink" title="pwn堆入门系列教程2"></a>pwn堆入门系列教程2</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">堆入门系列教程1<i class="fa fa-external-link"></i></span><br>序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴</p><a id="more"></a>
+        <p>本文首发于先知社区</p><h1 id="pwn堆入门系列教程2"><a href="#pwn堆入门系列教程2" class="headerlink" title="pwn堆入门系列教程2"></a>pwn堆入门系列教程2</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">堆入门系列教程1<i class="fa fa-external-link"></i></span><br>序言：第二题，研究了两天，其中有小猪师傅，m4x师傅，萝卜师傅等各个师傅指点我，这次又踩了几个坑，相信以后不会再犯，第二题感觉比第一题复杂许多，不是off-by-one的问题，是这种攻击方式的问题，这种攻击方式十分精妙，chunk overlap，堆块重叠，这种攻击方式我也是第一次见，复现起来难度也是有滴</p><a id="more"></a>
+
 <h2 id="off-by-one第二题"><a href="#off-by-one第二题" class="headerlink" title="off-by-one第二题"></a>off-by-one第二题</h2><p>此题也是off-by-one里的一道题目，让我再次意识到off by one在堆里的强大之处</p>
 <h2 id="plaidctf-2015-plaiddb"><a href="#plaidctf-2015-plaiddb" class="headerlink" title="plaidctf 2015 plaiddb"></a>plaidctf 2015 plaiddb</h2><p>前面的功能分析和数据结构分析我就不再做了，ctf-wiki上给的清楚了，然后网上各种wp也给的清楚了，我没逆向过红黑树，也没写过，所以具体结构我也不清楚，照着师傅们的来，确实是树</p>
 <p>数据结构</p>
@@ -494,7 +495,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -505,7 +506,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -547,12 +548,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

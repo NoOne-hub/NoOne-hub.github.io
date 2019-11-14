@@ -57,15 +57,15 @@
 
 
 
-  <meta name="description" content="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章">
+  <meta name="description" content="本文首发于先知社区论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章">
 <meta name="keywords" content="二进制,pwn">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;9f664865&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章">
+<meta property="og:description" content="本文首发于先知社区论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.103Z">
+<meta property="og:updated_time" content="2019-11-14T13:37:09.383Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/posts/9f664865/">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:37:09" itemprop="dateModified" datetime="2019-11-14T21:37:09+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,7 +326,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="论菜鸡pwn手如何在无网环境（ps：类似国赛-下生存"><a href="#论菜鸡pwn手如何在无网环境（ps：类似国赛-下生存" class="headerlink" title="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存"></a>论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存</h1><p>引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章</p><a id="more"></a>
+        <p>本文首发于先知社区</p><h1 id="论菜鸡pwn手如何在无网环境（ps：类似国赛-下生存"><a href="#论菜鸡pwn手如何在无网环境（ps：类似国赛-下生存" class="headerlink" title="论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存"></a>论菜鸡pwn手如何在无网环境（ps：类似国赛)下生存</h1><p>引言：在打完一次无网环境后，觉得没网环境实在难受，查个libc都没得查。。没准备好，那时碰巧我下了ctf-challenge,在那里碰巧弄到了libc，可能有人喜欢用libc-searcher那个py版本的项目，我不怎么喜欢，用那个导入库查找感觉较慢，还是喜欢手动泄露后到网页查找，于是有了这篇文章</p><a id="more"></a>
+
 <h2 id="pwntools安装"><a href="#pwntools安装" class="headerlink" title="pwntools安装"></a>pwntools安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pwntools</span><br></pre></td></tr></table></figure>
 <p>出错自己解决啊，那些个错误都查得到</p>
 <h2 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install one_gadget</span><br></pre></td></tr></table></figure>
@@ -470,7 +471,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -481,7 +482,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -523,12 +524,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

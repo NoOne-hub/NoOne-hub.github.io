@@ -57,19 +57,19 @@
 
 
 
-  <meta name="description" content="pwn-heap-learn-10这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7pwn堆入门系列教程8pwn堆入门系列教程9">
+  <meta name="description" content="pwn-heap-learn-10本文首发于先知社区这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7pwn堆入门系列教程8pwn堆入门系列教程9">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程10">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;62c86bb4&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn-heap-learn-10这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7pwn堆入门系列教程8pwn堆入门系列教程9">
+<meta property="og:description" content="pwn-heap-learn-10本文首发于先知社区这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7pwn堆入门系列教程8pwn堆入门系列教程9">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;NoOne-hub&#x2F;picture&#x2F;blob&#x2F;master&#x2F;orw-2.png">
-<meta property="og:updated_time" content="2019-11-13T08:48:27.676Z">
+<meta property="og:updated_time" content="2019-11-14T13:37:04.051Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;NoOne-hub&#x2F;picture&#x2F;master&#x2F;1.png">
 
@@ -259,7 +259,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-13 16:48:27" itemprop="dateModified" datetime="2019-11-13T16:48:27+08:00">2019-11-13</time>
+                <time title="Modified: 2019-11-14 21:37:04" itemprop="dateModified" datetime="2019-11-14T21:37:04+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -331,7 +331,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn-heap-learn-10"><a href="#pwn-heap-learn-10" class="headerlink" title="pwn-heap-learn-10"></a>pwn-heap-learn-10</h1><p>这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ0OQ==" title="https://xz.aliyun.com/t/6449">pwn堆入门系列教程7<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ3Mw==" title="https://xz.aliyun.com/t/6473">pwn堆入门系列教程8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjU1Ng==" title="https://xz.aliyun.com/t/6556">pwn堆入门系列教程9<i class="fa fa-external-link"></i></span></p><a id="more"></a>
+        <h1 id="pwn-heap-learn-10"><a href="#pwn-heap-learn-10" class="headerlink" title="pwn-heap-learn-10"></a>pwn-heap-learn-10</h1><p>本文首发于先知社区</p><p>这个系列完结了吧，入门系列做到这里我感觉已经入门了，后面的就是靠自己去多练习，多学新点了，我这系列最后一篇就发下近期遇到的一些骚操作和新思路吧</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ0OQ==" title="https://xz.aliyun.com/t/6449">pwn堆入门系列教程7<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ3Mw==" title="https://xz.aliyun.com/t/6473">pwn堆入门系列教程8<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjU1Ng==" title="https://xz.aliyun.com/t/6556">pwn堆入门系列教程9<i class="fa fa-external-link"></i></span></p><a id="more"></a>
+
 
 <h2 id="unctf-Box"><a href="#unctf-Box" class="headerlink" title="unctf Box"></a>unctf Box</h2><h3 id="漏洞点"><a href="#漏洞点" class="headerlink" title="漏洞点"></a>漏洞点</h3><p>数组index是可以输入负数的，就是不会利用,后面看了萝卜师傅的wp才知道可以直接改IO_stdout</p>
 <p>我是傻逼！这都想不到</p>
@@ -514,8 +515,8 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-                <a href="/posts/afb883f/" rel="prev" title="安恒部分题解">
-                  安恒部分题解 <i class="fa fa-chevron-right"></i>
+                <a href="/posts/3dac6f4c/" rel="prev" title="360杯pwn部分题解">
+                  360杯pwn部分题解 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -571,7 +572,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -582,7 +583,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -624,12 +625,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

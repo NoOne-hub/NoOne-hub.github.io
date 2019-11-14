@@ -57,15 +57,15 @@
 
 
 
-  <meta name="description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
+  <meta name="description" content="pwn堆入门系列教程3本文首发于先知社区pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程3">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;f4127a66&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程3pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
+<meta property="og:description" content="pwn堆入门系列教程3本文首发于先知社区pwn堆入门系列教程1pwn入门系列教程2序言：这次终于过了off-by-one来到了Chunk Extend &#x2F; Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.103Z">
+<meta property="og:updated_time" content="2019-11-14T13:36:39.435Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/posts/f4127a66/">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:36:39" itemprop="dateModified" datetime="2019-11-14T21:36:39+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,7 +326,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn入门系列教程2<i class="fa fa-external-link"></i></span></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p><a id="more"></a>
+        <h1 id="pwn堆入门系列教程3"><a href="#pwn堆入门系列教程3" class="headerlink" title="pwn堆入门系列教程3"></a>pwn堆入门系列教程3</h1><p>本文首发于先知社区</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn入门系列教程2<i class="fa fa-external-link"></i></span></p><p>序言：这次终于过了off-by-one来到了Chunk Extend / Overlapping,这部分在上一节也进行了学习，所以难度相对来说不会是那么大，刚起初我以为，因为第一题很简单，但做到第二题，我发觉我连格式化字符串的漏洞都不会利用，真的是太菜了，后面看了看雪大佬的文章才会做</p><a id="more"></a>
+
 
 <h2 id="1-1-HITCON-Trainging-lab13"><a href="#1-1-HITCON-Trainging-lab13" class="headerlink" title="1.1. HITCON Trainging lab13"></a>1.1. HITCON Trainging lab13</h2><p>这道题还是相对简单的，对于前面几道来说，上一道已经用过这种方法了，而且比这复杂许多，所以差不多了，不过还有些小细节注意下就好</p>
 <h3 id="1-1-1-功能分析"><a href="#1-1-1-功能分析" class="headerlink" title="1.1.1. 功能分析"></a>1.1.1. 功能分析</h3><p>引用于ctf-wiki</p>
@@ -502,7 +503,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -513,7 +514,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -555,12 +556,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

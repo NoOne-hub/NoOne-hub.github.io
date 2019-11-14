@@ -57,15 +57,15 @@
 
 
 
-  <meta name="description" content="pwn堆入门系列教程7pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题Large bin也没有题目，到时候遇到在进行学习">
+  <meta name="description" content="pwn堆入门系列教程7本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题Large bin也没有题目，到时候遇到在进行学习">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程7">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;f37fbe7f&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程7pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题Large bin也没有题目，到时候遇到在进行学习">
+<meta property="og:description" content="pwn堆入门系列教程7本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题Large bin也没有题目，到时候遇到在进行学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.103Z">
+<meta property="og:updated_time" content="2019-11-14T13:36:59.579Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/posts/f37fbe7f/">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:36:59" itemprop="dateModified" datetime="2019-11-14T21:36:59+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,7 +326,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程7"><a href="#pwn堆入门系列教程7" class="headerlink" title="pwn堆入门系列教程7"></a>pwn堆入门系列教程7</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span></p><p>先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题<br>Large bin也没有题目，到时候遇到在进行学习</p><a id="more"></a>
+        <h1 id="pwn堆入门系列教程7"><a href="#pwn堆入门系列教程7" class="headerlink" title="pwn堆入门系列教程7"></a>pwn堆入门系列教程7</h1><p>本文首发于先知社区</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span></p><p>先学习 Unsorted Bin Attack，这部分由于ctf-wiki题目较少，所以只练习了一道题<br>Large bin也没有题目，到时候遇到在进行学习</p><a id="more"></a>
+
 
 <h2 id="hitcontraining-lab14"><a href="#hitcontraining-lab14" class="headerlink" title="hitcontraining_lab14"></a>hitcontraining_lab14</h2><p>这个题过程也比较简单，自己复现下就好</p>
 <h3 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h3><p>因为现在都是tcache了，所以复现起来还是得拿老版本libc测试</p>
@@ -483,7 +484,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -494,7 +495,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -536,12 +537,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

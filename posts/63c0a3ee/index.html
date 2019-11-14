@@ -57,15 +57,15 @@
 
 
 
-  <meta name="description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
+  <meta name="description" content="pwn堆入门系列教程8本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
 <meta name="keywords" content="pwn， 堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pwn堆入门系列教程8">
 <meta property="og:url" content="https:&#x2F;&#x2F;noone-hub.github.io&#x2F;posts&#x2F;63c0a3ee&#x2F;index.html">
 <meta property="og:site_name" content="NoOne-hub">
-<meta property="og:description" content="pwn堆入门系列教程8pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
+<meta property="og:description" content="pwn堆入门系列教程8本文首发于先知社区pwn堆入门系列教程1pwn堆入门系列教程2pwn堆入门系列教程3pwn堆入门系列教程4pwn堆入门系列教程5pwn堆入门系列教程6pwn堆入门系列教程7这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-10T08:46:17.099Z">
+<meta property="og:updated_time" content="2019-11-14T13:37:01.603Z">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://noone-hub.github.io/posts/63c0a3ee/">
@@ -254,7 +254,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-10 16:46:17" itemprop="dateModified" datetime="2019-11-10T16:46:17+08:00">2019-11-10</time>
+                <time title="Modified: 2019-11-14 21:37:01" itemprop="dateModified" datetime="2019-11-14T21:37:01+08:00">2019-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,7 +326,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ0OQ==" title="https://xz.aliyun.com/t/6449">pwn堆入门系列教程7<i class="fa fa-external-link"></i></span></p><p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p><a id="more"></a>
+        <h1 id="pwn堆入门系列教程8"><a href="#pwn堆入门系列教程8" class="headerlink" title="pwn堆入门系列教程8"></a>pwn堆入门系列教程8</h1><p>本文首发于先知社区</p><p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjA4Nw==" title="https://xz.aliyun.com/t/6087">pwn堆入门系列教程1<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjE2OQ==" title="https://xz.aliyun.com/t/6169">pwn堆入门系列教程2<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjI1Mg==" title="https://xz.aliyun.com/t/6252">pwn堆入门系列教程3<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjMyMg==" title="https://xz.aliyun.com/t/6322">pwn堆入门系列教程4<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjM3Nw==" title="https://xz.aliyun.com/t/6377">pwn堆入门系列教程5<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQwNg==" title="https://xz.aliyun.com/t/6406">pwn堆入门系列教程6<i class="fa fa-external-link"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL3QvNjQ0OQ==" title="https://xz.aliyun.com/t/6449">pwn堆入门系列教程7<i class="fa fa-external-link"></i></span></p><p>这篇文章感觉算堆又不算堆，因为要结合到IO_FILE攻击部分，而且最主要是IO_FILE的利用，此题又学习到新的东西了，以前只玩过IO_FILE的伪造vtable,这次的leak方法第一次见</p><a id="more"></a>
+
 
 <h2 id="HITCON2018-baby-tcache"><a href="#HITCON2018-baby-tcache" class="headerlink" title="HITCON2018 baby_tcache"></a>HITCON2018 baby_tcache</h2><p>这道题我故意将其与tcache中的第一道题分开，因为这道题难度不在于tcache的攻击，而在于IO_FILE的利用，利用上一篇文章中的方法也很容易构造overlap，但libc却无法泄露，我自己纠结好久过后，还是看了wp</p>
 <h3 id="功能分析"><a href="#功能分析" class="headerlink" title="功能分析"></a>功能分析</h3><ol>
@@ -500,7 +501,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -511,7 +512,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -553,12 +554,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="Symbols count total">365k</span>
+    <span title="Symbols count total">375k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">5:32</span>
+    <span title="Reading time total">5:41</span>
 </div>
 
         

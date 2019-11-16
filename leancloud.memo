@@ -31,6 +31,7 @@
 {"title":"shellcode","url":"/posts/8002891b/"},
 {"title":"pwn堆入门系列教程2","url":"/posts/83154af0/"},
 {"title":"pwn堆入门系列教程6","url":"/posts/84788ee9/"},
+{"title":"bin/pwn/实战/cve-2010-3333","url":"/posts/8727dfdc/"},
 {"title":"unctf","url":"/posts/89fa1574/"},
 {"title":"随便做的练习","url":"/posts/8cd80461/"},
 {"title":"python-第六天学习","url":"/posts/98ab9219/"},
@@ -60,4 +61,5 @@
 {"title":"pwn堆入门系列教程3","url":"/posts/f4127a66/"},
 {"title":"web安全训练","url":"/posts/f605762/"},
 {"title":"基础待补充","url":"/posts/fc164dcc/"},
+{"title":"攻防世界新手区re","url":"/posts/ff286fcb/"},
 ]
